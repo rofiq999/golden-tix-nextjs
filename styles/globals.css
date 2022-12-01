@@ -11,8 +11,21 @@ a {
   text-decoration: none;
 }
 
-* {
+main {
+  max-width: 1440px;
+  margin: auto;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
+}
+
+:root {
+  --primary: #5f2eea;
 }
 
 @media (prefers-color-scheme: dark) {
