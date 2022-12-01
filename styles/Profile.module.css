@@ -137,6 +137,19 @@
   display: none;
 }
 
+@media screen and (max-width: 768px) {
+  .content-right {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 40px 0px 40px;
+    margin: 40px 0px;
+  }
+  .update {
+    margin-left: 0px;
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 428px) {
   .content-all {
     background: #f5f6f8;

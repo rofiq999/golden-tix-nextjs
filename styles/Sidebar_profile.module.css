@@ -164,6 +164,30 @@ padding-left: 40px; */
   background: #5f2eea;
 }
 
+@media screen and (max-width: 768px) {
+  .content-movie {
+    max-width: fit-content;
+    margin: auto;
+  }
+  .content-two-move {
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+  }
+  .content-right {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px;
+    padding: 20px 40px 0px 40px;
+  }
+  .text-loyalty {
+    text-align: center;
+  }
+  .image_jones {
+    margin-left: 232px;
+  }
+}
+
 @media screen and (max-width: 428px) {
   .image_jones {
     margin-left: 68px;

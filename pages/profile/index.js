@@ -4,7 +4,7 @@ import React from 'react'
 import styles from "../../styles/Profile.module.css";
 
 //import image
-import Sidebar from "../../Components/Sidebar_profile/index";
+import Sidebar from "../../Components/Sidebar_Profile/index";
 
 
 
