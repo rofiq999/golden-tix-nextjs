@@ -87,6 +87,7 @@ function index() {
                                 </div>
                             </div>
                             <button className={styles['update']}>Update changes</button>
+                            <button className={styles['logout']}>Logout</button>
                         </div>
                     </div>
                 </section>
