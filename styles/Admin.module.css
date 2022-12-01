@@ -328,6 +328,10 @@
   display: none;
 }
 
+.desc-btn-1 {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .section-1 {
     display: flex;
