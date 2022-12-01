@@ -442,6 +442,7 @@
   }
 
   .desc-btn-1 {
+    display: block;
     background: none;
     width: 100%;
     border: 1px solid #5f2eea;
