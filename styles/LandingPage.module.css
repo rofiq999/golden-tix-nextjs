@@ -1,173 +1,182 @@
-.left-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.left-footer .logo-container {
-    position: relative;
-    width: 10rem;
-    aspect-ratio: 2.4;
-}
-
-.left-footer .tagline {
-    color: #6E7191;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-.explore {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.explore p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: black;
-}
-
-.explore ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.explore ol li {
-padding-bottom: .5rem;
-color: #6E7191;
-}
-
-.sponsor {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.sponsor p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: black;
-}
-
-.sponsor .sponsor-logo {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.sponsor .sponsor-logo .sponsor-1 {
-    position: relative;
-    width: 120px;
-    height: 45px;
-}
-
-.sponsor .sponsor-logo .sponsor-2 {
-    position: relative;
-    width: 173px;
-    height: 26px;
-}
-
-.sponsor .sponsor-logo .sponsor-3 {
-    position: relative;
-    width: 79px;
-    height: 25px;
-}
-
-.social {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.social p {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: black;
-}
-
-.social .social-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.social .social-container .social-list {
+.top-content {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    padding: 5rem 0;
 }
 
-.social .social-container .social-list i {
-    color: #6E7191;
+.tagline-container h2 {
+    color: #A0A3BD;
     font-size: 1.5rem;
 }
 
-.social .social-container .social-list span {
-    color: #6E7191;
-    font-size: 1rem;
-    font-weight: 600;
+.tagline-container h1 {
+    color: var(--primary);
+    font-size: 3.5rem;
 }
 
-.copyright-footer {
+.poster-container {
+    display: flex;
+    padding-left: 5rem;
+    gap: 1.5rem;
+}
+
+.poster-container .image-content1 {
+    position: relative;
+    top: 30px;
+    width: 107px;
+    height: 352px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.poster-container .image-content2{
+    position: relative;
+    width: 107px;
+    height: 352px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.poster-container .image-content3 {
+    position: relative;
+    top: -30px;
+    width: 107px;
+    height: 352px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.showing-container {
+    background-color: #F5F6F8;
+    padding: 2rem 0;
+    z-index: 1;
+}
+
+.showing-container .tab {
+    display: flex;
+    justify-content: space-between;
+}
+
+.showing-container .tab .now-showing {
     font-size: 1.2rem;
-    color: #6E7191;
-    padding: 5rem 0;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.showing-container .tab .view-all {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    user-select: none;
+}
+
+.showing-container .tab .view-all:hover {
+    cursor: pointer;
+}
+
+.showing-container .card-movies {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 2rem;
+    padding: 2rem 0 10rem;
+}
+
+.coming-container {
+    background-color: white;
+    padding: 2rem 0;
+}
+
+.coming-container .tab {
+    display: flex;
+    justify-content: space-between;
+}
+
+.coming-container .tab .upcoming {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: black;
+}
+
+.coming-container .tab .view-all {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    user-select: none;
+}
+
+.coming-container .tab .view-all:hover {
+    cursor: pointer;
+}
+
+.coming-container .months-slider {
+    display: flex;
+    gap: 1rem;
+    overflow-x: scroll;
+}
+
+.coming-container .months-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.coming-container .months-slider .months-btn {
     width: 100%;
-    text-align: center;
 }
 
-@media screen and (max-width: 576px) {
-    .left-footer .tagline {
-        width: 70%;
-    }
+.coming-container .months-slider .months-btn button {
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background-color: white;
+    color: var(--primary);
+    font-weight: 600;
+    padding: .5rem 1rem;
+    width: 8rem;
+}
 
-    .explore, .sponsor, .social {
-        padding-top: 3.5rem;
-    }
-    
-    .explore ol {
-        display: flex;
-        flex-wrap: wrap;;
-    }
-    
-    .explore ol li {
-        padding-right: 1rem
-    }
-    
-    .sponsor .sponsor-logo {
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start!important;
-    }
+.coming-container .months-slider .months-btn button:hover {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0px 8px 30px rgba(95, 46, 234, 0.3);
+    transition: all .3s ease-out;
+}
 
-    .sponsor .sponsor-logo .logo-container {
-        position: relative;
-        width: 120px;
-        height: 25px;
-    }
+.coming-container .card-movies {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 2rem;
+    padding: 3rem 0;
+    overflow-x: scroll;
+}
 
-    .social .social-container {
-        flex-direction: row;
-        gap: 2.5rem;
-    }
+.coming-container .card-movies::-webkit-scrollbar {
+    display: none;
+}
 
-    .copyright-footer {
-        font-size: 1.2rem;
-        color: #6E7191;
-        padding: 5rem 0;
-        width: 100%;
-        text-align: left;
-    }
-
-    .none {
-        display: none;
-    }
+@media screen and (max-width: 768px) {
+    .showing-container {
+        overflow-x: scroll;
+        z-index: 1;
+    }    
 }
 
 
+@media screen and (max-width: 428px) {
+    .tagline-container h2 {
+        color: #A0A3BD;
+        font-size: 1rem;
+    }
+    
+    .tagline-container h1 {
+        color: var(--primary);
+        font-size: 3rem;
+    }
+
+    .poster-container {
+        padding: 6rem 0 10rem;
+        justify-content: space-around;
+    }
+
+    .card-movies {
+        overflow-x: scroll;
+        /* overflow: hidden; */
+    }
+}
