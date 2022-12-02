@@ -14,12 +14,12 @@ function Footer() {
           <div className="col-lg-3 col-md-3 col-12">
             <div className={styles["left-footer"]}>
               <div className={styles["logo-container"]}>
-                <Image
-                  src={logo}
-                  alt="logo"
-                  layout="fill"
-                  objectFit="cover"
-                ></Image>
+                <div className={styles["golden"]}>
+                  <p>GOLDEN</p>
+                </div>
+                <div className={styles["tix"]}>
+                  <p>TIX</p>
+                </div>
               </div>
               <div className={styles["tagline"]}>
                 <p>
