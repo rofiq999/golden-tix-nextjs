@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { Provider } from "react-redux";
 import store, { persistedStore } from "/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import 'bootstrap/dist/css/bootstrap.css'
 
 function MyApp({ Component, pageProps }) {
   return (
