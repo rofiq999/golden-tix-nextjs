@@ -15,12 +15,12 @@ function Header() {
         <div className={`row ${styles["container"]}`}>
           <div className="col-lg-2 col-md-2 col-10">
             <div className={styles["logo-container"]}>
-              <Image
-                src={logo}
-                alt="logo"
-                layout="fill"
-                // objectFit="cover"
-              ></Image>
+              <div className={styles["golden"]}>
+                <p>GOLDEN</p>
+              </div>
+              <div className={styles["tix"]}>
+                <p>TIX</p>
+              </div>
             </div>
           </div>
           <div className="col-lg-10 col-md-10 col-2">
