@@ -29,7 +29,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="col-lg-2 offset-lg-1 col-md-2 offset-md-1 col-12">
+          <div className="col-lg-2 offset-lg-1 col-md-2 col-12">
             <div className={styles["explore"]}>
               <p>Explore</p>
               <ol>
@@ -40,7 +40,7 @@ function Footer() {
               </ol>
             </div>
           </div>
-          <div className="col-lg-3 col-md-3 col-12">
+          <div className="col-lg-2 col-md-3 col-12">
             <div className={styles["sponsor"]}>
               <p>Our Sponsor</p>
               <div className={styles["sponsor-logo"]}>
@@ -77,7 +77,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 col-md-3 col-12">
+          <div className="col-lg-3 col-md-3 offset-md-1 col-12">
             <div className={styles["social"]}>
               <p>Follow us</p>
               <div className={styles["social-container"]}>

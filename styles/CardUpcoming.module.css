@@ -1,0 +1,53 @@
+.card-movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 3px solid #F5F6F8;
+    width: min-content;
+    height: 100%;
+    z-index: 5;
+    padding: 1.5rem;
+    box-shadow: 0px 8px 30px rgba(186, 186, 186, 0.25);
+}
+
+.card-movie .image-container {
+    position: relative;
+    width: 159px;
+    height: 244px;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.card-movie .title {
+    color: black;
+    font-size: 1rem;
+    font-weight: 700;
+    max-width: 100%;
+    text-align: center;
+    margin: 0;
+    padding-top: 1rem;
+}
+
+.card-movie .categories {
+    color: #A0A3BD;
+    font-size: .8rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.card-movie .detail-btn {
+    width: 100%;
+}
+
+.card-movie .detail-btn button {
+    background-color: white;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    font-size: .9rem;
+    font-weight: 400;
+    color: var(--primary);
+    width: 100%;
+    padding: .3rem 0;
+}
