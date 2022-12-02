@@ -5,9 +5,27 @@
 }
 
 .logo-container {
-    position: relative;
-    width: 7rem;
-    aspect-ratio: 2.4;
+    display: flex;
+    border: 2px solid var(--primary);
+    padding: .2rem;
+    width: fit-content;
+}
+
+.logo-container .golden p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--secondary);
+    background-color: var(--primary);
+}
+
+.logo-container .tix p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
 }
 
 .navbar {
@@ -118,6 +136,26 @@
 @media screen and (max-width: 768px) {
     .navbar .left-content ol {
        font-size: .8rem;
+    }
+
+    .logo-container .golden p {
+        font-size: 1rem;
+    }
+    
+    .logo-container .tix p {
+        font-size: 1rem;
+    }
+
+    .navbar .left-content ol {
+        gap: 1rem;
+    }
+
+    .navbar .right-content {
+        gap: 1rem;
+    }
+
+    .navbar .right-content .location p {
+        font-size: .8rem;
     }
 }
 
