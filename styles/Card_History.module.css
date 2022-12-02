@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap');
+
+.content-box {
+  border: 1px solid #abacb4;
+  margin: 32px;
+}
+
+.content-spidy {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 32px;
+}
+.content-sec p {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.time {
+  font-family: 'Mulish';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #aaaaaa;
+}
+
+.text-spiderman {
+  font-family: 'Mulish';
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 38px;
+}
+
+.br-bottom {
+  border-bottom: 1px solid #abacb4;
+}
+
+.content-tiket {
+  display: flex;
+  flex-direction: row;
+  padding: 40px 32px;
+  justify-content: space-between;
+}
+
+.btn-ticket {
+  font-family: 'Mulish';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  align-items: center;
+  text-align: center;
+  background: #00ba88;
+  color: white;
+  width: 196px;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+}
+
+.show {
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  font-family: 'Mulish';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 34px;
+  color: #aaaaaa;
+}
+
+.text-v {
+  cursor: pointer;
+}
+
+.btn-ticket-use {
+  display: none;
+  font-family: 'Mulish';
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  align-items: center;
+  text-align: center;
+  background: #6e7191;
+  color: white;
+  width: 196px;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+}
+
+@media screen and (max-width: 428px) {
+  .content-spidy {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    padding: 30px 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .show {
+    display: none;
+  }
+  .btn-ticket,
+  .btn-ticket-use {
+    width: 100%;
+  }
+  .content-box {
+    background: white;
+    border-radius: 10px;
+    border: none;
+  }
+}
