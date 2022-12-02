@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "../styles/Signup.module.css";
 import Link from "next/link";
+import React, { useState } from "react";
 
 import logo from "../assets/logo.png";
 import eye from "../assets/eye.png";
@@ -9,6 +10,21 @@ import google from "../assets/google.png";
 import logo2 from "../assets/logo2.png";
 
 export default function Signup() {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [hidden, setHidden] = useState("password");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("test");
+  };
+
+  // console.log(`firstname: ${firstName}`);
+  // console.log(lastName);
+  // console.log(email);
+  // console.log(password);
   return (
     <main className={styles["main"]}>
       <aside className={styles["aside-left"]}>
@@ -49,20 +65,43 @@ export default function Signup() {
         <h1 className={styles["aside-right-header-1"]}>
           Fill your additional details
         </h1>
+        <p className={styles["aside-right-label-1"]}>Firstname</p>
+        <input
+          className={styles["aside-right-input-1"]}
+          type="text"
+          placeholder="Write your firstname"
+          value={firstName}
+          onChange={(event) => setFirstName(event.target.value)}
+        />
+        <p className={styles["aside-right-label-1"]}>Lastname</p>
+        <input
+          className={styles["aside-right-input-1"]}
+          type="text"
+          placeholder="Write your lastname"
+          value={lastName}
+          onChange={(event) => setLastName(event.target.value)}
+        />
         <p className={styles["aside-right-label-1"]}>Email</p>
         <input
           className={styles["aside-right-input-1"]}
           type="text"
           placeholder="Write your email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
         <p className={styles["aside-right-label-1"]}>Password</p>
         <div className={styles["aside-right-div-1"]}>
           <input
             className={styles["aside-right-input-2"]}
-            type="text"
+            type={hidden}
             placeholder="Write your password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
           />
           <Image
+            onClick={() => {
+              hidden === "password" ? setHidden("text") : setHidden("password");
+            }}
             className={styles["aside-right-image-1"]}
             src={eye}
             alt="img"
@@ -74,10 +113,12 @@ export default function Signup() {
             I agree to terms & conditions
           </p>
         </div>
-        <button className={styles["aside-right-btn-1"]}>
-          <p className={styles["aside-right-text-7"]}>Join for free now</p>
-          <p className={styles["aside-right-text-6"]}>Join for free</p>
-        </button>
+        <form onSubmit={handleSubmit}>
+          <button type="Submit" className={styles["aside-right-btn-1"]}>
+            <p className={styles["aside-right-text-7"]}>Join for free now</p>
+            <p className={styles["aside-right-text-6"]}>Join for free</p>
+          </button>
+        </form>
         <p className={styles["aside-right-text-4"]}>
           <span className={styles["aside-right-text-2"]}>
             Do you already have an account?{" "}

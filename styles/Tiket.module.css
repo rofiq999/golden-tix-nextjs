@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap');
+
+.content-all {
+  background: #f5f6f8;
+}
+
+.content {
+  padding: 56px 72px;
+  margin: 70px 120px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+  background: white;
+}
+
+.content-left {
+  padding: 0;
+  border-right: dashed #dedede;
+}
+.content-right {
+  padding: 0;
+}
+.content-main {
+  border: 1px solid #dedede;
+  border-radius: 10px;
+}
+.text-payment {
+  font-family: 'Mulish';
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  padding-bottom: 48px;
+  text-align: center;
+}
+.content-tix {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dedede;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 20px 56px;
+  background: #5f2eea;
+}
+
+.text-golden {
+  font-family: 'Mulish';
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 34px;
+  color: white;
+}
+.text-admit {
+  font-family: 'Mulish';
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+}
+.text-admit,
+.p {
+  margin: 0;
+}
+
+.content-movie {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0px 16px 56px;
+}
+.text-movie {
+  font-family: 'Mulish';
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  color: #aaaaaa;
+}
+
+.text-spider {
+  font-family: 'Mulish';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 38px;
+}
+
+.content-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 22px 100px 6px 56px;
+}
+
+.content-wrap-sec {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 22px 100px 6px 56px;
+}
+
+.content-describe {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-month {
+  font-family: 'Mulish';
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.text-date {
+  font-family: 'Mulish';
+  font-weight: 400;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.content-Qr {
+  margin: 70px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.content-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+  padding: 48px 0px;
+}
+
+.bor-download {
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 10px 20px 10px 20px;
+}
+.bor-total {
+  display: none;
+}
+
+.text-download {
+  font-family: 'Mulish';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .content-all {
+    padding-top: 20px;
+  }
+
+  .content {
+    padding: 0px;
+    margin: 48px 0px 0px 0px;
+  }
+  .text-payment,
+  .content-tix {
+    display: none;
+  }
+  .content-right {
+    width: 100%;
+    border-bottom: dashed #dedede;
+  }
+
+  .content-left {
+    border: none;
+  }
+  .content-main {
+    display: flex;
+    flex-direction: column-reverse;
+    border: none;
+  }
+  .bor-download {
+    display: none;
+  }
+  .bor-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 10px 20px 10px 20px;
+    width: 75%;
+    margin: auto;
+    margin-top: 40px;
+  }
+  .content-wrap,
+  .content-wrap-sec {
+    justify-content: space-evenly;
+    padding: 0;
+  }
+  .content-movie {
+    padding: 32px 0px 16px 136px;
+  }
+}
+
+@media screen and (max-width: 428px) {
+  .content-all {
+    padding-top: 20px;
+  }
+
+  .content {
+    padding: 0px;
+    margin: 48px 0px 0px 0px;
+  }
+  .text-payment,
+  .content-tix {
+    display: none;
+  }
+  .content-right {
+    width: 100%;
+    border-bottom: dashed #dedede;
+  }
+
+  .content-left {
+    border: none;
+  }
+  .content-main {
+    display: flex;
+    flex-direction: column-reverse;
+    border: none;
+  }
+  .bor-download {
+    display: none;
+  }
+  .bor-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 10px 20px 10px 20px;
+    width: 75%;
+    margin: auto;
+    margin-top: 40px;
+  }
+  .content-wrap,
+  .content-wrap-sec {
+    justify-content: space-evenly;
+    padding: 0;
+  }
+}
