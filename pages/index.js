@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "../styles/LandingPage.module.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import PageTitle from "../Components/PageTitle";
 import CardShow from "../Components/CardMovieShow";
 import CardUpcoming from "../Components/CardUpcoming";
 // import logo from "../assets/golden-logo.png";
@@ -12,6 +13,7 @@ import poster3 from "../assets/keramat.jpeg";
 export default function Home() {
   return (
     <>
+      <PageTitle title={"Landing Page"} />
       <Header />
       <main>
         <div className={styles["top-container"]}>
@@ -113,6 +115,28 @@ export default function Home() {
             </div>
             <div className={styles["card-movies"]}>
               <CardUpcoming />
+            </div>
+          </div>
+        </div>
+        <div className={styles["bottom-content"]}>
+          <div className={styles["bottom-container"]}>
+            <div className={styles["tagline"]}>
+              <h2>Be the vanguard of the</h2>
+              <h1>Moviegoers</h1>
+            </div>
+            <div className={styles["join-container"]}>
+              <div className={styles["input"]}>
+                <input type="text" placeholder="Type your email" />
+              </div>
+              <div className={styles["join-btn"]}>
+                <button>Join Now</button>
+              </div>
+            </div>
+            <div className={styles["info"]}>
+              <p>
+                By joining you as a Golden Tix member, we will always send you
+                the latest updates via email .
+              </p>
             </div>
           </div>
         </div>
