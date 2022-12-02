@@ -2,15 +2,121 @@ import Image from "next/image";
 import styles from "../styles/LandingPage.module.css";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import logo from "../assets/golden-logo.png";
-import sponsor1 from "../assets/sponsor-1.png";
-import sponsor2 from "../assets/sponsor-2.png";
-import sponsor3 from "../assets/sponsor-3.png";
+import CardShow from "../Components/CardMovieShow";
+import CardUpcoming from "../Components/CardUpcoming";
+// import logo from "../assets/golden-logo.png";
+import poster1 from "../assets/sri-asih.jpg";
+import poster2 from "../assets/wakanda.jpg";
+import poster3 from "../assets/keramat.jpeg";
 
 export default function Home() {
   return (
     <>
       <Header />
+      <main>
+        <div className={styles["top-container"]}>
+          <div className="container">
+            <div className={`row ${styles["top-content"]}`}>
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className={styles["tagline-container"]}>
+                  <h2>Nearest Cinema, Newest Movie,</h2>
+                  <h1>Find out now!</h1>
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-6 col-12">
+                <div className={styles["poster-container"]}>
+                  <div className={styles["image-content1"]}>
+                    <Image
+                      src={poster1}
+                      layout="fill"
+                      objectFit="cover"
+                    ></Image>
+                  </div>
+                  <div className={styles["image-content2"]}>
+                    <Image
+                      src={poster2}
+                      layout="fill"
+                      objectFit="cover"
+                    ></Image>
+                  </div>
+                  <div className={styles["image-content3"]}>
+                    <Image
+                      src={poster3}
+                      layout="fill"
+                      objectFit="cover"
+                    ></Image>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={styles["showing-container"]}>
+          <div className="container">
+            <div className={styles["tab"]}>
+              <div className={styles["now-showing"]}>
+                <p>Now Showing</p>
+              </div>
+              <div className={styles["view-all"]}>
+                <p>view all</p>
+              </div>
+            </div>
+            <div className={styles["card-movies"]}>
+              <CardShow />
+            </div>
+          </div>
+        </div>
+        <div className={styles["coming-container"]}>
+          <div className="container">
+            <div className={styles["tab"]}>
+              <div className={styles["upcoming"]}>
+                <p>Upcoming Movies</p>
+              </div>
+              <div className={styles["view-all"]}>
+                <p>view all</p>
+              </div>
+            </div>
+            <div className={styles["months-slider"]}>
+              <div className={styles["months-btn"]}>
+                <button>January</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>February</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>March</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>April</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>May</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>June</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>July</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>September</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>October</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>November</button>
+              </div>
+              <div className={styles["months-btn"]}>
+                <button>December</button>
+              </div>
+            </div>
+            <div className={styles["card-movies"]}>
+              <CardUpcoming />
+            </div>
+          </div>
+        </div>
+      </main>
       <Footer />
     </>
   );
