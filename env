@@ -1,0 +1,18 @@
+PORT = 8080
+DB_HOST_DEV = 'db.vpgvvkwsobadjconircf.supabase.co'
+DB_USER_DEV = 'postgres'
+DB_PASS_DEV = 'h3sKbBMeiFhCws2e'
+DB_NAME_DEV = 'postgres'
+DB_PORT = '5432'
+
+
+CLOUDINARY_KEY = 753531251268411
+CLOUDINARY_SECRET = 1G4fbS_hSqDUQxliUQg5PeIZuPg
+CLOUDINARY_NAME = 'dedmbkp9a'
+
+REDIS_URL = "redis://default:8FJGpX4Xo8mfyiJov11fqkcs2xE5xTSX@redis-18834.c302.asia-northeast1-1.gce.cloud.redislabs.com:18834"
+REDIS_USER = "default"
+REDIS_PASSWORD = "8FJGpX4Xo8mfyiJov11fqkcs2xE5xTSX"
+
+ISSUER = "bolgeo"
+SECRET_KEY=  "somethinc"
