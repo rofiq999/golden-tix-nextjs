@@ -4,7 +4,7 @@ import React from 'react'
 import Image from "next/image";
 import icon_start from "../../assets/profile/icon_start.png";
 import image_jones from "../../assets/profile/image_jones.png";
-import styles from "../Sidebar_profile.module.css";
+import styles from "../../styles/Sidebar_profile.module.css";
 
 export default function index() {
     return (
@@ -40,6 +40,7 @@ export default function index() {
                     <div className={styles['br-wrapper']}>
                         <div className={styles['br-point']}></div>
                     </div>
+                    <button className={styles['logout']}>Logout</button>
                 </div>
             </div>
         </div>
