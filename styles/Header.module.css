@@ -1,0 +1,328 @@
+.container {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.logo-container {
+    display: flex;
+    border: 2px solid var(--primary);
+    padding: .2rem;
+    width: fit-content;
+}
+
+.logo-container .golden p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--secondary);
+    background-color: var(--primary);
+}
+
+.logo-container .tix p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .left-content ol {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #414141;
+}
+
+.navbar .left-content ol li {
+    user-select: none;
+}
+
+.navbar .left-content ol li:hover {
+    cursor: pointer;
+}
+
+.navbar .right-content {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+}
+
+.navbar .right-content .location {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    user-select: none;
+}
+
+.navbar .right-content .location:hover {
+    cursor: pointer;
+}
+
+.navbar .right-content .location p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #414141;
+}
+
+.navbar .right-content .location i {
+    color: #414141;
+}
+
+.navbar .right-content .searching {
+    color: #414141;
+}
+
+.navbar .right-content .btn-container button {
+    border: none;
+    background-color: var(--primary);
+    color: white;
+    font-size: .8rem;
+    font-weight: 700;
+    padding: .5rem 1.5rem;
+    border-radius: .2rem;
+}
+
+.navbar .right-content .btn-container button:active {
+    opacity: .8;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.toggle-list {
+    display: none;
+}
+  
+  .hamburger-list {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    background-color: #1a1a1a;
+    transition: all 0.5s;
+    z-index: 11;
+  }
+  
+  .hamburger-list ol {
+    padding: 1rem 6rem 1rem 1rem;
+    margin: 0;
+  }
+  
+  .hamburger-list ol li {
+    list-style: none;
+    color: #919191;
+    margin: 0;
+    padding: 1rem;
+    user-select: none;
+  }
+  
+  .hamburger-list ol li:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+@media screen and (max-width: 768px) {
+    .navbar .left-content ol {
+       font-size: .8rem;
+    }
+
+    .logo-container .golden p {
+        font-size: 1rem;
+    }
+    
+    .logo-container .tix p {
+        font-size: 1rem;
+    }
+
+    .navbar .left-content ol {
+        gap: 1rem;
+    }
+
+    .navbar .right-content {
+        gap: 1rem;
+    }
+
+    .navbar .right-content .location p {
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .navbar {
+        display: none;
+    }
+    
+
+    .show {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        opacity: 0;
+        transition: all 1s;
+    }
+
+    .menu-toggle {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 30px;
+        justify-content: space-around;
+      }
+      
+      .menu-toggle span:nth-child(2) {
+        position: relative;
+        right: -10px;
+        display: block;
+        width: 20px;
+        height: 4px;
+        background-color: black;
+        border-radius: 3px;
+        transition: all 0.5s;
+      }
+      
+      .menu-toggle span:nth-child(3) {
+        display: block;
+        width: 30px;
+        height: 4px;
+        background-color: black;
+        border-radius: 3px;
+        transition: all 0.5s;
+      }
+      
+      .menu-toggle span:nth-child(4) {
+        display: block;
+        width: 20px;
+        height: 4px;
+        background-color: black;
+        border-radius: 3px;
+        transition: all 0.5s;
+      }
+      
+      .menu-toggle input {
+        position: absolute;
+        width: 29px;
+        height: 28px;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 11;
+      }
+
+      /* hamburger animation */
+  .menu-toggle span:nth-child(2) {
+    transform-origin: 0 0;
+  }
+  
+  .menu-toggle span:nth-child(4) {
+    transform-origin: 0 100%;
+  }
+  
+  .menu-toggle input:checked ~ span:nth-child(2) {
+    background-color: black;
+    transform: rotate(45deg) translate(-1px, 4px);
+  }
+  
+  .menu-toggle input:checked ~ span:nth-child(4) {
+    background-color: black;
+    transform: rotate(-45deg) translate(9px, 2px);
+  }
+  
+  .menu-toggle input:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+    .toggle-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        opacity: 1;
+        transition: all 1s;
+    }
+
+    .toggle-list .search {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid #DEDEDE;
+        border-radius: 4px;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .toggle-list .search i {
+        font-size: 1.5rem;
+        color: #6E7191;
+    }
+
+    .toggle-list .search input {
+        border: none;
+        outline: none;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #14142B;
+    }
+
+    .toggle-list .search input::-webkit-input-placeholder{
+        color: #A0A3BD;
+    }
+
+    .toggle-list .location {
+        display: flex;
+        align-items: center;
+        border-top: 1px solid #DEDEDE;
+        border-bottom: 1px solid #DEDEDE;
+        width: 100%;
+        padding: 1rem;
+        margin-top: 5rem;
+        gap: .5rem;
+        justify-content: center;
+    }
+
+    .toggle-list .location p {
+        margin: 0!important;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .toggle-list .location i {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .toggle-list .toggle-content {
+        /* border-top: 1px solid #DEDEDE; */
+        border-bottom: 1px solid #DEDEDE;
+        width: 100%;
+        padding: 1rem;
+        gap: .5rem;
+    }
+
+    .toggle-list .toggle-content p {
+        margin: 0!important;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .toggle-list .copyright {
+        font-size: 1.2rem;
+        color: #6E7191;
+        padding: 5rem 0;
+        width: 100%;
+        text-align: center;
+    }
+}

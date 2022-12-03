@@ -30,14 +30,5 @@ main {
 
 :root {
   --primary: #5f2eea;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    /* color-scheme: dark; */
-  }
-  body {
-    /* color: white; */
-    /* background: black; */
-  }
+  --secondary: #FFC107;
 }
