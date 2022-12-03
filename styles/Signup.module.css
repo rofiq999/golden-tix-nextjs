@@ -36,6 +36,7 @@
   line-height: 30px;
   letter-spacing: 0.005em;
   color: #ffffff;
+  margin-bottom: 0px;
 }
 
 .aside-left-div-1 {
@@ -87,6 +88,7 @@
   line-height: 30px;
   letter-spacing: 0.005em;
   color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0px;
 }
 
 .main {
@@ -184,6 +186,7 @@
   line-height: 34px;
   letter-spacing: 0.75px;
   color: #696f79;
+  margin-bottom: 0px;
 }
 
 .aside-right-btn-1 {
@@ -244,6 +247,7 @@
   color: #aaaaaa;
   margin-left: 37px;
   margin-right: 36px;
+  margin-bottom: 0px;
 }
 
 .aside-right-div-4 {
@@ -281,6 +285,14 @@
 
 .aside-right-text-6 {
   display: none;
+}
+
+.aside-right-text-7 {
+  margin-bottom: 0px;
+}
+
+.aside-right-text-8 {
+  margin-bottom: 0px;
 }
 
 @media (max-width: 768px) {
