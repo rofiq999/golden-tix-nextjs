@@ -10,7 +10,7 @@ function Footer() {
   return (
     <footer>
       <div className="container">
-        <div className="row">
+        <div className={`row ${styles["footer-container"]}`}>
           <div className="col-lg-3 col-md-3 col-12">
             <div className={styles["left-footer"]}>
               <div className={styles["logo-container"]}>
