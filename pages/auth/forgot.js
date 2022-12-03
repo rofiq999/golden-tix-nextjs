@@ -1,13 +1,41 @@
 import Image from "next/image";
-import styles from "../styles/Forgot.module.css";
+import React, { useState } from "react";
+import { useDispatch, connect, useSelector } from "react-redux";
+import styles from "../../styles/Forgot.module.css";
 
-import logo from "../assets/logo.png";
-import eye from "../assets/eye.png";
-import facebook from "../assets/Facebook.png";
-import google from "../assets/google.png";
-import logo2 from "../assets/logo2.png";
+import authAction from "../../redux/actions/auth";
+
+import logo from "../../assets/logo.png";
+import eye from "../../assets/eye.png";
+import facebook from "../../assets/Facebook.png";
+import google from "../../assets/google.png";
+import logo2 from "../../assets/logo2.png";
 
 export default function Signup() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+
+  const [email, setEmail] = useState();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      email: email,
+      linkDirect: "http://localhost:3000/auth/reset-password",
+    };
+    dispatch(authAction.forgotThunk(data));
+    // if (state.auth.isLoading) {
+    //   toast(`Loading...`);
+    // }
+    if (state.auth.isError === true) {
+      toast.error(`Forgot Failed!`);
+    }
+    if (state.auth.isFulfilled === true) {
+      toast.success(`Forgot Success!`);
+    }
+    // console.log("test");
+  };
+
   return (
     <main className={styles["main"]}>
       <aside className={styles["aside-left"]}>
@@ -63,10 +91,14 @@ export default function Signup() {
           className={styles["aside-right-input-1"]}
           type="text"
           placeholder="Write your email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
-        <button className={styles["aside-right-btn-1"]}>
-          <p className={styles["aside-right-text-7"]}>Activate now</p>
-        </button>
+        <form onSubmit={handleSubmit}>
+          <button type="submit" className={styles["aside-right-btn-1"]}>
+            <p className={styles["aside-right-text-7"]}>Activate now</p>
+          </button>
+        </form>
       </aside>
     </main>
   );

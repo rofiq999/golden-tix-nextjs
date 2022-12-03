@@ -1,18 +1,18 @@
 import Image from "next/image";
-import styles from "../styles/Signin.module.css";
+import styles from "../../styles/Signin.module.css";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useDispatch, connect, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import authAction from "../redux/actions/auth";
+import authAction from "../../redux/actions/auth";
 
-import logo3 from "../assets/logo3.png";
-import eye from "../assets/eye.png";
-import facebook from "../assets/Facebook.png";
-import google from "../assets/google.png";
-import logo2 from "../assets/logo2.png";
+import logo3 from "../../assets/logo3.png";
+import eye from "../../assets/eye.png";
+import facebook from "../../assets/Facebook.png";
+import google from "../../assets/google.png";
+import logo2 from "../../assets/logo2.png";
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -25,17 +25,16 @@ function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { email: email, password: password };
-    dispatch(authAction.loginThunk(data));
-    // if (state.auth.isLoading) {
-    //   toast(`Loading...`);
-    // }
-    if (state.auth.isError) {
-      toast.error(`Login Failed!`);
-    }
-    if (state.auth.isFulfilled) {
-      toast.success(`Login Success!`);
-    }
+    dispatch(authAction.loginThunk(data, signinSuccess, signinFailed));
     // console.log("test");
+  };
+
+  const signinSuccess = () => {
+    toast.success(`Login Success!`);
+  };
+
+  const signinFailed = (error) => {
+    toast.error(`${error.response.data.msg}`);
   };
 
   // console.log(state.auth.isFulfilled);
@@ -43,7 +42,6 @@ function SignIn() {
   // console.log(`Lastname: ${password}`);
   return (
     <main className={styles["main"]}>
-      <ToastContainer />
       <aside className={styles["aside-left"]}>
         <Image className={styles["aside-left-image-1"]} src={logo3} alt="img" />
         <h1 className={styles["aside-left-header-1"]}>wait, watch, wow!</h1>
@@ -93,7 +91,7 @@ function SignIn() {
           <span className={styles["aside-right-text-2"]}>
             Forgot your password?{" "}
           </span>
-          <Link href="/forgot" className={styles["aside-right-text-3"]}>
+          <Link href="/auth/forgot" className={styles["aside-right-text-3"]}>
             Reset now
           </Link>
         </p>

@@ -1,15 +1,20 @@
 import Image from "next/image";
-import styles from "../styles/Signup.module.css";
+import styles from "../../styles/Signup.module.css";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useDispatch, connect, useSelector } from "react-redux";
 
-import logo from "../assets/logo.png";
-import eye from "../assets/eye.png";
-import facebook from "../assets/Facebook.png";
-import google from "../assets/google.png";
-import logo2 from "../assets/logo2.png";
+import authAction from "../../redux/actions/auth";
+
+import logo from "../../assets/logo.png";
+import eye from "../../assets/eye.png";
+import facebook from "../../assets/Facebook.png";
+import google from "../../assets/google.png";
+import logo2 from "../../assets/logo2.png";
 
 export default function Signup() {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -18,7 +23,23 @@ export default function Signup() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("test");
+    const data = {
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+    };
+    dispatch(authAction.registerThunk(data));
+    // if (state.auth.isLoading) {
+    //   toast(`Loading...`);
+    // }
+    if (state.auth.isError) {
+      toast.error(`Register Failed!`);
+    }
+    if (state.auth.isFulfilled) {
+      toast.success(`Register Success! Please verify your email!`);
+    }
+    // console.log("test");
   };
 
   // console.log(`firstname: ${firstName}`);
@@ -123,7 +144,7 @@ export default function Signup() {
           <span className={styles["aside-right-text-2"]}>
             Do you already have an account?{" "}
           </span>
-          <Link href="/signin" className={styles["aside-right-text-3"]}>
+          <Link href="/auth/signin" className={styles["aside-right-text-3"]}>
             {" "}
             Log in
           </Link>
