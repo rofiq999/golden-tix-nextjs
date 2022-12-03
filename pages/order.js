@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import PageTitle from "../Components/PageTitle";
 
 import cineone from "../assets/cineone2.png";
+import arrowdown from "../assets/arrowdown.png";
+import arrowright from "../assets/arrowright.png";
 
 export default function Order() {
   return (
@@ -16,16 +18,19 @@ export default function Order() {
         <Header />
         <section className={styles["section-1"]}>
           <aside className={styles["aside-left"]}>
-            <h1 className={styles["movie-header-1"]}>Movie Selected</h1>
-            <div className={styles["movie-div-1"]}>
-              <p className={styles["movie-text-1"]}>Spider-Man: Homecoming</p>
-              <button className={styles["movie-btn-1"]}>Change movie</button>
+            <div className={styles["movie-div"]}>
+              <h1 className={styles["movie-header-1"]}>Movie Selected</h1>
+              <div className={styles["movie-div-1"]}>
+                <p className={styles["movie-text-1"]}>Spider-Man: Homecoming</p>
+                <button className={styles["movie-btn-1"]}>Change movie</button>
+              </div>
             </div>
-            <h1 className={styles["movie-header-1"]}>Movie Selected</h1>
+            <h1 className={styles["movie-header-1"]}>Choose Your Seat</h1>
             <div className={styles["seat-div"]}>
               <p className={styles["seat-text-1"]}>Screen</p>
               <div className={styles["seat-div-1"]}></div>
               <div className={styles["seat-div-8"]}>
+                <div className={styles["seat-div-17"]}></div>
                 <div className={styles["seat-div-9"]}>
                   <p className={styles["seat-text-2"]}>A</p>
                   <p className={styles["seat-text-2"]}>B</p>
@@ -210,13 +215,48 @@ export default function Order() {
                       <p>7</p>
                     </div>
                   </div>
+                  <div className={styles["seat-div-19"]}>
+                    <div className={styles["seat-div-18"]}></div>
+                    <div className={styles["seat-div-18"]}></div>
+                  </div>
                 </div>
               </div>
-              <div>
+              <div className={styles["seat-div-21"]}>
                 <h1 className={styles["seat-header-1"]}>Seating key</h1>
+                <div className={styles["seat-div-24"]}>
+                  <aside className={styles["seat-aside-left"]}>
+                    <div className={styles["seat-div-22"]}>
+                      <Image src={arrowdown} alt="img" />
+                      <p className={styles["seat-text-4"]}>A - G</p>
+                    </div>
+                    <div className={styles["seat-div-22"]}>
+                      <div className={styles["seat-div-20"]}></div>
+                      <p className={styles["seat-text-4"]}>Available</p>
+                    </div>
+                    <div className={styles["seat-div-22"]}>
+                      <div className={styles["seat-div-23"]}></div>
+                      <p className={styles["seat-text-4"]}>Love nest</p>
+                    </div>
+                  </aside>
+                  <aside className={styles["seat-aside-left"]}>
+                    <div className={styles["seat-div-22"]}>
+                      <Image src={arrowright} alt="img" />
+                      <p className={styles["seat-text-4"]}>1 - 14</p>
+                    </div>
+                    <div className={styles["seat-div-22"]}>
+                      <div className={styles["seat-div-25"]}></div>
+                      <p className={styles["seat-text-4"]}>Selected</p>
+                    </div>
+                    <div className={styles["seat-div-22"]}>
+                      <div className={styles["seat-div-26"]}></div>
+                      <p className={styles["seat-text-4"]}>Sold</p>
+                    </div>
+                  </aside>
+                  <aside></aside>
+                </div>
                 <div className={styles["seat-div-12"]}>
                   <div className={styles["seat-div-13"]}>
-                    <div className={styles["seat-div-2"]}></div>
+                    <div className={styles["seat-div-20"]}></div>
                     <p className={styles["seat-text-3"]}>Available</p>
                   </div>
                   <div className={styles["seat-div-13"]}>
@@ -224,7 +264,7 @@ export default function Order() {
                     <p className={styles["seat-text-3"]}>Selected</p>
                   </div>
                   <div className={styles["seat-div-13"]}>
-                    <div className={styles["seat-div-15"]}></div>
+                    <div className={styles["seat-div-23"]}></div>
                     <p className={styles["seat-text-3"]}>Love nest</p>
                   </div>
                   <div className={styles["seat-div-13"]}>
@@ -232,6 +272,11 @@ export default function Order() {
                     <p className={styles["seat-text-3"]}>Sold</p>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <div></div>
               </div>
             </div>
             <div className={styles["btn-div-1"]}>
