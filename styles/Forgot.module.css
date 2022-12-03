@@ -37,6 +37,7 @@
   line-height: 30px;
   letter-spacing: 0.005em;
   color: #ffffff;
+  margin-bottom: 0px;
 }
 
 .aside-left-div-1 {
@@ -88,6 +89,7 @@
   line-height: 30px;
   letter-spacing: 0.005em;
   color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0px;
 }
 
 .main {
@@ -181,6 +183,10 @@
 
 .aside-right-text-6 {
   display: none;
+}
+
+.aside-right-text-7 {
+  margin-bottom: 0px;
 }
 
 @media (max-width: 768px) {
