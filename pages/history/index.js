@@ -1,5 +1,7 @@
-import React from 'react'
+// import React from 'react'
 // import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 //import css
@@ -15,11 +17,16 @@ import Header from "../../Components/Header";
 import Image from "next/image";
 import icon_cineone from "../../assets/history/icon_cineone.png";
 import icon_ebu_id from "../../assets/history/icon_ebu_id.png";
+import profileActions from "../../redux/actions/profile";
+
 
 
 function index() {
-
+  const dispatch = useDispatch();
   const router = useRouter();
+  const profiles = useSelector((state) => state.user.profile);
+
+
   const profileHandler = () => {
     router.push("/profile");
   };
@@ -35,7 +42,7 @@ function index() {
           <div className={`${styles['content']} container`}>
             <div className='row'>
               <div className={`${styles['content-left']} col-lg-3 col-md-12 col-sm-12`}>
-                <Sidebar />
+                <Sidebar firstname={profiles.firstname} lastname={profiles.lastname} username={profiles.username} image={profiles.image} />
               </div>
               <div className={`${styles['content-right']} col-lg-9 col-md-12 col-sm-12 `}>
                 <div className={styles['content-right-one']}>

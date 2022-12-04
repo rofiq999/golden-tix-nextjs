@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 
 export default function Index({ firstname, lastname, username, image }) {
     const token = useSelector((state) => state.auth.userData.token);
+    const profiles = useSelector((state) => state.user.profile);
     const router = useRouter();
     // const [image, setImage] = useState("");
     const dispatch = useDispatch()
@@ -53,6 +54,7 @@ export default function Index({ firstname, lastname, username, image }) {
     };
     const handleCancel = () => {
         setBtnsave(false);
+        setDisplay()
     };
 
     // handleClose, handleShow => Show Modals
