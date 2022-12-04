@@ -22,7 +22,12 @@ function Header() {
       <div className="container">
         <div className={`row ${styles["container"]}`}>
           <div className="col-lg-2 col-md-2 col-10">
-            <div className={styles["logo-container"]}>
+            <div
+              className={styles["logo-container"]}
+              onClick={() => {
+                router.push("/");
+              }}
+            >
               <div className={styles["golden"]}>
                 <p>GOLDEN</p>
               </div>
@@ -65,13 +70,22 @@ function Header() {
                       />
                     </div>
                   ) : (
-                    <button
-                      onClick={() => {
-                        router.push("/auth/signup");
-                      }}
-                    >
-                      Sign Up
-                    </button>
+                    <div className={styles["right-btn"]}>
+                      <button
+                        onClick={() => {
+                          router.push("/auth/signup");
+                        }}
+                      >
+                        Sign Up
+                      </button>
+                      <button
+                        onClick={() => {
+                          router.push("/auth/signin");
+                        }}
+                      >
+                        Sign In
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>

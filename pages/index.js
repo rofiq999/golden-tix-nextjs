@@ -5,6 +5,7 @@ import Footer from "../Components/Footer";
 import PageTitle from "../Components/PageTitle";
 import CardShow from "../Components/CardMovieShow";
 import CardUpcoming from "../Components/CardUpcoming";
+import Loading from "../Components/Loading";
 // import logo from "../assets/golden-logo.png";
 import poster1 from "../assets/sri-asih.jpg";
 import poster2 from "../assets/wakanda.jpg";
@@ -17,6 +18,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const upcomingMovies = useSelector((state) => state.movie.upcoming);
   const showingMovies = useSelector((state) => state.movie.showing);
+  const loading = useSelector((state) => state.movie.isLoading);
   // console.log(upcomingMovies);
 
   useEffect(() => {
@@ -80,16 +82,20 @@ export default function Home() {
               </div>
             </div>
             <div className={styles["card-movies"]}>
-              {showingMovies?.map((e) => {
-                return (
-                  <CardShow
-                    name={e.movie_name}
-                    categories={e.genres}
-                    image={e.image}
-                    id={e.id}
-                  />
-                );
-              })}
+              {loading ? (
+                <Loading />
+              ) : (
+                showingMovies?.map((e) => {
+                  return (
+                    <CardShow
+                      name={e.movie_name}
+                      categories={e.genres}
+                      image={e.image}
+                      id={e.id}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
@@ -139,16 +145,20 @@ export default function Home() {
               </div>
             </div>
             <div className={styles["card-movies"]}>
-              {upcomingMovies.map((e) => {
-                return (
-                  <CardUpcoming
-                    name={e.movie_name}
-                    category={e.genres.join(", ")}
-                    image={e.image}
-                    id={e.id}
-                  />
-                );
-              })}
+              {loading ? (
+                <Loading />
+              ) : (
+                upcomingMovies.map((e) => {
+                  return (
+                    <CardUpcoming
+                      name={e.movie_name}
+                      category={e.genres.join(", ")}
+                      image={e.image}
+                      id={e.id}
+                    />
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
