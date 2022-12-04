@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 //import css
 import styles from "../../styles/Profile.module.css";
@@ -16,12 +18,14 @@ import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 
 import profileActions from "../../redux/actions/profile";
+import authActions from "../../redux/actions/auth";
 
 function Index() {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.userData.token);
-
+  const [btnsave, setBtnsave] = useState(false);
+  const [show, setShow] = useState(false);
   const Id = useSelector((state) => state.auth.userData.id);
   const [edit, setEdit] = useState(true);
   const profiles = useSelector((state) => state.user.profile);
@@ -39,31 +43,6 @@ function Index() {
   useEffect(() => {
     dispatch(profileActions.userThunk(token));
 
-    //     // axios
-    //     //     .get(
-    //     //         `${baseUrl}/api/user/profile`,
-    //     //         {
-    //     //             headers: {
-    //     //                 'x-access-token': token, Id
-    //     //             },
-    //     //         }
-    //     //     )
-    //     //     .then((res) => {
-    //     //         setFirstName(
-    //     //             res.data.data.first_name
-    //     //         )
-    //     //         setLastName(
-    //     //             res.data.data.last_name
-    //     //         )
-    //     //         setEmail(
-    //     //             res.data.data.email
-    //     //         )
-    //     //         setPhone(
-    //     //             res.data.data.phone
-    //     //         )
-    //     //         // console.log(res.data.data.first_name);
-    //     //     })
-    //     //     .catch((err) => console.log(err));
   }, [dispatch]);
 
   const handleFirstname = (e) => {
@@ -79,6 +58,7 @@ function Index() {
     setPhone(e.target.value);
   };
 
+
   //edit profile
   const handleSave = () => {
     const formData = new FormData();
@@ -91,7 +71,7 @@ function Index() {
         { first_name, last_name, phone },
         {
           headers: {
-            "x-access-token": token,
+            'x-access-token': token
           },
         }
       )
@@ -104,44 +84,47 @@ function Index() {
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    dispatch(profileActions.userThunk(token))
+  }, [dispatch])
+  // handleClose, handleShow => Show Modals
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleLogout = () => {
+    const data = token
+    dispatch(authActions.logoutThunk(data)),
+      localStorage.removeItem("data"),
+      toast.success("Logout Success"),
+      setTimeout(() => {
+        router.push("/auth/signin");
+      }, 2000);
+  };
   return (
     <>
       <Header />
-      <main className={`${styles["content-all"]} container-fluid`}>
-        <div className={styles["content-account"]}>
-          <p className={styles["details-account"]}>Details Account</p>
-          <p className={styles["order"]} onClick={historyHandler}>
-            Order History
-          </p>
+      <main className={`${styles['content-all']} container-fluid`}>
+        <div className={styles['content-account']}>
+          <p className={styles['details-account']}>Details Account</p>
+          <p className={styles['order']} onClick={historyHandler}>Order History</p>
         </div>
-        <section className="container">
-          <div className="row">
-            <div
-              className={`${styles["content-left"]} col-lg-3 col-md-12 col-sm-12`}
-            >
-              <Sidebar
-                firstname={profiles.firstname}
-                lastname={profiles.lastname}
-                username={profiles.username}
-                image={profiles.image}
-              />
+        <section className='container'>
+          <div className='row'>
+            <div className={`${styles['content-left']} col-lg-3 col-md-12 col-sm-12`}>
+              <Sidebar firstname={profiles.firstname} lastname={profiles.lastname} username={profiles.username} image={profiles.image} />
             </div>
-            <div
-              className={`${styles["content-right"]} col-lg-9 col-md-12 col-sm-12 `}
-            >
-              <div className={styles["content-input"]}>
-                <div className={styles["content-right-one"]}>
-                  <p className={styles["text-acount"]}>Account Settings</p>
-                  <p className={styles["text-order"]} onClick={historyHandler}>
-                    Order History
-                  </p>
+            <div className={`${styles['content-right']} col-lg-9 col-md-12 col-sm-12 `}>
+              <div className={styles['content-input']}>
+                <div className={styles['content-right-one']}>
+                  <p className={styles['text-acount']}>Account Settings</p>
+                  <p className={styles['text-order']} onClick={historyHandler} >Order History</p>
                 </div>
-                <div className={styles["content-detail"]}>
-                  <p className={styles["detail"]}>Details Information</p>
-                  <div className={styles["content-br"]}> </div>
+                <div className={styles['content-detail']}>
+                  <p className={styles['detail']}>Details Information</p>
+                  <div className={styles['content-br']}> </div>
                 </div>
                 <div
-                  className={`${styles.buttonedit} btn btn-outline-warning text-black fw-bold mt-4 ms-4 `}
+                  className={`${styles['buttonedit']} btn btn-outline-primary text-black fw-bold mt-4 ms-4 `}
                   onClick={() => {
                     setEdit(!edit);
                     console.log("click");
@@ -149,117 +132,100 @@ function Index() {
                 >
                   <span className="text-center">Edit</span>
                 </div>
-                <div className={styles["content-name"]}>
-                  <div className={styles["input"]}>
-                    <label className={styles["name"]}>Frist Name</label>
-                    <div className={styles["input-bar"]}>
-                      <div className={styles["content-number"]}></div>
-                      <input
-                        className={styles["input-name"]}
-                        type="text"
-                        disabled={edit}
-                        value={first_name}
-                        placeholder={profiles.firstname}
-                        onChange={handleFirstname}
-                      />
+                <div className={styles['content-name']}>
+                  <div className={styles['input']}>
+                    <label className={styles['name']}>Frist Name</label>
+                    <div className={styles['input-bar']}>
+                      <div className={styles['content-number']}></div>
+                      <input className={styles['input-name']} type='text' disabled={edit} value={first_name} placeholder={profiles.firstname} onChange={handleFirstname} />
                     </div>
                   </div>
-                  <div className={styles["input"]}>
-                    <label className={styles["name"]}>Last Name</label>
-                    <div className={styles["input-bar"]}>
-                      <div className={styles["content-number"]}></div>
-                      <input
-                        className={styles["input-name"]}
-                        type="text"
-                        disabled={edit}
-                        value={last_name}
-                        placeholder={profiles.lastname}
-                        onChange={handleLastname}
-                      />
+                  <div className={styles['input']}>
+                    <label className={styles['name']}>Last Name</label>
+                    <div className={styles['input-bar']}>
+                      <div className={styles['content-number']}></div>
+                      <input className={styles['input-name']} type='text' disabled={edit} value={last_name}
+                        placeholder={profiles.lastname} onChange={handleLastname} />
                     </div>
                   </div>
                 </div>
-                <div className={styles["content-name"]}>
-                  <div className={styles["input"]}>
-                    <label className={styles["name"]}>Email</label>
-                    <div className={styles["input-bar"]}>
-                      <div className={styles["content-number"]}></div>
-                      <input
-                        className={styles["input-name"]}
-                        type="email"
-                        disabled={edit}
-                        placeholder={profiles.email}
-                      />
+                <div className={styles['content-name']}>
+                  <div className={styles['input']}>
+                    <label className={styles['name']}>Email</label>
+                    <div className={styles['input-bar']}>
+                      <div className={styles['content-number']}></div>
+                      <input className={styles['input-name']} type='email' disabled={edit} placeholder={profiles.email} />
                     </div>
                   </div>
-                  <div className={styles["input"]}>
-                    <label className={styles["name"]}>Phone Number</label>
-                    <div className={styles["input-bar"]}>
-                      <div className={styles["content-number"]}>
-                        <p>
-                          +62 <span className={styles["bor-left"]}></span>
-                        </p>
-                      </div>
-                      <input
-                        className={styles["input-number"]}
-                        type="tel"
-                        value={phone}
-                        disabled={edit}
-                        placeholder={profiles.phone}
-                        onChange={handlesetPhone}
-                      />
+                  <div className={styles['input']}>
+                    <label className={styles['name']}>Phone Number</label>
+                    <div className={styles['input-bar']}>
+                      <div className={styles['content-number']}><p>+62 <span className={styles['bor-left']}></span></p></div>
+                      <input className={styles['input-number']} type='tel' value={phone} disabled={edit} placeholder={profiles.phone} onChange={handlesetPhone} />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className={styles["content-password"]}>
-                <div className={styles["content-detail"]}>
-                  <p className={styles["privacy"]}>Account and Privacy</p>
-                  <div className={styles["content-br"]}> </div>
+              <div className={styles['content-password']}>
+                <div className={styles['content-detail']}>
+                  <p className={styles['privacy']}>Account and Privacy</p>
+                  <div className={styles['content-br']}> </div>
                 </div>
-                <div className={styles["content-name"]}>
-                  <div className={styles["input"]}>
-                    <label className={styles["name"]}>New Password</label>
-                    <div className={styles["input-bar"]}>
-                      <div className={styles["content-number"]}></div>
-                      <input
-                        className={styles["input-name"]}
-                        type="password"
-                        disabled={edit}
-                        placeholder="Write your password"
-                      />
+                <div className={styles['content-name']}>
+                  <div className={styles['input']}>
+                    <label className={styles['name']}>New Password</label>
+                    <div className={styles['input-bar']}>
+                      <div className={styles['content-number']}></div>
+                      <input className={styles['input-name']} type='password' disabled={edit} placeholder='Write your password' />
                     </div>
                   </div>
-                  <div className={styles["input"]}>
-                    <label className={styles["name"]}>Confirm Password</label>
-                    <div className={styles["input-bar"]}>
-                      <div className={styles["content-number"]}></div>
-                      <input
-                        className={styles["input-name"]}
-                        type="password"
-                        disabled={edit}
-                        placeholder="Confirm your password"
-                      />
+                  <div className={styles['input']}>
+                    <label className={styles['name']}>Confirm Password</label>
+                    <div className={styles['input-bar']}>
+                      <div className={styles['content-number']}></div>
+                      <input className={styles['input-name']} type='password' disabled={edit} placeholder='Confirm your password' />
                     </div>
                   </div>
                 </div>
               </div>
-              <button
-                className={styles["update"]}
-                onClick={() => {
-                  handleSave();
-                }}
-              >
-                Update changes
-              </button>
-              <button className={styles["logout"]}>Logout</button>
+              <button className={styles['update']} onClick={() => {
+                handleSave();
+              }}>Update changes</button>
+              <button className={styles['logout']} onClick={handleShow}>Logout</button>
             </div>
           </div>
         </section>
       </main>
       <Footer />
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>are you sure you want to log out?</Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="success"
+            className="fw-bold text-bg-primary text-white"
+            onClick={handleLogout}
+          >
+            Yes
+          </Button>
+          <Button
+            variant="danger"
+            className="fw-bold text-bg-dark text-white"
+            onClick={handleClose}
+          >
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
-  );
+  )
 }
 
 export default Index;

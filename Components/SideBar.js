@@ -6,7 +6,7 @@ import axios from "axios";
 //import css
 import Image from "next/image";
 import icon_start from "../assets/profile/icon_start.png";
-// import icon_default from "../assets/icon_default.png";
+import icon_default from "../assets/icon_default.png";
 import styles from "../styles/Sidebar_profile.module.css";
 import profileActions from "../redux/actions/profile";
 import authActions from "../redux/actions/auth";
@@ -38,7 +38,10 @@ export default function SideBar({ firstname, lastname, username, image }) {
     const getToken = token;
     const body = new FormData();
     if (picture) body.append("image", picture);
-    dispatch(profileActions.imageThunk(getToken, body));
+    dispatch(profileActions.imageThunk(getToken, body)),
+      toast.success("update succes"),
+      setTimeout(() => {
+      }, 2000);
   };
 
   useEffect(() => {
@@ -59,7 +62,8 @@ export default function SideBar({ firstname, lastname, username, image }) {
   const handleLogout = () => {
     const data = token;
     dispatch(authActions.logoutThunk(data)),
-      toast.success("Logout Success"),
+      localStorage.removeItem("data");
+    toast.success("Logout Success"),
       setTimeout(() => {
         router.push("/auth/signin");
       }, 2000);
@@ -79,7 +83,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
           <div className={styles["content-img"]}>
             <Image
               className={styles["image_jones"]}
-              src={display == null ? `${CLOUD}/${image}` : display}
+              src={(display == null) ? `${CLOUD}/${image}` : display}
               alt="image_jones"
               width={130}
               height={130}
@@ -142,9 +146,11 @@ export default function SideBar({ firstname, lastname, username, image }) {
             <div className={styles["br-wrapper"]}>
               <div className={styles["br-point"]}></div>
             </div>
-            <button className={styles["logout"]} onClick={handleShow}>
-              Logout
-            </button>
+            <div className={styles["content-logout"]}>
+              <button className={styles["logout"]} onClick={handleShow}>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
