@@ -92,6 +92,30 @@
   margin-bottom: 0px;
 }
 
+.logo-container {
+  display: flex;
+  border: 2px solid white;
+  padding: .2rem;
+  width: fit-content;
+}
+
+.logo-container .golden p {
+  margin: 0;
+  padding: 0 .5rem;
+  font-size: 3rem;
+  font-weight: 500;
+  color: var(--primary);
+  background-color: white;
+}
+
+.logo-container .tix p {
+  margin: 0;
+  padding: 0 .5rem;
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+}
+
 .main {
   display: flex;
 }
@@ -243,9 +267,29 @@
   }
 
   .aside-right-image-2 {
-    display: block;
-    margin-bottom: 40px;
-  }
+    display: flex;
+    border: 2px solid var(--primary);
+    padding: .2rem;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.aside-right-image-2 .golden p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--secondary);
+    background-color: var(--primary);
+}
+
+.aside-right-image-2 .tix p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--primary);
+}
 
   .aside-right-div-2 {
     display: none;

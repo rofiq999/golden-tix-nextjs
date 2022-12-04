@@ -47,11 +47,14 @@ export default function Signup() {
       <PageTitle title={"Sign Up"} />
       <main className={styles["main"]}>
         <aside className={styles["aside-left"]}>
-          <Image
-            className={styles["aside-left-image-1"]}
-            src={logo}
-            alt="img"
-          />
+          <div className={styles["logo-container"]}>
+            <div className={styles["golden"]}>
+              <p>GOLDEN</p>
+            </div>
+            <div className={styles["tix"]}>
+              <p>TIX</p>
+            </div>
+          </div>
           <h1 className={styles["aside-left-header-1"]}>
             Lets build your account
           </h1>
@@ -81,11 +84,14 @@ export default function Signup() {
           </div>
         </aside>
         <aside className={styles["aside-right"]}>
-          <Image
-            className={styles["aside-right-image-2"]}
-            src={logo2}
-            alt="img"
-          />
+          <div className={styles["aside-right-image-2"]}>
+            <div className={styles["golden"]}>
+              <p>GOLDEN</p>
+            </div>
+            <div className={styles["tix"]}>
+              <p>TIX</p>
+            </div>
+          </div>
           <h1 className={styles["aside-right-header-2"]}>Sign Up</h1>
           <h1 className={styles["aside-right-header-1"]}>
             Fill your additional details
