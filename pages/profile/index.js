@@ -156,7 +156,7 @@ function Index() {
                                     <div className={styles['content-br']}> </div>
                                 </div>
                                 <div
-                                    className={`${styles.buttonedit} btn btn-outline-warning text-black fw-bold mt-4 ms-4 `}
+                                    className={`${styles.buttonedit} btn btn-outline-success text-black fw-bold mt-4 ms-4 `}
                                     onClick={() => {
                                         setEdit(!edit);
                                         console.log("click");

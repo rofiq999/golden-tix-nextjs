@@ -41,7 +41,10 @@ export default function Index({ firstname, lastname, username, image }) {
         const body = new FormData();
         if (picture) body.append('image', picture)
         dispatch(profileActions.imageThunk(getToken, body
-        ))
+        )),
+            toast.success("update succes"),
+            setTimeout(() => {
+            }, 2000);
     }
 
     useEffect(() => {
@@ -82,7 +85,7 @@ export default function Index({ firstname, lastname, username, image }) {
                         </div>
                     </div>
                     <div className={styles["content-img"]}>
-                        <Image className={styles['image_jones']} src={(display == icon_default) ? `${CLOUD}/${image}` : display} alt="icon_default" width={130} height={130} />
+                        <Image className={styles['image_jones']} src={(display == null) ? `${CLOUD}/${image}` : display} alt="icon_default" width={130} height={130} />
                     </div>
                     <input name='image' type='file' hidden={true} />
                     <div
