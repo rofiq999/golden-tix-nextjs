@@ -8,10 +8,11 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const router = useRouter();
+  const image = useSelector((state) => state.user.profile.image);
   const token = useSelector((state) => state.auth.userData.token);
   const [toggle, setToggle] = useState(false);
-
-  // console.log(token);
+  const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
+  console.log(image);
 
   const showHamburger = () => {
     setToggle(!toggle);
@@ -57,7 +58,7 @@ function Header() {
                       }}
                     >
                       <Image
-                        src={defaultImg}
+                        src={!image ? defaultImg : `${link}/${image}`}
                         alt="profile"
                         layout="fill"
                         objectFit="cover"
