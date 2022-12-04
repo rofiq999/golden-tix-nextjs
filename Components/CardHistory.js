@@ -1,11 +1,11 @@
 import React from "react";
 
 //import css
-import styles from "../../styles/Card_History.module.css";
+import styles from "../styles/Card_History.module.css";
 
 //import image
 import Image from "next/image";
-import icon_cineone from "../../assets/history/icon_cineone.png";
+import icon_cineone from "../assets/history/icon_cineone.png";
 // import icon_ebu_id from "../../assets/history/icon_ebu_id.png";
 
 export default function CardHistory() {
