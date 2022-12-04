@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
-import logo from "../assets/golden-logo.png";
+// import logo from "../assets/golden-logo.png";
+import defaultImg from "../assets/avatar.webp";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const router = useRouter();
+  const token = useSelector((state) => state.auth.userData.token);
   const [toggle, setToggle] = useState(false);
+
+  // console.log(token);
 
   const showHamburger = () => {
     setToggle(!toggle);
@@ -38,10 +45,33 @@ function Header() {
                   <i className="fa-sharp fa-solid fa-chevron-down"></i>
                 </div>
                 <div className={styles["search"]}>
+                  <input type="text" placeholder="Search here..." />
                   <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <div className={styles["btn-container"]}>
-                  <button>Sign Up</button>
+                  {token ? (
+                    <div
+                      className={styles["image-container"]}
+                      onClick={() => {
+                        router.push("/profile");
+                      }}
+                    >
+                      <Image
+                        src={defaultImg}
+                        alt="profile"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        router.push("/auth/signup");
+                      }}
+                    >
+                      Sign Up
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
