@@ -1,8 +1,8 @@
 import styles from "../styles/Payment.module.css";
 import Image from "next/image";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 import googlepay from "../assets/googlepay.png";
 import visa from "../assets/visa.png";
