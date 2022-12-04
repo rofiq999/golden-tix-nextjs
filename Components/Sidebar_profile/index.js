@@ -7,7 +7,6 @@ import axios from "axios";
 import Image from "next/image";
 import icon_start from "../../assets/profile/icon_start.png";
 import icon_default from "../../assets/icon_default.png";
-// import image_jones from "../../assets/profile/image_jones.png";
 import styles from "../../styles/Sidebar_profile.module.css";
 import profileActions from "../../redux/actions/profile";
 import authActions from "../../redux/actions/auth";
@@ -16,7 +15,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/router";
-import { PersistGate } from "redux-persist/integration/react";
 
 export default function Index({ firstname, lastname, username, image }) {
     const token = useSelector((state) => state.auth.userData.token);
@@ -66,7 +64,7 @@ export default function Index({ firstname, lastname, username, image }) {
         dispatch(authActions.logoutThunk(data)),
             toast.success("Logout Success"),
             setTimeout(() => {
-                router.push("/signin");
+                router.push("/auth/signin");
             }, 2000);
     };
     return (

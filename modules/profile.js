@@ -15,4 +15,5 @@ export const editImage = (token, body) => {
         },
 
     })
-}
+
+} 

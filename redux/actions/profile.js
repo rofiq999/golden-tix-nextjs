@@ -45,16 +45,17 @@ const userThunk = (token) => {
     };
 };
 
-const imageThunk = (token, body) => {
+const imageThunk = (token, body, cbSuccess, cbError) => {
     return async (dispacth) => {
         try {
             dispacth(imagePending());
             const result = await editImage(token, body);
             dispacth(imageFulfilled(result.data));
-            // if (typeof router === "function") router();
+            typeof cbSuccess === "function" && cbSuccess();
         } catch (error) {
             console.log(error);
             dispacth(imageRejected(error));
+            typeof cbSuccess === "function" && cbError(error);
         }
     };
 };

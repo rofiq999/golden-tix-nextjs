@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //import css
 import styles from "../../styles/Profile.module.css";
@@ -106,6 +108,9 @@ function Index() {
             )
             .then((res) => {
                 console.log(res);
+                setTimeout(() => {
+                    toast.success("update succes");
+                }, 2000);
             })
             .catch((err) => console.log(err));
     };
