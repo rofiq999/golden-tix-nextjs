@@ -16,7 +16,12 @@ import moviesActions from "../redux/actions/movies";
 export default function Home() {
   const dispatch = useDispatch();
   const upcomingMovies = useSelector((state) => state.movie.upcoming);
-  console.log(upcomingMovies);
+  const showingMovies = useSelector((state) => state.movie.showing);
+  // console.log(upcomingMovies);
+
+  useEffect(() => {
+    dispatch(moviesActions.getShowingThunk());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(moviesActions.getUpcomingThunk());
@@ -75,7 +80,16 @@ export default function Home() {
               </div>
             </div>
             <div className={styles["card-movies"]}>
-              <CardShow />
+              {showingMovies?.map((e) => {
+                return (
+                  <CardShow
+                    name={e.movie_name}
+                    categories={e.genres}
+                    image={e.image}
+                    id={e.id}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -131,6 +145,7 @@ export default function Home() {
                     name={e.movie_name}
                     category={e.genres.join(", ")}
                     image={e.image}
+                    id={e.id}
                   />
                 );
               })}
