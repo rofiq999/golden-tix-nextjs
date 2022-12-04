@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 //import css
 import styles from "../../styles/Profile.module.css";
@@ -16,6 +18,7 @@ import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 
 import profileActions from "../../redux/actions/profile";
+import authActions from "../../redux/actions/auth";
 
 
 
@@ -25,6 +28,8 @@ function Index() {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.userData.token);
 
+    const [btnsave, setBtnsave] = useState(false);
+    const [show, setShow] = useState(false);
     const Id = useSelector((state) => state.auth.userData.id);
     const [edit, setEdit] = useState(true);
     const profiles = useSelector((state) => state.user.profile);
@@ -115,6 +120,18 @@ function Index() {
             .catch((err) => console.log(err));
     };
 
+    // handleClose, handleShow => Show Modals
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const handleLogout = () => {
+        const data = token
+        dispatch(authActions.logoutThunk(data)),
+            toast.success("Logout Success"),
+            setTimeout(() => {
+                router.push("/auth/signin");
+            }, 2000);
+    };
     return (
         <>
             <Header />
@@ -206,12 +223,39 @@ function Index() {
                             <button className={styles['update']} onClick={() => {
                                 handleSave();
                             }}>Update changes</button>
-                            <button className={styles['logout']}>Logout</button>
+                            <button className={styles['logout']} onClick={handleShow}>Logout</button>
                         </div>
                     </div>
                 </section>
             </main>
             <Footer />
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>are you sure you want to log out?</Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="success"
+                        className="fw-bold text-bg-primary text-white"
+                        onClick={handleLogout}
+                    >
+                        Yes
+                    </Button>
+                    <Button
+                        variant="danger"
+                        className="fw-bold text-bg-dark text-white"
+                        onClick={handleClose}
+                    >
+                        No
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     )
 }

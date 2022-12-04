@@ -82,7 +82,7 @@ export default function Index({ firstname, lastname, username, image }) {
                         </div>
                     </div>
                     <div className={styles["content-img"]}>
-                        <Image className={styles['image_jones']} src={(display == null) ? `${CLOUD}/${image}` : display} alt="image_jones" width={130} height={130} />
+                        <Image className={styles['image_jones']} src={(display == icon_default) ? `${CLOUD}/${image}` : display} alt="icon_default" width={130} height={130} />
                     </div>
                     <input name='image' type='file' hidden={true} />
                     <div
