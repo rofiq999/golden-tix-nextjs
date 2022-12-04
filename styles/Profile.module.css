@@ -2,6 +2,7 @@
 
 .content-all {
   background: #f5f6f8;
+  padding: 60px 30px;
 }
 .details-account,
 .order {
@@ -214,6 +215,7 @@
     margin-bottom: 30px;
   }
   .details-account {
+    cursor: pointer;
     display: block;
     font-family: 'Mulish';
     font-weight: 400;
@@ -222,6 +224,7 @@
   }
 
   .order {
+    cursor: pointer;
     display: block;
     font-family: 'Mulish';
     font-style: normal;
