@@ -9,8 +9,19 @@ import CardUpcoming from "../Components/CardUpcoming";
 import poster1 from "../assets/sri-asih.jpg";
 import poster2 from "../assets/wakanda.jpg";
 import poster3 from "../assets/keramat.jpeg";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import moviesActions from "../redux/actions/movies";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const upcomingMovies = useSelector((state) => state.movie.upcoming);
+  console.log(upcomingMovies);
+
+  useEffect(() => {
+    dispatch(moviesActions.getUpcomingThunk());
+  }, [dispatch]);
+
   return (
     <>
       <PageTitle title={"Landing Page"} />
@@ -114,7 +125,15 @@ export default function Home() {
               </div>
             </div>
             <div className={styles["card-movies"]}>
-              <CardUpcoming />
+              {upcomingMovies.map((e) => {
+                return (
+                  <CardUpcoming
+                    name={e.movie_name}
+                    category={e.genres.join(", ")}
+                    image={e.image}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
