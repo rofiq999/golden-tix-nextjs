@@ -1,8 +1,8 @@
 import styles from "../styles/Admin.module.css";
 import Image from "next/image";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 import poster from "../assets/poster1.png";
 import location from "../assets/location.png";

@@ -8,11 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 import authAction from "../../redux/actions/auth";
 
-import logo3 from "../../assets/logo3.png";
+// import logo3 from "../../assets/logo3.png";
 import eye from "../../assets/eye.png";
-import facebook from "../../assets/Facebook.png";
+import facebook from "../../assets/facebook.png";
 import google from "../../assets/google.png";
-import logo2 from "../../assets/logo2.png";
+// import logo2 from "../../assets/logo2.png";
 import PageTitle from "../../Components/PageTitle";
 import { useRouter } from "next/router";
 
