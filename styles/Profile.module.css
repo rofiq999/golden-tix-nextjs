@@ -137,6 +137,9 @@
 .logout {
   display: none;
 }
+.buttonedit:hover {
+  color: white !important;
+}
 
 @media screen and (max-width: 768px) {
   .content-right {
