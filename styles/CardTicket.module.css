@@ -1,0 +1,154 @@
+.card-ticket {
+    background-color: white;
+    width: min-content;
+    border-radius: 5px;
+}
+
+.card-ticket .top-container {
+    display: flex;
+    padding: 1rem 2rem;
+    align-items: center;
+    gap: 2rem;
+}
+
+.card-ticket .top-container .image-container {
+    position: relative;
+    width: 10rem;
+    height: 5rem;
+}
+
+.card-ticket .top-container .details h1 {
+    margin: 0;
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.card-ticket .top-container .details p {
+    margin: 0;
+    color: #6E7191;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.card-ticket .schedule {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem 2rem;
+    border-top: 1px solid #DEDEDE;
+}
+
+.card-ticket .schedule .time p {
+    margin: 0;
+    color: #4E4B66;
+    font-size: .9rem;
+    font-weight: 600;
+    user-select: none;
+}
+
+.card-ticket .schedule .time p:hover {
+    cursor: pointer;
+}
+
+.card-ticket .price-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.card-ticket .price-container .title p {
+    margin: 0;
+    color: #6B6B6B;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.card-ticket .price-container .price p {
+    margin: 0;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.card-ticket .button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.card-ticket .button-container .book-btn button {
+    border: none;
+    background-color: var(--primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+}
+
+.card-ticket .button-container .add-btn button {
+    border: none;
+    background-color: transparent;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: .5rem 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .card-ticket .top-container {
+        padding: 1rem;
+    }
+
+    .card-ticket .schedule {
+        padding: 1rem;
+    }
+
+    .card-ticket .price-container {
+        padding: 1rem;
+    }
+
+    .card-ticket .button-container {
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .card-ticket {
+        width: max-content;
+        padding: 2rem 0;
+    }
+
+    .card-ticket .top-container {
+        flex-direction: column;
+    }
+
+    .card-ticket .top-container .image-container {
+        position: relative;
+        width: 10rem;
+        height: 4rem;
+    }
+
+    .card-ticket .top-container .details h1 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+    .card-ticket .top-container .details p {
+        text-align: center;
+        font-size: 1rem;
+    }
+    
+    .card-ticket .schedule .time p {
+        font-size: 1.1rem;
+    }
+
+    .card-ticket .price-container .title p {
+        font-size: 1.2rem;
+    }
+
+    .card-ticket .price-container .price p {
+        font-size: 1.2rem;
+    }
+}

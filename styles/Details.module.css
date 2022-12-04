@@ -1,0 +1,231 @@
+.main-content {
+    background-color: white;
+    padding: 2rem 0;
+}
+
+.main-content .image-border {
+    padding: 2rem 0;
+    width: fit-content;
+    border: 2px solid #DEDEDE;
+    border-radius: 10px;
+}
+
+.main-content .image-container {
+    position: relative;
+    width: 236px;
+    height: 262px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.movie-details .title h1 {
+    margin: 0;
+    color: #14142B;
+    font-size: 2rem;
+    font-weight: 700;
+    padding-bottom: .5rem;
+}
+
+.movie-details .categories p {
+    margin: 0;
+    color: #4E4B66;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding-bottom: 1.5rem;
+}
+
+.main-content .credits {
+    display: flex;
+    gap: 5rem;
+}
+
+.main-content .credits .label {
+    margin: 0;
+    color: #8692A6;
+    font-size: .8rem;
+    font-weight: 400;
+}
+
+.main-content .credits .content {
+    margin: 0;
+    color: #121212;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.main-content .credits .duration, .main-content .credits .casts {
+    padding-top: 1rem;
+}
+
+.main-content .synopsis {
+    margin-top: 1rem;
+    border-top: 1px solid #DEDEDE;
+}
+
+.main-content .synopsis .title p {
+    margin: 0;
+    padding: 1rem 0;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.main-content .synopsis p {
+    margin: 0;
+    color: #4E4B66;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.tickets-container {
+    padding: 4rem 0;
+    background-color: #F5F6F8;
+}
+
+.tickets-container .top-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
+
+.tickets-container .title {
+    width: 100%;
+}
+
+.tickets-container .title h2 {
+    margin: 0;
+    color: #14142B;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.tickets-container .input-bar {
+    display: flex;
+    gap: 1rem;
+}
+
+.tickets-container .input-bar .date-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #EFF0F6;
+    padding: .5rem 1rem;
+}
+
+.tickets-container .input-bar .date-input i {
+    color: #4E4B66;
+}
+
+.tickets-container .input-bar .date-input input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.tickets-container .input-bar .location-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #EFF0F6;
+    padding: .5rem 1rem;
+}
+
+.tickets-container .input-bar .location-input i {
+    color: #4E4B66;
+}
+
+.tickets-container .input-bar .location-input input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.tickets-container .card-bioskop {
+    padding-top: 2rem;
+}
+
+.tickets-container .card-bioskop .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.1rem;
+}
+
+.tickets-container .card-bioskop .show-more {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.tickets-container .card-bioskop .show-more span {
+    width: 31rem;
+    height: 1px;
+    background-color: #DEDEDE;
+}
+
+.tickets-container .card-bioskop .show-more p {
+    margin: 0;
+    padding: 1rem;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
+    user-select: none;
+}
+
+.tickets-container .card-bioskop .show-more p:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .main-content .image-border {
+        display: flex;
+        margin: auto;
+    }
+
+    .movie-details .title h1 {
+        text-align: center;
+        padding-top: 2rem;
+    }
+    
+    .movie-details .categories p {
+        text-align: center;
+    }
+
+    .tickets-container .card-bioskop .show-more span {
+        width: 18rem;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .main-content .image-border {
+        display: flex;
+        margin: auto;
+    }
+
+    .movie-details .title h1 {
+        text-align: center;
+        padding-top: 2rem;
+    }
+    
+    .movie-details .categories p {
+        text-align: center;
+    }
+
+    .main-content .credits {
+        gap: 1rem;
+    }
+
+    .main-content .credits .left {
+        width: 100%;
+    }
+
+    .tickets-container .input-bar {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tickets-container .card-bioskop .show-more span {
+        width: 9rem;
+    }
+}

@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import styles from "../styles/Footer.module.css";
-import logo from "../assets/golden-logo.png";
 import sponsor1 from "../assets/sponsor-1.png";
 import sponsor2 from "../assets/sponsor-2.png";
 import sponsor3 from "../assets/sponsor-3.png";
@@ -10,16 +9,16 @@ function Footer() {
   return (
     <footer>
       <div className="container">
-        <div className="row">
+        <div className={`row ${styles["footer-container"]}`}>
           <div className="col-lg-3 col-md-3 col-12">
             <div className={styles["left-footer"]}>
               <div className={styles["logo-container"]}>
-                <Image
-                  src={logo}
-                  alt="logo"
-                  layout="fill"
-                  objectFit="cover"
-                ></Image>
+                <div className={styles["golden"]}>
+                  <p>GOLDEN</p>
+                </div>
+                <div className={styles["tix"]}>
+                  <p>TIX</p>
+                </div>
               </div>
               <div className={styles["tagline"]}>
                 <p>
@@ -29,7 +28,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="col-lg-2 offset-lg-1 col-md-2 offset-md-1 col-12">
+          <div className="col-lg-2 offset-lg-1 col-md-2 col-12">
             <div className={styles["explore"]}>
               <p>Explore</p>
               <ol>
@@ -40,7 +39,7 @@ function Footer() {
               </ol>
             </div>
           </div>
-          <div className="col-lg-3 col-md-3 col-12">
+          <div className="col-lg-2 col-md-3 col-12">
             <div className={styles["sponsor"]}>
               <p>Our Sponsor</p>
               <div className={styles["sponsor-logo"]}>
@@ -77,7 +76,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="col-lg-3 col-md-3 col-12">
+          <div className="col-lg-3 col-md-3 offset-md-1 col-12">
             <div className={styles["social"]}>
               <p>Follow us</p>
               <div className={styles["social-container"]}>

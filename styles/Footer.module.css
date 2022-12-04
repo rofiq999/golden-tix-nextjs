@@ -1,3 +1,6 @@
+.footer-container {
+    padding: 3rem 0;
+}
 .left-footer {
     display: flex;
     flex-direction: column;
@@ -5,9 +8,27 @@
 }
 
 .left-footer .logo-container {
-    position: relative;
-    width: 10rem;
-    aspect-ratio: 2.4;
+    display: flex;
+    border: 2px solid var(--primary);
+    padding: .2rem;
+    width: fit-content;
+}
+
+.left-footer .logo-container .golden p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--secondary);
+    background-color: var(--primary);
+}
+
+.left-footer .logo-container .tix p {
+    margin: 0;
+    padding: 0 .5rem;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary);
 }
 
 .left-footer .tagline {
@@ -122,13 +143,47 @@ color: #6E7191;
     text-align: center;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
+    .left-footer .logo-container .golden p {
+        font-size: 1rem;
+    }
+    
+    .left-footer .logo-container .tix p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .left-footer .logo-container {
+        display: flex;
+        border: 2px solid var(--primary);
+        padding: .2rem;
+        width: fit-content;
+    }
+    
+    .left-footer .logo-container .golden p {
+        margin: 0;
+        padding: 0 .5rem;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--secondary);
+        background-color: var(--primary);
+    }
+    
+    .left-footer .logo-container .tix p {
+        margin: 0;
+        padding: 0 .5rem;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--primary);
+    }
+
     .left-footer .tagline {
         width: 70%;
     }
 
     .explore, .sponsor, .social {
-        padding-top: 3.5rem;
+        padding-top: 2rem;
     }
     
     .explore ol {

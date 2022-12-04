@@ -1,6 +1,9 @@
 import styles from "../styles/Admin.module.css";
 import Image from "next/image";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 import poster from "../assets/poster1.png";
 import location from "../assets/location.png";
 import chevron from "../assets/chevron.png";
@@ -14,6 +17,7 @@ import chart from "../assets/chart.png";
 export default function Admin() {
   return (
     <main>
+      <Header />
       <section className={styles["section-main"]}>
         <section className={styles["section-1"]}>
           <aside className={styles["aside-left"]}>
@@ -232,6 +236,7 @@ export default function Admin() {
           </div>
         </section>
       </section>
+      <Footer />
     </main>
   );
 }
