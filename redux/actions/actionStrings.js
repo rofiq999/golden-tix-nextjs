@@ -6,4 +6,5 @@ export const ACTION_STRING = {
   authLogout: "AUTH_LOGOUT",
   authRegister: "AUTH_REGISTER",
   authForgot: "AUTH_FORGOT",
+  getUpcoming: "GET_UPCOMING",
 };
