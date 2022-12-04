@@ -25,17 +25,19 @@ function CardMovieShow({ name, categories, image, id }) {
           <div className={styles["categories"]}>
             <p>{categories}</p>
           </div>
-          <div className={styles["detail-btn"]}>
-            <button
-              onClick={() => {
-                router.push(`/movie/${id}`);
-              }}
-            >
-              Details
-            </button>
-          </div>
-          <div className={styles["book-btn"]}>
-            <button>Book Now</button>
+          <div className={styles["btn-container"]}>
+            <div className={styles["detail-btn"]}>
+              <button
+                onClick={() => {
+                  router.push(`/movie/${id}`);
+                }}
+              >
+                Details
+              </button>
+            </div>
+            <div className={styles["book-btn"]}>
+              <button>Book Now</button>
+            </div>
           </div>
         </div>
       </div>
