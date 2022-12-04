@@ -9,4 +9,6 @@ export const ACTION_STRING = {
   authRegister: "AUTH_REGISTER",
   authForgot: "AUTH_FORGOT",
   getUpcoming: "GET_UPCOMING",
+  getShowing: "GET_SHOWING",
+  getDetails: "GET_DETAILS",
 };
