@@ -2,8 +2,10 @@ import React from "react";
 import Image from "next/image";
 import styles from "../styles/CardMovieShow.module.css";
 import sample from "../assets/poster1.png";
+import Router, { useRouter } from "next/router";
 
-function CardMovieShow({ name, categories, image }) {
+function CardMovieShow({ name, categories, image, id }) {
+  const router = useRouter();
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   return (
     <>
@@ -24,7 +26,13 @@ function CardMovieShow({ name, categories, image }) {
             <p>{categories}</p>
           </div>
           <div className={styles["detail-btn"]}>
-            <button>Details</button>
+            <button
+              onClick={() => {
+                router.push(`/movie/${id}`);
+              }}
+            >
+              Details
+            </button>
           </div>
           <div className={styles["book-btn"]}>
             <button>Book Now</button>
