@@ -2,8 +2,8 @@ import { Fragment } from "react";
 import styles from "../styles/Order.module.css";
 import Image from "next/image";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 import PageTitle from "../Components/PageTitle";
 
 import cineone from "../assets/cineone2.png";
