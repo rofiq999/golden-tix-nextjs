@@ -9,6 +9,7 @@ import PageTitle from "../Components/PageTitle";
 import cineone from "../assets/cineone2.png";
 import arrowdown from "../assets/arrowdown.png";
 import arrowright from "../assets/arrowright.png";
+import chevron2 from "../assets/chevron2.png";
 
 export default function Order() {
   return (
@@ -41,6 +42,7 @@ export default function Order() {
                   <p className={styles["seat-text-2"]}>G</p>
                 </div>
                 <div className={styles["seat-div-7"]}>
+                  {/* Row 1 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
@@ -58,17 +60,132 @@ export default function Order() {
                       <div className={styles["seat-div-2"]}></div>
                       <div className={styles["seat-div-2"]}></div>
                       <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-5"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                    </div>
+                  </div>
+                  {/* Row 2 */}
+                  <div className={styles["seat-div-3"]}>
+                    <div className={styles["seat-div-6"]}>
+                      <div className={styles["seat-div-4"]}>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-5"]}></div>
+                        <div className={styles["seat-div-5"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                      </div>
+                    </div>
+                    <div className={styles["seat-div-4"]}>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                    </div>
+                  </div>
+                  {/* Row 3 */}
+                  <div className={styles["seat-div-3"]}>
+                    <div className={styles["seat-div-6"]}>
+                      <div className={styles["seat-div-4"]}>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-14"]}></div>
+                        <div className={styles["seat-div-14"]}></div>
+                        <div className={styles["seat-div-14"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                      </div>
+                    </div>
+                    <div className={styles["seat-div-4"]}>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-5"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-5"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                    </div>
+                  </div>
+                  {/* Row 4 */}
+                  <div className={styles["seat-div-3"]}>
+                    <div className={styles["seat-div-6"]}>
+                      <div className={styles["seat-div-4"]}>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-5"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                      </div>
+                    </div>
+                    <div className={styles["seat-div-4"]}>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-5"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-5"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                    </div>
+                  </div>
+                  {/* Row 5 */}
+                  <div className={styles["seat-div-3"]}>
+                    <div className={styles["seat-div-6"]}>
+                      <div className={styles["seat-div-4"]}>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-5"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                      </div>
+                    </div>
+                    <div className={styles["seat-div-4"]}>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                    </div>
+                  </div>
+                  {/* Row 6  */}
+                  <div className={styles["seat-div-3"]}>
+                    <div className={styles["seat-div-6"]}>
+                      <div className={styles["seat-div-4"]}>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-2"]}></div>
+                      </div>
+                    </div>
+                    <div className={styles["seat-div-4"]}>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-31"]}></div>
                       <div className={styles["seat-div-2"]}></div>
                       <div className={styles["seat-div-5"]}></div>
                       <div className={styles["seat-div-2"]}></div>
                     </div>
                   </div>
+                  {/* Row 7 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
                         <div className={styles["seat-div-2"]}></div>
                         <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        <div className={styles["seat-div-5"]}></div>
                         <div className={styles["seat-div-2"]}></div>
                         <div className={styles["seat-div-2"]}></div>
                         <div className={styles["seat-div-5"]}></div>
@@ -81,117 +198,7 @@ export default function Order() {
                       <div className={styles["seat-div-2"]}></div>
                       <div className={styles["seat-div-2"]}></div>
                       <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
                       <div className={styles["seat-div-2"]}></div>
-                    </div>
-                  </div>
-                  <div className={styles["seat-div-3"]}>
-                    <div className={styles["seat-div-6"]}>
-                      <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                      </div>
-                    </div>
-                    <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                    </div>
-                  </div>
-                  <div className={styles["seat-div-3"]}>
-                    <div className={styles["seat-div-6"]}>
-                      <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                      </div>
-                    </div>
-                    <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                    </div>
-                  </div>
-                  <div className={styles["seat-div-3"]}>
-                    <div className={styles["seat-div-6"]}>
-                      <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                      </div>
-                    </div>
-                    <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                    </div>
-                  </div>
-                  <div className={styles["seat-div-3"]}>
-                    <div className={styles["seat-div-6"]}>
-                      <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                      </div>
-                    </div>
-                    <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                    </div>
-                  </div>
-                  <div className={styles["seat-div-3"]}>
-                    <div className={styles["seat-div-6"]}>
-                      <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                      </div>
-                    </div>
-                    <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
                       <div className={styles["seat-div-2"]}></div>
                     </div>
                   </div>
@@ -274,10 +281,40 @@ export default function Order() {
                 </div>
               </div>
             </div>
-            <div>
-              <div>
-                <div></div>
+            <div className={styles["seat-div-27"]}>
+              <div className={styles["seat-div-30"]}>
+                <div className={styles["seat-div-28"]}>
+                  <div className={styles["seat-div-29"]}>
+                    <p className={styles["seat-text-5"]}>C</p>
+                    <Image src={chevron2} alt="img" />
+                  </div>
+                  <div className={styles["seat-div-29"]}>
+                    <p className={styles["seat-text-5"]}>4</p>
+                    <Image src={chevron2} alt="img" />
+                  </div>
+                </div>
+                <div className={styles["seat-div-28"]}>
+                  <div className={styles["seat-div-29"]}>
+                    <p className={styles["seat-text-5"]}>C</p>
+                    <Image src={chevron2} alt="img" />
+                  </div>
+                  <div className={styles["seat-div-29"]}>
+                    <p className={styles["seat-text-5"]}>5</p>
+                    <Image src={chevron2} alt="img" />
+                  </div>
+                </div>
+                <div className={styles["seat-div-28"]}>
+                  <div className={styles["seat-div-29"]}>
+                    <p className={styles["seat-text-5"]}>C</p>
+                    <Image src={chevron2} alt="img" />
+                  </div>
+                  <div className={styles["seat-div-29"]}>
+                    <p className={styles["seat-text-5"]}>6</p>
+                    <Image src={chevron2} alt="img" />
+                  </div>
+                </div>
               </div>
+              <button className={styles["seat-btn-1"]}>Add new seat</button>
             </div>
             <div className={styles["btn-div-1"]}>
               <button className={styles["btn-1"]}>Change your movie</button>
