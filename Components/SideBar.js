@@ -8,15 +8,15 @@ import Image from "next/image";
 import icon_start from "../../assets/profile/icon_start.png";
 import icon_default from "../../assets/icon_default.png";
 import styles from "../../styles/Sidebar_profile.module.css";
-import profileActions from "../../redux/actions/profile";
-import authActions from "../../redux/actions/auth";
+import profileActions from "../redux/actions/profile";
+import authActions from "../redux/actions/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/router";
 
-export default function Index({ firstname, lastname, username, image }) {
+export default function SideBar({ firstname, lastname, username, image }) {
   const token = useSelector((state) => state.auth.userData.token);
   const router = useRouter();
   // const [image, setImage] = useState("");
