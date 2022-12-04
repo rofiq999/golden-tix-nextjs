@@ -1,6 +1,7 @@
 // import React from 'react'
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 //import css
 import Image from "next/image";
@@ -19,8 +20,6 @@ import { PersistGate } from "redux-persist/integration/react";
 
 export default function Index({ firstname, lastname, username, image }) {
     const token = useSelector((state) => state.auth.userData.token);
-    const Id = useSelector((state) => state.auth.userData.id);
-    const profiles = useSelector((state) => state.user.profile);
     const router = useRouter();
     // const [image, setImage] = useState("");
     const dispatch = useDispatch()
@@ -28,48 +27,34 @@ export default function Index({ firstname, lastname, username, image }) {
     const [show, setShow] = useState(false);
     const [display, setDisplay] = useState();
     const [picture, setPicture] = useState();
-    const inputFileRef = React.createRef();
-    // const link = process.env.CLOUD_LINK
-    console.log(image);
+    const CLOUD = process.env.CLOUD_LINK
 
 
-    const inputImage = () => {
-        inputFileRef.current.click()
-    }
-
-    // const editImageHandler = (e) => {
-    //     setDisplay(URL.createObjectURL(e.target.files[0]))
-    //     const body = new FormData()
-    //     body.append('image', e.target.files[0])
-    //     console.log(body);
-    // }
-
-    const editImageHandler = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setDisplay(URL.createObjectURL(event.target.files[0]));
-            setPicture(event.target.files[0]);
-            console.log(picture);
+    const inputImage = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setDisplay(URL.createObjectURL(e.target.files[0]));
+            setPicture(e.target.files[0]);
         }
     };
 
-
     const saveImage = () => {
         const getToken = token;
-        const formData = new FormData();
-        // if (picture) formData.append('image', `https://res.cloudinary.com/dedmbkp9a/image/upload/v1669990442/${picture}`)
-        dispatch(profileActions.imageThunk(getToken, {
-            image: `https://res.cloudinary.com/dedmbkp9a/image/upload/v1669990442/${image}`,
-        }))
+        const body = new FormData();
+        if (picture) body.append('image', picture)
+        dispatch(profileActions.imageThunk(getToken, body
+        ))
     }
+
     useEffect(() => {
-        dispatch(profileActions.userThunk(token))
+        dispatch(profileActions.imageThunk(token))
     }, [dispatch])
 
     const handleSaveShow = () => {
-        setBtnsave(true);
+        setBtnsave(true)
+
     };
     const handleCancel = () => {
-        setDisplay(profiles.image), setBtnsave(false);
+        setBtnsave(false);
     };
 
     // handleClose, handleShow => Show Modals
@@ -77,7 +62,7 @@ export default function Index({ firstname, lastname, username, image }) {
     const handleShow = () => setShow(true);
 
     const handleLogout = () => {
-        const data = { token }
+        const data = token
         dispatch(authActions.logoutThunk(data)),
             toast.success("Logout Success"),
             setTimeout(() => {
@@ -97,16 +82,16 @@ export default function Index({ firstname, lastname, username, image }) {
                         </div>
                     </div>
                     <div className={styles["content-img"]}>
-                        <Image className={styles['image_jones']} src={display || `https://res.cloudinary.com/dedmbkp9a/image/upload/v1669990442/${image}` || icon_default} alt="image_jones" width={130} height={130} />
+                        <Image className={styles['image_jones']} src={(display == null) ? `${CLOUD}/${image}` : display} alt="image_jones" width={130} height={130} />
                     </div>
-                    <input name='image' type='file' ref={inputFileRef} hidden={true} onChange={editImageHandler} />
+                    <input name='image' type='file' hidden={true} />
                     <div
                         className={btnsave ? "d-none" : `${styles.profile_edit}`}
-                        onClick={handleSaveShow}
+
                     >
                         {/* <i className="fa-solid fa-pencil"></i> */}
                         <div className={`${styles["text-edit"]}`}>
-                            <label htmlFor="file">Edit</label>
+                            <label htmlFor="file" onClick={handleSaveShow}>Edit</label>
                         </div>
                         <input
                             type="file"
