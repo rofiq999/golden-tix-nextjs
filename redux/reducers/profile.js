@@ -8,6 +8,7 @@ const initialState = {
     error: null,
     profile: {
         image: null,
+        fullName: null,
         username: null,
         firstName: null,
         lastName: null,
@@ -18,7 +19,7 @@ const initialState = {
 
 const profileReducer = (prevState = initialState, { type, payload }) => {
     const { Pending, Rejected, Fulfilled } = ActionType;
-    const { profile } =
+    const { profile, editImage } =
         ACTION_STRING;
 
     switch (type) {
@@ -50,9 +51,35 @@ const profileReducer = (prevState = initialState, { type, payload }) => {
                     image: payload.data.data.image,
                     firstname: payload.data.data.first_name,
                     lastname: payload.data.data.last_name,
+                    fullName: payload.data.data.full_name,
+                    username: payload.data.data.username,
                     email: payload.data.data.email,
                     phone: payload.data.data.phone,
                 },
+            };
+
+        //edit image
+        case editImage.concat("_", Pending):
+            return {
+                ...prevState,
+                isLoading: true,
+                isError: false,
+                isFulfilled: false,
+            };
+        case editImage.concat("_", Rejected):
+            return {
+                ...prevState,
+                isLoading: false,
+                isError: true,
+                isFulfilled: false,
+                error: payload.error.response.data.msg,
+            };
+        case editImage.concat("_", Fulfilled):
+            return {
+                ...prevState,
+                isError: false,
+                isFulfilled: true,
+                isLoading: false,
             };
 
         default:

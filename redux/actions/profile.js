@@ -1,8 +1,9 @@
 import { ActionType } from "redux-promise-middleware";
 import { ACTION_STRING } from "./actionStrings";
-import { editProfile } from "../../modules/api/auth";
+import { editProfile, editImage } from "../../modules/profile";
 
-const { Pending, Rejected, Fulfilled } = ActionType;
+
+const { Pending, Rejected, Fulfilled, } = ActionType;
 
 // Get id user
 const profilePending = () => ({
@@ -14,6 +15,19 @@ const profileRejected = (error) => ({
 });
 const profileFulfilled = (data) => ({
     type: ACTION_STRING.profile.concat("_", Fulfilled),
+    payload: { data },
+});
+
+// edit Image
+const imagePending = () => ({
+    type: ACTION_STRING.editImage.concat("_", Pending),
+});
+const imageRejected = (error) => ({
+    type: ACTION_STRING.editImage.concat("_", Rejected),
+    payload: { error },
+});
+const imageFulfilled = (data) => ({
+    type: ACTION_STRING.editImage.concat("_", Fulfilled),
     payload: { data },
 });
 
@@ -31,8 +45,23 @@ const userThunk = (token) => {
     };
 };
 
+const imageThunk = (token, body) => {
+    return async (dispacth) => {
+        try {
+            dispacth(imagePending());
+            const result = await editImage(token, body);
+            dispacth(imageFulfilled(result.data));
+            // if (typeof router === "function") router();
+        } catch (error) {
+            console.log(error);
+            dispacth(imageRejected(error));
+        }
+    };
+};
+
 const profileActions = {
     userThunk,
+    imageThunk,
 };
 
 export default profileActions;

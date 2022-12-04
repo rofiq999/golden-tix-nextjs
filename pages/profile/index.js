@@ -7,22 +7,26 @@ import axios from "axios";
 import styles from "../../styles/Profile.module.css";
 
 //import image
-import Sidebar from "../../Components/Sidebar_Profile/index";
+import Sidebar from "../../Components/Sidebar_Profile";
 
 //import components
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
 
+import profileActions from "../../redux/actions/profile";
 
 
-function index() {
+
+
+function Index() {
     const router = useRouter();
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.userData.token);
+
     const Id = useSelector((state) => state.auth.userData.id);
     const [edit, setEdit] = useState(true);
-    const data = Profiles;
-    const Profiles = useSelector((state) => state.auth.profile);
+    const profiles = useSelector((state) => state.user.profile);
+
 
     const historyHandler = () => {
         router.push("/history");
@@ -37,32 +41,38 @@ function index() {
     const [email, setEmail] = useState();
     const [phone, setPhone] = useState();
     useEffect(() => {
-        axios
-            .get(
-                `${baseUrl}/api/user/profile`,
-                {
-                    headers: {
-                        'x-access-token': token, Id
-                    },
-                }
-            )
-            .then((res) => {
-                setFirstName(
-                    res.data.data.first_name
-                )
-                setLastName(
-                    res.data.data.last_name
-                )
-                setEmail(
-                    res.data.data.email
-                )
-                setPhone(
-                    res.data.data.phone
-                )
-                // console.log(res.data.data.first_name);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+
+        dispatch(profileActions.userThunk(token))
+
+        //     // axios
+        //     //     .get(
+        //     //         `${baseUrl}/api/user/profile`,
+        //     //         {
+        //     //             headers: {
+        //     //                 'x-access-token': token, Id
+        //     //             },
+        //     //         }
+        //     //     )
+        //     //     .then((res) => {
+        //     //         setFirstName(
+        //     //             res.data.data.first_name
+        //     //         )
+        //     //         setLastName(
+        //     //             res.data.data.last_name
+        //     //         )
+        //     //         setEmail(
+        //     //             res.data.data.email
+        //     //         )
+        //     //         setPhone(
+        //     //             res.data.data.phone
+        //     //         )
+        //     //         // console.log(res.data.data.first_name);
+        //     //     })
+        //     //     .catch((err) => console.log(err));
+    }, [dispatch]);
+
+
+
 
     const handleFirstname = (e) => {
         // console.log(handleFirstname);
@@ -99,24 +109,25 @@ function index() {
             })
             .catch((err) => console.log(err));
     };
+
     return (
         <>
             <Header />
             <main className={`${styles['content-all']} container-fluid`}>
                 <div className={styles['content-account']}>
                     <p className={styles['details-account']}>Details Account</p>
-                    <p className={styles['order']}>Order History</p>
+                    <p className={styles['order']} onClick={historyHandler}>Order History</p>
                 </div>
                 <section className='container'>
                     <div className='row'>
                         <div className={`${styles['content-left']} col-lg-3 col-md-12 col-sm-12`}>
-                            <Sidebar />
+                            <Sidebar firstname={profiles.firstname} lastname={profiles.lastname} username={profiles.username} image={profiles.image} />
                         </div>
                         <div className={`${styles['content-right']} col-lg-9 col-md-12 col-sm-12 `}>
                             <div className={styles['content-input']}>
                                 <div className={styles['content-right-one']}>
                                     <p className={styles['text-acount']}>Account Settings</p>
-                                    <p className={styles['text-order']} onClick={historyHandler}>Order History</p>
+                                    <p className={styles['text-order']} onClick={historyHandler} >Order History</p>
                                 </div>
                                 <div className={styles['content-detail']}>
                                     <p className={styles['detail']}>Details Information</p>
@@ -136,16 +147,15 @@ function index() {
                                         <label className={styles['name']}>Frist Name</label>
                                         <div className={styles['input-bar']}>
                                             <div className={styles['content-number']}></div>
-                                            <input className={styles['input-name']} type='text' value={first_name} onChange={handleFirstname} placeholder='Input First Name' />
+                                            <input className={styles['input-name']} type='text' disabled={edit} value={first_name} placeholder={profiles.firstname} onChange={handleFirstname} />
                                         </div>
                                     </div>
                                     <div className={styles['input']}>
                                         <label className={styles['name']}>Last Name</label>
                                         <div className={styles['input-bar']}>
                                             <div className={styles['content-number']}></div>
-                                            <input className={styles['input-name']} type='text' value={last_name} onChange={(e) => {
-                                                handleLastname(e);
-                                            }} placeholder='Input Last Name' />
+                                            <input className={styles['input-name']} type='text' disabled={edit} value={last_name}
+                                                placeholder={profiles.lastname} onChange={handleLastname} />
                                         </div>
                                     </div>
                                 </div>
@@ -154,16 +164,14 @@ function index() {
                                         <label className={styles['name']}>Email</label>
                                         <div className={styles['input-bar']}>
                                             <div className={styles['content-number']}></div>
-                                            <input className={styles['input-name']} type='email' value={email} placeholder='Input Email' />
+                                            <input className={styles['input-name']} type='email' disabled={edit} placeholder={profiles.email} />
                                         </div>
                                     </div>
                                     <div className={styles['input']}>
                                         <label className={styles['name']}>Phone Number</label>
                                         <div className={styles['input-bar']}>
                                             <div className={styles['content-number']}><p>+62 <span className={styles['bor-left']}></span></p></div>
-                                            <input className={styles['input-number']} type='tel' value={phone} onChange={(e) => {
-                                                handlesetPhone(e);
-                                            }} placeholder='Input Phone Number' />
+                                            <input className={styles['input-number']} type='tel' value={phone} disabled={edit} placeholder={profiles.phone} onChange={handlesetPhone} />
                                         </div>
                                     </div>
                                 </div>
@@ -178,14 +186,14 @@ function index() {
                                         <label className={styles['name']}>New Password</label>
                                         <div className={styles['input-bar']}>
                                             <div className={styles['content-number']}></div>
-                                            <input className={styles['input-name']} type='text' placeholder='Write your password' />
+                                            <input className={styles['input-name']} type='password' disabled={edit} placeholder='Write your password' />
                                         </div>
                                     </div>
                                     <div className={styles['input']}>
                                         <label className={styles['name']}>Confirm Password</label>
                                         <div className={styles['input-bar']}>
                                             <div className={styles['content-number']}></div>
-                                            <input className={styles['input-name']} type='text' placeholder='Confirm your password' />
+                                            <input className={styles['input-name']} type='password' disabled={edit} placeholder='Confirm your password' />
                                         </div>
                                     </div>
                                 </div>
@@ -203,4 +211,4 @@ function index() {
     )
 }
 
-export default index;
+export default Index;

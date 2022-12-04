@@ -8,6 +8,8 @@ import styles from "../../styles/History.module.css";
 //import components
 import Sidebar from "../../Components/Sidebar_Profile/index";
 import Card_History from "../../Components/Card_History/index";
+import Footer from "../../Components/Footer";
+import Header from "../../Components/Header";
 
 //import image
 import Image from "next/image";
@@ -27,6 +29,7 @@ function index() {
 
   return (
     <>
+      <Header />
       <main>
         <section className={`${styles['content-all']} container-fluid`}>
           <div className={`${styles['content']} container`}>
@@ -47,6 +50,7 @@ function index() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   )
 }
