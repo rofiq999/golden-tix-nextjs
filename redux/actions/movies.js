@@ -1,6 +1,10 @@
 import { ActionType } from "redux-promise-middleware";
 import { ACTION_STRING } from "./actionStrings";
-import { getMovieUpcoming } from "../../modules/api/movies";
+import {
+  getMovieUpcoming,
+  getMovieShowing,
+  getMovieDetails,
+} from "../../modules/api/movies";
 
 const { Pending, Rejected, Fulfilled } = ActionType;
 
@@ -18,6 +22,34 @@ const getUpcomingFulfilled = (data) => ({
   payload: { data },
 });
 
+const getShowingPending = () => ({
+  type: ACTION_STRING.getShowing.concat("_", Pending),
+});
+
+const getShowingRejected = (error) => ({
+  type: ACTION_STRING.getShowing.concat("_", Rejected),
+  payload: { error },
+});
+
+const getShowingFulfilled = (data) => ({
+  type: ACTION_STRING.getShowing.concat("_", Fulfilled),
+  payload: { data },
+});
+
+const getDetailsPending = () => ({
+  type: ACTION_STRING.getDetails.concat("_", Pending),
+});
+
+const getDetailsRejected = (error) => ({
+  type: ACTION_STRING.getDetails.concat("_", Rejected),
+  payload: { error },
+});
+
+const getDetailsFulfilled = (data) => ({
+  type: ACTION_STRING.getDetails.concat("_", Fulfilled),
+  payload: { data },
+});
+
 const getUpcomingThunk = (params) => {
   return async (dispacth) => {
     try {
@@ -30,8 +62,34 @@ const getUpcomingThunk = (params) => {
   };
 };
 
+const getShowingThunk = (params) => {
+  return async (dispacth) => {
+    try {
+      dispacth(getShowingPending());
+      const result = await getMovieShowing(params);
+      dispacth(getShowingFulfilled(result.data));
+    } catch (error) {
+      dispacth(getShowingRejected(error));
+    }
+  };
+};
+
+const getDetailsThunk = (params, token) => {
+  return async (dispacth) => {
+    try {
+      dispacth(getDetailsPending());
+      const result = await getMovieDetails(token, params);
+      dispacth(getDetailsFulfilled(result.data));
+    } catch (error) {
+      dispacth(getDetailsRejected(error));
+    }
+  };
+};
+
 const moviesActions = {
   getUpcomingThunk,
+  getShowingThunk,
+  getDetailsThunk,
 };
 
 export default moviesActions;
