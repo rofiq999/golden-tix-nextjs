@@ -1,6 +1,8 @@
+import React, { useEffect, Fragment } from "react";
 import { Fragment } from "react";
 import styles from "../../styles/Order.module.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
@@ -11,7 +13,13 @@ import arrowdown from "../../assets/arrowdown.png";
 import arrowright from "../../assets/arrowright.png";
 import chevron2 from "../../assets/chevron2.png";
 
-export default function Order() {
+function Order() {
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(router.query.showtime_id);
+  }, [router.query]);
+
   return (
     <Fragment>
       <PageTitle title={"Order"} />
@@ -364,3 +372,4 @@ export default function Order() {
     </Fragment>
   );
 }
+export default Order;
