@@ -6,7 +6,7 @@ import axios from "axios";
 //import css
 import Image from "next/image";
 import icon_start from "../assets/profile/icon_start.png";
-import icon_default from "../assets/icon_default.png";
+import icon_default from "../assets/avatar.webp";
 import styles from "../styles/Sidebar_profile.module.css";
 import profileActions from "../redux/actions/profile";
 import authActions from "../redux/actions/auth";
@@ -39,7 +39,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
     const body = new FormData();
     if (picture) body.append("image", picture);
     dispatch(profileActions.imageThunk(getToken, body)),
-      toast.success("update succes"),
+      toast.success("update success"),
       setTimeout(() => {
       }, 2000);
   };
@@ -59,15 +59,15 @@ export default function SideBar({ firstname, lastname, username, image }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log(token);
   const handleLogout = () => {
-    const data = token;
-    dispatch(authActions.logoutThunk(data)),
-      localStorage.removeItem("data");
-    toast.success("Logout Success"),
+    dispatch(authActions.logoutThunk(token)),
+      toast.success("Logout Success"),
       setTimeout(() => {
         router.push("/auth/signin");
-      }, 2000);
+      }, 0);
   };
+  // `${CLOUD}/${image}`
   return (
     <>
       <div className={`${styles["content-all"]}`}>
@@ -83,7 +83,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
           <div className={styles["content-img"]}>
             <Image
               className={styles["image_jones"]}
-              src={(display == null) ? `${CLOUD}/${image}` : display}
+              src={display == null ? image && icon_default : display}
               alt="image_jones"
               width={130}
               height={130}

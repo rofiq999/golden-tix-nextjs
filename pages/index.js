@@ -12,11 +12,13 @@ import poster3 from "../assets/keramat.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import moviesActions from "../redux/actions/movies";
+import profileActions from "../redux/actions/profile";
 
 export default function Home() {
   const dispatch = useDispatch();
   const upcomingMovies = useSelector((state) => state.movie.upcoming);
   const showingMovies = useSelector((state) => state.movie.showing);
+  const token = useSelector((state) => state.auth.userData.token);
   // console.log(upcomingMovies);
 
   useEffect(() => {
@@ -27,6 +29,10 @@ export default function Home() {
     dispatch(moviesActions.getUpcomingThunk());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(profileActions.userThunk(token));
+
+  }, [dispatch]);
   return (
     <>
       <PageTitle title={"Landing Page"} />

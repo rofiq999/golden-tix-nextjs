@@ -48,7 +48,7 @@ const profileReducer = (prevState = initialState, { type, payload }) => {
                 isLoading: false,
                 error: null,
                 profile: {
-                    image: payload.data.data.image,
+                    image: `${process.env.NEXT_PUBLIC_CLOUDINARY_LINK}${payload.data.data.image}`,
                     firstname: payload.data.data.first_name,
                     lastname: payload.data.data.last_name,
                     fullName: payload.data.data.full_name,

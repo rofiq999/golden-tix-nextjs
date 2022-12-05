@@ -53,7 +53,6 @@ const imageThunk = (token, body, cbSuccess, cbError) => {
             dispacth(imageFulfilled(result.data));
             typeof cbSuccess === "function" && cbSuccess();
         } catch (error) {
-            console.log(error);
             dispacth(imageRejected(error));
             typeof cbSuccess === "function" && cbError(error);
         }

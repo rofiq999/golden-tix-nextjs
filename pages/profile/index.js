@@ -29,6 +29,12 @@ function Index() {
   const Id = useSelector((state) => state.auth.userData.id);
   const [edit, setEdit] = useState(true);
   const profiles = useSelector((state) => state.user.profile);
+  const [icon_, setIcon_] = useState("fa-solid fa-eye-slash");
+  const [type__, setType__] = useState("password");
+  const [icon__, setIcon__] = useState("fa-solid fa-eye-slash");
+  const [oldpass, setOldpass] = useState("");
+  const [newpass, setNewpass] = useState("");
+  const [confirmpass, setConfirmpass] = useState("");
 
   const historyHandler = () => {
     router.push("/history");
@@ -57,6 +63,9 @@ function Index() {
     // console.log(handlesetPhone);
     setPhone(e.target.value);
   };
+  const valueOldpass = (e) => { setOldpass(e.target.value) }
+  const valueNewpass = (e) => { setNewpass(e.target.value) }
+  const valueConfirmpass = (e) => { setConfirmpass(e.target.value) }
 
 
   //edit profile
@@ -87,14 +96,60 @@ function Index() {
   useEffect(() => {
     dispatch(profileActions.userThunk(token))
   }, [dispatch])
+
+
+
+  // handleToggle => Show Password
+  const handleToggle_ = () => {
+    if (type_ === "password") {
+      setIcon_("fa-regular fa-eye");
+      setType_("text");
+    } else {
+      setIcon_("fa-solid fa-eye-slash");
+      setType_("password");
+    }
+  };
+
+  // handleToggle => Show Password
+  const handleToggle__ = () => {
+    if (type__ === "password") {
+      setIcon__("fa-regular fa-eye");
+      setType__("text");
+    } else {
+      setIcon__("fa-solid fa-eye-slash");
+      setType__("password");
+    }
+  };
+
+
+  // handleReset => reset password
+  const handleReset = () => {
+    axios.patch(`${baseUrl}/api/user/edit-password`, {
+      oldPassword: oldpass,
+      newPassword: newpass,
+      confirmPassword: confirmpass
+    }, {
+      headers: {
+        "x-access-token": token
+      }
+    })
+      .then((res) => {
+        setEdit(true),
+          handleCancel_(),
+          toast.success(res.data.status)
+      })
+      .catch((err) => toast.error(err.response.data.status));
+  }
+
+
+
   // handleClose, handleShow => Show Modals
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleLogout = () => {
-    const data = token
-    dispatch(authActions.logoutThunk(data)),
-      localStorage.removeItem("data"),
+    const token = token
+    dispatch(authActions.logoutThunk(token)),
       toast.success("Logout Success"),
       setTimeout(() => {
         router.push("/auth/signin");
@@ -173,18 +228,25 @@ function Index() {
                 </div>
                 <div className={styles['content-name']}>
                   <div className={styles['input']}>
-                    <label className={styles['name']}>New Password</label>
+                    <label className={styles['name']}>Old Password</label>
                     <div className={styles['input-bar']}>
                       <div className={styles['content-number']}></div>
                       <input className={styles['input-name']} type='password' disabled={edit} placeholder='Write your password' />
                     </div>
                   </div>
                   <div className={styles['input']}>
-                    <label className={styles['name']}>Confirm Password</label>
+                    <label className={styles['name']}>New Password</label>
                     <div className={styles['input-bar']}>
                       <div className={styles['content-number']}></div>
                       <input className={styles['input-name']} type='password' disabled={edit} placeholder='Confirm your password' />
                     </div>
+                  </div>
+                </div>
+                <div className={styles['input']}>
+                  <label className={styles['name']}>Confirm Password</label>
+                  <div className={styles['input-bar-confirm']}>
+                    <div className={styles['content-number']}></div>
+                    <input className={styles['input-name']} type='password' disabled={edit} placeholder='Write your password' />
                   </div>
                 </div>
               </div>
