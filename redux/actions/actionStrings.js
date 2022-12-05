@@ -17,4 +17,8 @@ export const ACTION_STRING = {
   getCast: "GET_CAST",
   getLocation: "GET_LOCATION",
   getList: "GET_LIST",
+  getSeat: "GET_SEAT",
+  postBook: "POST_BOOKING",
+  getBooked: "GET_BOOKED",
+  getCinemaShowing: "GET_CINEMA_SHOWING",
 };

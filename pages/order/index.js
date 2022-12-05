@@ -1,8 +1,9 @@
-import React, { useEffect, Fragment } from "react";
-import { Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import styles from "../../styles/Order.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
@@ -13,12 +14,63 @@ import arrowdown from "../../assets/arrowdown.png";
 import arrowright from "../../assets/arrowright.png";
 import chevron2 from "../../assets/chevron2.png";
 
+import bookingAction from "../../redux/actions/booking";
+import cinemaActions from "../../redux/actions/cinema";
+
 function Order() {
+  const dispatch = useDispatch();
   const router = useRouter();
+  const [id, setId] = useState([]);
+  const [code, setCode] = useState([]);
+  const seats = useSelector((state) => state.booking.seatData.data);
+  const token = useSelector((state) => state.auth.userData.token);
+  const showData = useSelector((state) => state.cinema.showingData);
+  const bookedDataRaw = useSelector((state) => state.booking.bookedData.data);
+  const bookedData = bookedDataRaw.map((item) => {
+    return item.seat_id;
+  });
+  // console.log(bookedData);
 
   useEffect(() => {
-    console.log(router.query.showtime_id);
+    console.log(router.query);
+    const config = {
+      headers: {
+        "x-access-token": token,
+      },
+    };
+    const showTimeId = router.query.showtime_id;
+    dispatch(bookingAction.getSeatThunk());
+    dispatch(bookingAction.getBookedThunk(showTimeId));
+    dispatch(cinemaActions.getCinemaShowingThunk(showTimeId, config));
   }, [router.query]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const body = {
+      seatIds: id,
+      paymentMethodId: "370a39e9-b3fb-434b-ac85-5c2f3c068f9f",
+      movieScheduleId: router.query.showtime_id,
+      totalPayment: showData.price * id.length,
+    };
+    const config = {
+      headers: {
+        "x-access-token": token,
+      },
+    };
+    // dispatch(bookingAction.postBookThunk(body, config));
+    axios
+      .post(
+        "https://golden-tix-backend.vercel.app/api/booking/new",
+        body,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  console.log(code);
 
   return (
     <Fragment>
@@ -30,7 +82,7 @@ function Order() {
             <div className={styles["movie-div"]}>
               <h1 className={styles["movie-header-1"]}>Movie Selected</h1>
               <div className={styles["movie-div-1"]}>
-                <p className={styles["movie-text-1"]}>Spider-Man: Homecoming</p>
+                <p className={styles["movie-text-1"]}>{showData.movie}</p>
                 <button className={styles["movie-btn-1"]}>Change movie</button>
               </div>
             </div>
@@ -54,160 +106,530 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index < 7 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      {seats.map(
+                        (e, index) =>
+                          index >= 7 &&
+                          index < 14 &&
+                          (bookedData.includes(e.seat_id) ? (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={styles["seat-div-5"]}
+                            ></div>
+                          ) : (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={
+                                id.includes(e.seat_id)
+                                  ? styles["seat-div-14"]
+                                  : styles["seat-div-2"]
+                              }
+                              onClick={() => {
+                                // console.log(e.seat_id);
+                                id.includes(e.seat_id)
+                                  ? setId(id.filter((x) => x !== e.seat_id))
+                                  : setId([...id, e.seat_id]);
+                                code.includes(e.seat_code)
+                                  ? setCode(
+                                      code.filter((x) => x !== e.seat_code)
+                                    )
+                                  : setCode([...code, e.seat_code]);
+                              }}
+                            ></div>
+                          ))
+                      )}
                     </div>
                   </div>
                   {/* Row 2 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 14 &&
+                            index < 21 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      {seats.map(
+                        (e, index) =>
+                          index >= 21 &&
+                          index < 28 &&
+                          (bookedData.includes(e.seat_id) ? (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={styles["seat-div-5"]}
+                            ></div>
+                          ) : (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={
+                                id.includes(e.seat_id)
+                                  ? styles["seat-div-14"]
+                                  : styles["seat-div-2"]
+                              }
+                              onClick={() => {
+                                // console.log(e.seat_id);
+                                id.includes(e.seat_id)
+                                  ? setId(id.filter((x) => x !== e.seat_id))
+                                  : setId([...id, e.seat_id]);
+                                code.includes(e.seat_code)
+                                  ? setCode(
+                                      code.filter((x) => x !== e.seat_code)
+                                    )
+                                  : setCode([...code, e.seat_code]);
+                              }}
+                            ></div>
+                          ))
+                      )}
                     </div>
                   </div>
                   {/* Row 3 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-14"]}></div>
-                        <div className={styles["seat-div-14"]}></div>
-                        <div className={styles["seat-div-14"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 28 &&
+                            index < 35 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      {seats.map(
+                        (e, index) =>
+                          index >= 35 &&
+                          index < 42 &&
+                          (bookedData.includes(e.seat_id) ? (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={styles["seat-div-5"]}
+                            ></div>
+                          ) : (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={
+                                id.includes(e.seat_id)
+                                  ? styles["seat-div-14"]
+                                  : styles["seat-div-2"]
+                              }
+                              onClick={() => {
+                                // console.log(e.seat_id);
+                                id.includes(e.seat_id)
+                                  ? setId(id.filter((x) => x !== e.seat_id))
+                                  : setId([...id, e.seat_id]);
+                                code.includes(e.seat_code)
+                                  ? setCode(
+                                      code.filter((x) => x !== e.seat_code)
+                                    )
+                                  : setCode([...code, e.seat_code]);
+                              }}
+                            ></div>
+                          ))
+                      )}
                     </div>
                   </div>
                   {/* Row 4 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 42 &&
+                            index < 49 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      {seats.map(
+                        (e, index) =>
+                          index >= 49 &&
+                          index < 56 &&
+                          (bookedData.includes(e.seat_id) ? (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={styles["seat-div-5"]}
+                            ></div>
+                          ) : (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={
+                                id.includes(e.seat_id)
+                                  ? styles["seat-div-14"]
+                                  : styles["seat-div-2"]
+                              }
+                              onClick={() => {
+                                // console.log(e.seat_id);
+                                id.includes(e.seat_id)
+                                  ? setId(id.filter((x) => x !== e.seat_id))
+                                  : setId([...id, e.seat_id]);
+                                code.includes(e.seat_code)
+                                  ? setCode(
+                                      code.filter((x) => x !== e.seat_code)
+                                    )
+                                  : setCode([...code, e.seat_code]);
+                              }}
+                            ></div>
+                          ))
+                      )}
                     </div>
                   </div>
                   {/* Row 5 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 56 &&
+                            index < 63 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      {seats.map(
+                        (e, index) =>
+                          index >= 63 &&
+                          index < 70 &&
+                          (bookedData.includes(e.seat_id) ? (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={styles["seat-div-5"]}
+                            ></div>
+                          ) : (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={
+                                id.includes(e.seat_id)
+                                  ? styles["seat-div-14"]
+                                  : styles["seat-div-2"]
+                              }
+                              onClick={() => {
+                                // console.log(e.seat_id);
+                                id.includes(e.seat_id)
+                                  ? setId(id.filter((x) => x !== e.seat_id))
+                                  : setId([...id, e.seat_id]);
+                                code.includes(e.seat_code)
+                                  ? setCode(
+                                      code.filter((x) => x !== e.seat_code)
+                                    )
+                                  : setCode([...code, e.seat_code]);
+                              }}
+                            ></div>
+                          ))
+                      )}
                     </div>
                   </div>
                   {/* Row 6  */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 70 &&
+                            index < 77 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-31"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-5"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      <div className={styles["seat-div-4"]}>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 77 &&
+                            index < 79 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
+                        <div className={styles["seat-div-31"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 81 &&
+                            index < 84 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
+                      </div>
                     </div>
                   </div>
                   {/* Row 7 */}
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
-                        <div className={styles["seat-div-5"]}></div>
-                        <div className={styles["seat-div-2"]}></div>
+                        {seats.map(
+                          (e, index) =>
+                            index >= 84 &&
+                            index < 91 &&
+                            (bookedData.includes(e.seat_id) ? (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={styles["seat-div-5"]}
+                              ></div>
+                            ) : (
+                              <div
+                                style={{ backgroundColor: "" }}
+                                className={
+                                  id.includes(e.seat_id)
+                                    ? styles["seat-div-14"]
+                                    : styles["seat-div-2"]
+                                }
+                                onClick={() => {
+                                  // console.log(e.seat_id);
+                                  id.includes(e.seat_id)
+                                    ? setId(id.filter((x) => x !== e.seat_id))
+                                    : setId([...id, e.seat_id]);
+                                  code.includes(e.seat_code)
+                                    ? setCode(
+                                        code.filter((x) => x !== e.seat_code)
+                                      )
+                                    : setCode([...code, e.seat_code]);
+                                }}
+                              ></div>
+                            ))
+                        )}
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
-                      <div className={styles["seat-div-2"]}></div>
+                      {seats.map(
+                        (e, index) =>
+                          index >= 91 &&
+                          index < 98 &&
+                          (bookedData.includes(e.seat_id) ? (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={styles["seat-div-5"]}
+                            ></div>
+                          ) : (
+                            <div
+                              style={{ backgroundColor: "" }}
+                              className={
+                                id.includes(e.seat_id)
+                                  ? styles["seat-div-14"]
+                                  : styles["seat-div-2"]
+                              }
+                              onClick={() => {
+                                // console.log(e.seat_id);
+                                id.includes(e.seat_id)
+                                  ? setId(id.filter((x) => x !== e.seat_id))
+                                  : setId([...id, e.seat_id]);
+                                code.includes(e.seat_code)
+                                  ? setCode(
+                                      code.filter((x) => x !== e.seat_code)
+                                    )
+                                  : setCode([...code, e.seat_code]);
+                              }}
+                            ></div>
+                          ))
+                      )}
                     </div>
                   </div>
                   <div className={styles["seat-div-11"]}>
@@ -326,7 +748,11 @@ function Order() {
             </div>
             <div className={styles["btn-div-1"]}>
               <button className={styles["btn-1"]}>Change your movie</button>
-              <button className={styles["btn-2"]}>Checkout now</button>
+              <form onSubmit={handleSubmit}>
+                <button type="submit" className={styles["btn-2"]}>
+                  Checkout now
+                </button>
+              </form>
             </div>
           </aside>
           <aside className={styles["aside-right"]}>
@@ -334,15 +760,18 @@ function Order() {
             <div className={styles["order-div"]}>
               <div className={styles["order-div-1"]}>
                 <div className={styles["order-div-4"]}>
-                  <Image src={cineone} alt="img" />
+                  <Image
+                    width={174}
+                    height={70}
+                    src={`https://res.cloudinary.com/dedmbkp9a/image/upload/v1669990442/${showData.image}`}
+                    alt="img"
+                  />
                 </div>
-                <h1 className={styles["order-header-1"]}>CineOne21 Cinema</h1>
+                <h1 className={styles["order-header-1"]}>{showData.cinema}</h1>
                 <div className={styles["order-div-5"]}>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>Movie selected</p>
-                    <p className={styles["order-text-2"]}>
-                      Spider-Man: Homecoming
-                    </p>
+                    <p className={styles["order-text-2"]}>{showData.movie}</p>
                   </div>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>
@@ -352,7 +781,9 @@ function Order() {
                   </div>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>One ticket price</p>
-                    <p className={styles["order-text-2"]}>$10</p>
+                    <p
+                      className={styles["order-text-2"]}
+                    >{`Rp ${showData.price}`}</p>
                   </div>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>Seat choosed</p>
@@ -362,7 +793,9 @@ function Order() {
               </div>
               <section className={styles["order-section-2"]}>
                 <p className={styles["order-text-3"]}>Total Payment</p>
-                <p className={styles["order-text-4"]}>$30</p>
+                <p className={styles["order-text-4"]}>
+                  Rp {showData.price * id.length}
+                </p>
               </section>
             </div>
           </aside>
