@@ -4,6 +4,11 @@ export const ACTION_STRING = {
   fulfilled: "_FULFILLED",
   authLogin: "AUTH_LOGIN",
   authLogout: "AUTH_LOGOUT",
+  profile: "PROFILE",
+  editImage: "EDIT_IMAGE",
   authRegister: "AUTH_REGISTER",
   authForgot: "AUTH_FORGOT",
+  getUpcoming: "GET_UPCOMING",
+  getShowing: "GET_SHOWING",
+  getDetails: "GET_DETAILS",
 };

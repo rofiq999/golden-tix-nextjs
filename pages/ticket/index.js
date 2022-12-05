@@ -3,6 +3,10 @@ import React from 'react'
 //import css
 import styles from "../../styles/Tiket.module.css";
 
+//import components
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+
 //import image
 import Image from "next/image";
 import logo3 from "../../assets/logo3.png";
@@ -14,9 +18,10 @@ import icon_printer from "../../assets/icon_printer.png";
 function index() {
     return (
         <>
+            <Header />
             <main>
                 <section className={`${styles['content-all']} container-fluid`}>
-                    <div className='container'>
+                    <div className={`${styles['content-container']} container`}>
                         <div className={styles['content']}>
                             <p className={styles['text-payment']}>Proof of Payment</p>
                             <div className={`${styles['content-main']} row`}>
@@ -85,6 +90,7 @@ function index() {
                     </div>
                 </section>
             </main>
+            <Footer />
         </>
     )
 }

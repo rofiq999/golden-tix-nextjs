@@ -8,16 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 import authAction from "../../redux/actions/auth";
 
-import logo3 from "../../assets/logo3.png";
+// import logo3 from "../../assets/logo3.png";
 import eye from "../../assets/eye.png";
-import facebook from "../../assets/Facebook.png";
+import facebook from "../../assets/facebook.png";
 import google from "../../assets/google.png";
-import logo2 from "../../assets/logo2.png";
+// import logo2 from "../../assets/logo2.png";
 import PageTitle from "../../Components/PageTitle";
+import { useRouter } from "next/router";
 
 function SignIn() {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [hidden, setHidden] = useState("password");
@@ -30,6 +31,7 @@ function SignIn() {
 
   const signinSuccess = () => {
     toast.success(`Login Success!`);
+    router.push("/");
   };
 
   const signinFailed = (error) => {
@@ -41,19 +43,25 @@ function SignIn() {
       <PageTitle title={"Sign In"} />
       <main className={styles["main"]}>
         <aside className={styles["aside-left"]}>
-          <Image
-            className={styles["aside-left-image-1"]}
-            src={logo3}
-            alt="img"
-          />
+          <div className={styles["logo-container"]}>
+            <div className={styles["golden"]}>
+              <p>GOLDEN</p>
+            </div>
+            <div className={styles["tix"]}>
+              <p>TIX</p>
+            </div>
+          </div>
           <h1 className={styles["aside-left-header-1"]}>wait, watch, wow!</h1>
         </aside>
         <aside className={styles["aside-right"]}>
-          <Image
-            className={styles["aside-right-image-2"]}
-            src={logo2}
-            alt="img"
-          />
+          <div className={styles["aside-right-image-2"]}>
+            <div className={styles["golden"]}>
+              <p>GOLDEN</p>
+            </div>
+            <div className={styles["tix"]}>
+              <p>TIX</p>
+            </div>
+          </div>
           <h1 className={styles["aside-right-header-1"]}>Sign In</h1>
           <p className={styles["aside-right-text-9"]}>
             Sign in with your data that you entered during your registration
