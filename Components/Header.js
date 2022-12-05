@@ -14,7 +14,7 @@ function Header() {
   const token = useSelector((state) => state.auth.userData.token);
   const [toggle, setToggle] = useState(false);
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
-  console.log(image);
+  // console.log(image);
 
   const showHamburger = () => {
     setToggle(!toggle);

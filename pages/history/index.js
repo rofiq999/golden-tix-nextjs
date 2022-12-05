@@ -1,8 +1,8 @@
-// import React from "react";
-// import React, { useEffect, useState } from "react";
+
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 //import css
 import styles from "../../styles/History.module.css";
@@ -12,23 +12,51 @@ import Sidebar from "../../Components/SideBar";
 import Card_History from "../../Components/CardHistory";
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
-
-//import image
-import Image from "next/image";
-import icon_cineone from "../../assets/history/icon_cineone.png";
-import icon_ebu_id from "../../assets/history/icon_ebu_id.png";
-import profileActions from "../../redux/actions/profile";
+import Loading from "../../Components/Loading";
 
 
 function index() {
   const dispatch = useDispatch();
   const router = useRouter();
   const profiles = useSelector((state) => state.user.profile);
+  const token = useSelector((state) => state.auth.userData.token);
+  const [data, setData] = useState([]);
+  const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
+  const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
 
+  useEffect(() => {
+    const baseUrl = `${LINK}api/booking/history`;
+    axios
+      .get(baseUrl,
+        {
+          headers: {
+            "x-access-token": token
+          }
+        })
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  let days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   const profileHandler = () => {
     router.push("/profile");
   };
+
 
   return (
     <>
@@ -44,14 +72,27 @@ function index() {
                 className={`${styles["content-right"]} col-lg-9 col-md-12 col-sm-12 `}
               >
                 <div className={styles["content-right-one"]}>
-                  <p className={styles["text-acount"]} onClick={profileHandler}>
+                  <p className={styles["text-acount"]} onClick={profileHandler} >
                     Account Settings
                   </p>
                   <p className={styles["text-order"]}>Order History</p>
                 </div>
-                <Card_History />
-                <Card_History />
-                <Card_History />
+                {data.length > 0 && data ? (
+                  data.map((e) => (
+                    <Card_History
+                      key={e.id}
+                      movie={e.movie}
+                      image={`${CLOUD}/${e.image}`}
+                      cinema={e.cinema}
+                      ticket_status={e.ticket_status}
+                      id={e.id}
+                      show_date={new Date(e.show_date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    />
+                  ))
+                ) : (
+                  <Loading />
+                )}
+                {/* <Card_History /> */}
               </div>
             </div>
           </div>
