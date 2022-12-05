@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../../styles/Details.module.css";
 import PageTitle from "../../Components/PageTitle";
@@ -10,6 +10,7 @@ import Loading from "../../Components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import moviesActions from "../../redux/actions/movies";
+import cinemaActions from "../../redux/actions/cinema";
 
 function Details() {
   const dispatch = useDispatch();
@@ -17,12 +18,18 @@ function Details() {
   const movies = useSelector((state) => state.movie.details);
   const loading = useSelector((state) => state.movie.isLoading);
   const token = useSelector((state) => state.auth.userData.token);
+  const scheduleData = useSelector((state) => state.cinema.scheduleData);
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   const newDate = new Date(movies.release_date);
   const date = newDate.getDate();
   const month = newDate.toLocaleString("en-US", { month: "long" });
   const year = newDate.getFullYear();
-  console.log(date, month, year);
+  const id = movies.id;
+
+  const [city, setCity] = useState("Bandung");
+  const [dates, setDates] = useState("2022-12-04");
+  // console.log(date, month, year);
+  console.log(scheduleData);
 
   useEffect(() => {
     dispatch(
@@ -31,7 +38,50 @@ function Details() {
         token
       )
     );
+    const config = {
+      headers: {
+        "x-access-token": token,
+      },
+      params: {
+        date: dates,
+        movie: movies.movie_name,
+        location: city,
+      },
+    };
+    router.push(
+      {
+        pathname: `/movie/${id}`,
+        query: { location: city, date: dates },
+      },
+      undefined,
+      { scroll: false }
+    );
+    dispatch(cinemaActions.getScheduleThunk(config));
   }, [dispatch]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      const config = {
+        headers: {
+          "x-access-token": token,
+        },
+        params: {
+          date: dates,
+          movie: movies.movie_name,
+          location: city,
+        },
+      };
+      dispatch(cinemaActions.getScheduleThunk(config));
+      router.push(
+        {
+          pathname: `/movie/${id}`,
+          query: { location: city, date: dates },
+        },
+        undefined,
+        { scroll: false }
+      );
+    }
+  };
 
   return (
     <>
@@ -114,18 +164,64 @@ function Details() {
             <div className={styles["input-bar"]}>
               <div className={styles["date-input"]}>
                 <i className="fa-regular fa-calendar-days"></i>
-                <input type="date" name="" id="" />
+                <input
+                  type="date"
+                  name=""
+                  id=""
+                  value={dates}
+                  onChange={(event) => {
+                    setDates(event.target.value);
+                    const config = {
+                      headers: {
+                        "x-access-token": token,
+                      },
+                      params: {
+                        date: event.target.value,
+                        movie: movies.movie_name,
+                        location: city,
+                      },
+                    };
+                    router.push(
+                      {
+                        pathname: `/movie/${id}`,
+                        query: { location: city, date: event.target.value },
+                      },
+                      undefined,
+                      { scroll: false }
+                    );
+                    dispatch(cinemaActions.getScheduleThunk(config));
+                  }}
+                />
               </div>
               <div className={styles["location-input"]}>
                 <i className="fa-solid fa-map-location"></i>
-                <input type="text" name="" id="" placeholder="Set a city" />
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="Set a city"
+                  value={city}
+                  onChange={(event) => {
+                    setCity(event.target.value);
+                  }}
+                  onKeyDown={handleKeyDown}
+                />
               </div>
             </div>
           </div>
           <div className={styles["card-bioskop"]}>
             <div className="container">
               <div className={styles["card-container"]}>
-                <Card />
+                {scheduleData.map((schedule) => {
+                  return (
+                    <Card
+                      cinemaone21={schedule.CinemaOne21}
+                      hiflix={schedule.Hiflix}
+                      image={schedule.image}
+                      price={schedule.price}
+                    />
+                  );
+                })}
               </div>
               <div className={styles["show-more"]}>
                 <span></span>
