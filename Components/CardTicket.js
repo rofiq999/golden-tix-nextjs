@@ -7,6 +7,7 @@ import { Router, useRouter } from "next/router";
 function CardTicket(props) {
   const [time, setTime] = useState();
   const [id, setId] = useState();
+  console.log(props.movie_name);
 
   const router = useRouter();
   console.log(`time: ${time}, id"${id}`);
@@ -16,7 +17,7 @@ function CardTicket(props) {
     router.push(
       {
         pathname: "/order",
-        query: { showtime_id: id },
+        query: { showtime_id: id, movies_name: props.movie_name },
       },
       "/order"
     );
