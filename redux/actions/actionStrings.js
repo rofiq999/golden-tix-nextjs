@@ -11,5 +11,6 @@ export const ACTION_STRING = {
   getUpcoming: "GET_UPCOMING",
   getShowing: "GET_SHOWING",
   getDetails: "GET_DETAILS",
+  getSchedule: "GET_SCHEDULE",
   createMovie: "CREATE_MOVIE",
 };
