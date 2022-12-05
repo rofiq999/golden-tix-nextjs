@@ -40,8 +40,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
     if (picture) body.append("image", picture);
     dispatch(profileActions.imageThunk(getToken, body)),
       toast.success("update success"),
-      setTimeout(() => {
-      }, 2000);
+      setTimeout(() => {}, 2000);
   };
 
   useEffect(() => {
@@ -82,7 +81,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
           <div className={styles["content-img"]}>
             <Image
               className={styles["image_jones"]}
-              src={display ? `${CLOUD}/${image}` || icon_default : display}
+              src={!display ? `${CLOUD}/${image}` : icon_default}
               alt="image_jones"
               width={130}
               height={130}
