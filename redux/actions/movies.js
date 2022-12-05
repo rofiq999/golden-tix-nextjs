@@ -161,14 +161,16 @@ const getDetailsThunk = (params, token) => {
   };
 };
 
-const createMovieThunk = (token, data) => {
+const createMovieThunk = (token, data, cbSuccess, cbError) => {
   return async (dispatch) => {
     try {
       dispatch(createMoviePending());
       const result = await createMovies(token, data);
       dispatch(createMovieFulfilled(result.data));
+      typeof cbSuccess === "function" && cbSuccess();
     } catch (error) {
       dispatch(createMovieRejected(error));
+      typeof cbError === "function" && cbError(error.response.data.msg);
     }
   };
 };
