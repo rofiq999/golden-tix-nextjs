@@ -28,7 +28,11 @@ function Index() {
   const [show, setShow] = useState(false);
   const Id = useSelector((state) => state.auth.userData.id);
   const [edit, setEdit] = useState(true);
+  const [edit_, setEdit_] = useState(true);
   const profiles = useSelector((state) => state.user.profile);
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState("fa-solid fa-eye-slash");
+  const [type_, setType_] = useState("password");
   const [icon_, setIcon_] = useState("fa-solid fa-eye-slash");
   const [type__, setType__] = useState("password");
   const [icon__, setIcon__] = useState("fa-solid fa-eye-slash");
@@ -97,7 +101,16 @@ function Index() {
     dispatch(profileActions.userThunk(token))
   }, [dispatch])
 
-
+  // handleToggle => Show Password
+  const handleToggle = () => {
+    if (type === "password") {
+      setIcon("fa-regular fa-eye");
+      setType("text");
+    } else {
+      setIcon("fa-solid fa-eye-slash");
+      setType("password");
+    }
+  };
 
   // handleToggle => Show Password
   const handleToggle_ = () => {
@@ -122,8 +135,9 @@ function Index() {
   };
 
 
+
   // handleReset => reset password
-  const handleReset = () => {
+  const handleEditPass = () => {
     axios.patch(`${baseUrl}/api/user/edit-password`, {
       oldPassword: oldpass,
       newPassword: newpass,
@@ -134,13 +148,16 @@ function Index() {
       }
     })
       .then((res) => {
-        setEdit(true),
-          handleCancel_(),
-          toast.success(res.data.status)
+        console.log(res)
+        setEdit(true)
+        setTimeout(() => {
+          // toast.success(res.data.data.msg)
+          toast.success("Password updated")
+        }, 2000);
       })
-      .catch((err) => toast.error(err.response.data.status));
+      .catch((err) => toast.error("wrong/password"));
+    // console.log(erorr);
   }
-
 
 
   // handleClose, handleShow => Show Modals
@@ -225,34 +242,51 @@ function Index() {
                 <div className={styles['content-detail']}>
                   <p className={styles['privacy']}>Account and Privacy</p>
                   <div className={styles['content-br']}> </div>
+                  <div
+                    className={`${styles['buttonedit1']} btn btn-outline-primary text-black fw-bold mt-4 ms-4 `}
+                    onClick={() => {
+                      setEdit_(!edit);
+                      console.log("click");
+                    }}
+                  >
+                    <span className="text-center">Edit</span>
+                  </div>
                 </div>
                 <div className={styles['content-name']}>
                   <div className={styles['input']}>
                     <label className={styles['name']}>Old Password</label>
                     <div className={styles['input-bar']}>
                       <div className={styles['content-number']}></div>
-                      <input className={styles['input-name']} type='password' disabled={edit} placeholder='Write your password' />
+                      <input className={styles['input-name']} type={type} onChange={valueOldpass} disabled={edit_} placeholder='Write your password' />
+                      <i className={icon} onClick={handleToggle}></i>
                     </div>
                   </div>
                   <div className={styles['input']}>
                     <label className={styles['name']}>New Password</label>
                     <div className={styles['input-bar']}>
                       <div className={styles['content-number']}></div>
-                      <input className={styles['input-name']} type='password' disabled={edit} placeholder='Confirm your password' />
+                      <input className={styles['input-name']} type={type_} onChange={valueNewpass} disabled={edit_} placeholder='Confirm your password' />
+                      <i className={icon_} onClick={handleToggle_}></i>
                     </div>
                   </div>
                 </div>
-                <div className={styles['input']}>
+                <div className={styles['input-confirm']}>
                   <label className={styles['name']}>Confirm Password</label>
                   <div className={styles['input-bar-confirm']}>
                     <div className={styles['content-number']}></div>
-                    <input className={styles['input-name']} type='password' disabled={edit} placeholder='Write your password' />
+                    <input className={styles['input-name']} type={type__} onChange={valueConfirmpass} disabled={edit_} placeholder='Write your password' />
+                    <i className={icon__} onClick={handleToggle__}></i>
                   </div>
                 </div>
               </div>
-              <button className={styles['update']} onClick={() => {
-                handleSave();
-              }}>Update changes</button>
+              <div className={styles["content-save"]}>
+                <button className={styles['update']} onClick={() => {
+                  handleSave();
+                }}>Update changes</button>
+                <button className={styles['save']} onClick={() => {
+                  handleEditPass();
+                }}>Save Password</button>
+              </div>
               <button className={styles['logout']} onClick={handleShow}>Logout</button>
             </div>
           </div>
@@ -266,7 +300,7 @@ function Index() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>confirmation</Modal.Title>
+          <Modal.Title> Golden-Tix </Modal.Title>
         </Modal.Header>
         <Modal.Body>are you sure you want to log out?</Modal.Body>
         <Modal.Footer>

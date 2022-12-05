@@ -26,7 +26,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
   const [display, setDisplay] = useState();
   const [picture, setPicture] = useState();
   const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
-
+  console.log(CLOUD);
   const inputImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       setDisplay(URL.createObjectURL(e.target.files[0]));
@@ -59,7 +59,6 @@ export default function SideBar({ firstname, lastname, username, image }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(token);
   const handleLogout = () => {
     dispatch(authActions.logoutThunk(token)),
       toast.success("Logout Success"),
@@ -83,7 +82,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
           <div className={styles["content-img"]}>
             <Image
               className={styles["image_jones"]}
-              src={display == null ? image && icon_default : display}
+              src={display ? `${CLOUD}/${image}` || icon_default : display}
               alt="image_jones"
               width={130}
               height={130}
@@ -161,7 +160,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>confirmation</Modal.Title>
+          <Modal.Title>Golden-Tix</Modal.Title>
         </Modal.Header>
         <Modal.Body>are you sure you want to log out?</Modal.Body>
         <Modal.Footer>
