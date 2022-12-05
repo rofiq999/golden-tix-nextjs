@@ -4,6 +4,7 @@ import {
   getMovieUpcoming,
   getMovieShowing,
   getMovieDetails,
+  createMovies,
 } from "../../modules/api/movies";
 
 const { Pending, Rejected, Fulfilled } = ActionType;
@@ -50,38 +51,64 @@ const getDetailsFulfilled = (data) => ({
   payload: { data },
 });
 
+const createMoviePending = () => ({
+  type: ACTION_STRING.createMovie.concat("_", Pending),
+});
+
+const createMovieRejected = (error) => ({
+  type: ACTION_STRING.createMovie.concat("_", Rejected),
+  payload: { error },
+});
+
+const createMovieFulfilled = (data) => ({
+  type: ACTION_STRING.createMovie.concat("_", Fulfilled),
+  payload: { data },
+});
+
 const getUpcomingThunk = (params) => {
-  return async (dispacth) => {
+  return async (dispatch) => {
     try {
-      dispacth(getUpcomingPending());
+      dispatch(getUpcomingPending());
       const result = await getMovieUpcoming(params);
-      dispacth(getUpcomingFulfilled(result.data));
+      dispatch(getUpcomingFulfilled(result.data));
     } catch (error) {
-      dispacth(getUpcomingRejected(error));
+      dispatch(getUpcomingRejected(error));
     }
   };
 };
 
 const getShowingThunk = (params) => {
-  return async (dispacth) => {
+  return async (dispatch) => {
     try {
-      dispacth(getShowingPending());
+      dispatch(getShowingPending());
       const result = await getMovieShowing(params);
-      dispacth(getShowingFulfilled(result.data));
+      dispatch(getShowingFulfilled(result.data));
     } catch (error) {
-      dispacth(getShowingRejected(error));
+      dispatch(getShowingRejected(error));
     }
   };
 };
 
 const getDetailsThunk = (params, token) => {
-  return async (dispacth) => {
+  return async (dispatch) => {
     try {
-      dispacth(getDetailsPending());
+      dispatch(getDetailsPending());
       const result = await getMovieDetails(token, params);
-      dispacth(getDetailsFulfilled(result.data));
+      dispatch(getDetailsFulfilled(result.data));
     } catch (error) {
-      dispacth(getDetailsRejected(error));
+      dispatch(getDetailsRejected(error));
+    }
+  };
+};
+
+const createMovieThunk = (data, token) => {
+  return async (dispatch) => {
+    try {
+      dispatch(createMoviePending());
+      const result = await createMovies(data, token);
+      dispatch(createMovieFulfilled(result.data));
+    } catch (error) {
+      dispatch(createMovieRejected(error));
     }
   };
 };
@@ -90,6 +117,7 @@ const moviesActions = {
   getUpcomingThunk,
   getShowingThunk,
   getDetailsThunk,
+  createMovieThunk,
 };
 
 export default moviesActions;
