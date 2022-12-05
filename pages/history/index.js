@@ -43,16 +43,6 @@ function index() {
       });
   }, []);
 
-  let days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
   const profileHandler = () => {
     router.push("/profile");
   };
