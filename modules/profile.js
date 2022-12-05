@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const baseUrl = `https://golden-tix-backend.vercel.app`;
 export const editProfile = (token) => {
     return axios.get(`${baseUrl}/api/user/profile`, {

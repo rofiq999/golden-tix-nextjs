@@ -52,13 +52,15 @@ const logoutFulfilled = (data) => ({
   payload: { data },
 });
 
-const logoutThunk = () => {
+const logoutThunk = (token) => {
   return async (dispatch) => {
     try {
       dispatch(logoutPending());
-      const result = await logout();
+      const result = await logout(token);
       dispatch(logoutFulfilled(result.data));
+      typeof cbSuccess === "function" && cbBerhasil();
     } catch (error) {
+      console.log(error.response.data);
       dispatch(logoutRejected(error));
     }
   };
