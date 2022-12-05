@@ -20,6 +20,7 @@ const initialState = {
   isError: false,
   isLoading: false,
   isFulfilled: false,
+  error: null,
 };
 
 const moviesReducer = (prevState = initialState, { type, payload }) => {
@@ -111,6 +112,7 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isLoading: true,
         isError: false,
         isFulfilled: false,
+        error: null,
       };
     case createMovie.concat("_", Rejected):
       return {
@@ -118,6 +120,7 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isLoading: false,
         isError: true,
         isFulfilled: false,
+        error: payload.error.response.data.msg,
       };
     case createMovie.concat("_", Fulfilled):
       return {
@@ -125,14 +128,7 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isLoading: false,
         isError: false,
         isFulfilled: true,
-        movie: {
-          moviename: payload.data.data.movieName,
-          synopsis: payload.data.data.synopsis,
-          release_date: payload.data.data.releaseDate,
-          duration: payload.data.data.duration,
-          director: payload.data.data.director,
-          image: payload.data.data.image,
-        },
+        error: null,
       };
 
     case getGenre.concat("_", Pending):

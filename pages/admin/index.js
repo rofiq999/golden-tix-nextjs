@@ -20,8 +20,11 @@ import chart from "../../assets/chart.png";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moviesActions from "../../redux/actions/movies";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 export default function Admin() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.userData.token);
   const locationData = useSelector((state) => state.movie.location);
@@ -107,7 +110,7 @@ export default function Admin() {
     setCastsId([...arrCastId]);
   };
 
-  console.log(image);
+  // console.log(image);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -140,9 +143,18 @@ export default function Admin() {
     body.append("castIds", JSON.stringify(castsId));
     body.append("cinemasLocationsId", listLocation);
     body.append("schedulesId", listSchedule);
-    console.log(body);
-    dispatch(moviesActions.createMovieThunk(token, body));
+    // console.log(body);
+    dispatch(
+      moviesActions.createMovieThunk(token, body, createSuccess, createError)
+    );
   };
+
+  const createSuccess = () => {
+    toast.success("Congrats!, Movie created successfully");
+    router.push("/");
+  };
+
+  const createError = (error) => toast.error(`${error}`);
 
   // const changeLocation = (e) => {
   //   setMovieLocation(e.target.id);
