@@ -213,8 +213,10 @@ function Details() {
             <div className="container">
               <div className={styles["card-container"]}>
                 {scheduleData.map((schedule) => {
+                  console.log(movies.movie_name);
                   return (
                     <Card
+                      movie_name={movies.movie_name}
                       cinemaone21={schedule.CinemaOne21}
                       hiflix={schedule.Hiflix}
                       image={schedule.image}

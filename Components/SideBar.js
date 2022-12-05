@@ -40,8 +40,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
     if (picture) body.append("image", picture);
     dispatch(profileActions.imageThunk(getToken, body)),
       toast.success("update success"),
-      setTimeout(() => {
-      }, 2000);
+      setTimeout(() => { }, 2000);
   };
 
   useEffect(() => {

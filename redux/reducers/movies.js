@@ -5,15 +5,36 @@ const initialState = {
   upcoming: [],
   showing: [],
   details: [],
-  movie: {},
+  genre: [],
+  cast: [],
+  location: [],
+  list: [],
+  movie: {
+    moviename: null,
+    synopsis: null,
+    release_date: null,
+    duration: null,
+    director: null,
+    image: null,
+  },
   isError: false,
   isLoading: false,
   isFulfilled: false,
+  error: null,
 };
 
 const moviesReducer = (prevState = initialState, { type, payload }) => {
   const { Pending, Rejected, Fulfilled } = ActionType;
-  const { getUpcoming, getShowing, getDetails, createMovie } = ACTION_STRING;
+  const {
+    getUpcoming,
+    getShowing,
+    getDetails,
+    createMovie,
+    getGenre,
+    getCast,
+    getLocation,
+    getList,
+  } = ACTION_STRING;
 
   switch (type) {
     case getUpcoming.concat("_", Pending):
@@ -91,6 +112,7 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isLoading: true,
         isError: false,
         isFulfilled: false,
+        error: null,
       };
     case createMovie.concat("_", Rejected):
       return {
@@ -98,6 +120,7 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isLoading: false,
         isError: true,
         isFulfilled: false,
+        error: payload.error.response.data.msg,
       };
     case createMovie.concat("_", Fulfilled):
       return {
@@ -105,14 +128,99 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isLoading: false,
         isError: false,
         isFulfilled: true,
-        movie: {
-          moviename: payload.data.data.movieName,
-          synopsis: payload.data.data.synopsis,
-          release_data: payload.data.data.releaseDate,
-          duration: payload.data.data.duration,
-          director: payload.data.data.director,
-          image: payload.data.data.image,
-        },
+        error: null,
+      };
+
+    case getGenre.concat("_", Pending):
+      return {
+        ...prevState,
+        isLoading: true,
+        isError: false,
+        isFulfilled: false,
+      };
+    case getGenre.concat("_", Rejected):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: true,
+        isFulfilled: false,
+      };
+    case getGenre.concat("_", Fulfilled):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: false,
+        isFulfilled: true,
+        genre: payload.data.data,
+      };
+
+    case getCast.concat("_", Pending):
+      return {
+        ...prevState,
+        isLoading: true,
+        isError: false,
+        isFulfilled: false,
+      };
+    case getCast.concat("_", Rejected):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: true,
+        isFulfilled: false,
+      };
+    case getCast.concat("_", Fulfilled):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: false,
+        isFulfilled: true,
+        cast: payload.data.data,
+      };
+
+    case getLocation.concat("_", Pending):
+      return {
+        ...prevState,
+        isLoading: true,
+        isError: false,
+        isFulfilled: false,
+      };
+    case getLocation.concat("_", Rejected):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: true,
+        isFulfilled: false,
+      };
+    case getLocation.concat("_", Fulfilled):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: false,
+        isFulfilled: true,
+        location: payload.data.data,
+      };
+
+    case getList.concat("_", Pending):
+      return {
+        ...prevState,
+        isLoading: true,
+        isError: false,
+        isFulfilled: false,
+      };
+    case getList.concat("_", Rejected):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: true,
+        isFulfilled: false,
+      };
+    case getList.concat("_", Fulfilled):
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: false,
+        isFulfilled: true,
+        list: payload.data.data,
       };
 
     default:

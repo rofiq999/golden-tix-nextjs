@@ -12,6 +12,7 @@ function Header() {
   const router = useRouter();
   const image = useSelector((state) => state.user.profile.image);
   const token = useSelector((state) => state.auth.userData.token);
+  const role = useSelector((state) => state.auth.userData.role);
   const [toggle, setToggle] = useState(false);
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   // console.log(image);
@@ -44,13 +45,30 @@ function Header() {
           </div>
           <div className="col-lg-10 col-md-10 col-2">
             <div className={styles["navbar"]}>
-              <div className={styles["left-content"]}>
-                <ol>
-                  <li>Movies</li>
-                  <li>Cinemas</li>
-                  <li>Buy Ticket</li>
-                </ol>
-              </div>
+              {!token === "admin" ? (
+                <div className={styles["left-content"]}>
+                  <ol>
+                    <li>Movies</li>
+                    <li>Cinemas</li>
+                    <li>Buy Ticket</li>
+                  </ol>
+                </div>
+              ) : (
+                <div className={styles["left-content"]}>
+                  <ol>
+                    <li>Movies</li>
+                    <li>Cinemas</li>
+                    <li
+                      onClick={() => {
+                        router.push("/admin");
+                      }}
+                    >
+                      Create Movies
+                    </li>
+                  </ol>
+                </div>
+              )}
+
               <div className={styles["right-content"]}>
                 <div className={styles["location"]}>
                   <p>Location</p>
