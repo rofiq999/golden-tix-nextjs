@@ -31,6 +31,22 @@ export const getMovieDetails = (token, params) => {
   return axios.get(`${baseUrl}${params}`, config(token));
 };
 
+export const getGenre = (token) => {
+  return axios.get(`${baseUrl}/api/movie/genres`, config(token));
+};
+
+export const getCast = (token) => {
+  return axios.get(`${baseUrl}/api/movie/casts`, config(token));
+};
+
 export const createMovies = (token, data) => {
-  return axiosRequest("POST", "/api/movie/new", config(token), data);
+  return axios.post(`${baseUrl}/api/movie/new`, data, config(token));
+};
+
+export const getMovieLocation = () => {
+  return axiosRequest("GET", "/api/cinema/locations");
+};
+
+export const getListLocation = (token, params) => {
+  return axios.post(`${baseUrl}${params}`, data, config(token));
 };

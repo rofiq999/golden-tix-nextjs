@@ -13,4 +13,8 @@ export const ACTION_STRING = {
   getDetails: "GET_DETAILS",
   getSchedule: "GET_SCHEDULE",
   createMovie: "CREATE_MOVIE",
+  getGenre: "GET_GENRE",
+  getCast: "GET_CAST",
+  getLocation: "GET_LOCATION",
+  getList: "GET_LIST",
 };
