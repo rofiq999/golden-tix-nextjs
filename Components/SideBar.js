@@ -26,7 +26,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
   const [display, setDisplay] = useState();
   const [picture, setPicture] = useState();
   const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
-  console.log(CLOUD);
+  // console.log(CLOUD);
   const inputImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       setDisplay(URL.createObjectURL(e.target.files[0]));
@@ -40,7 +40,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
     if (picture) body.append("image", picture);
     dispatch(profileActions.imageThunk(getToken, body)),
       toast.success("update success"),
-      setTimeout(() => {}, 2000);
+      setTimeout(() => { }, 2000);
   };
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
           <div className={styles["content-img"]}>
             <Image
               className={styles["image_jones"]}
-              src={!display ? `${CLOUD}/${image}` : icon_default}
+              src={!display ? `${CLOUD}/${image}` || icon_default : display}
               alt="image_jones"
               width={130}
               height={130}
