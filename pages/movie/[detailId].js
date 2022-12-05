@@ -5,7 +5,8 @@ import PageTitle from "../../Components/PageTitle";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import Card from "../../Components/CardTicket";
-import poster from "../../assets/poster1.png";
+import Loading from "../../Components/Loading";
+// import poster from "../../assets/poster1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import moviesActions from "../../redux/actions/movies";
@@ -14,6 +15,7 @@ function Details() {
   const dispatch = useDispatch();
   const router = useRouter();
   const movies = useSelector((state) => state.movie.details);
+  const loading = useSelector((state) => state.movie.isLoading);
   const token = useSelector((state) => state.auth.userData.token);
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   const newDate = new Date(movies.release_date);
@@ -42,56 +44,64 @@ function Details() {
               <div className="col-lg-3 col-md-12 col-12">
                 <div className={styles["image-border"]}>
                   <div className={styles["image-container"]}>
-                    <Image
-                      src={`${link}/${movies.image}`}
-                      alt="poster"
-                      layout="fill"
-                      objectFit="contain"
-                    />
+                    {loading ? (
+                      <Loading />
+                    ) : (
+                      <Image
+                        src={`${link}/${movies.image}`}
+                        alt="poster"
+                        layout="fill"
+                        objectFit="contain"
+                      />
+                    )}
                   </div>
                 </div>
               </div>
               <div className="col-lg-9 col-md-12 col-12">
-                <div className={styles["movie-details"]}>
-                  <div className={styles["title"]}>
-                    <h1>{movies.movie_name}</h1>
-                  </div>
-                  <div className={styles["categories"]}>
-                    <p>{movies.genres.join(", ")}</p>
-                  </div>
-                  <div className={styles["credits"]}>
-                    <div className={styles["left"]}>
-                      <div className={styles["release"]}>
-                        <p className={styles["label"]}>Release Date</p>
-                        <p className={styles["content"]}>
-                          {`${date} ${month} ${year}`}
-                        </p>
-                      </div>
-                      <div className={styles["duration"]}>
-                        <p className={styles["label"]}>Duration</p>
-                        <p
-                          className={styles["content"]}
-                        >{`${movies.duration} minutes`}</p>
-                      </div>
-                    </div>
-                    <div className={styles["right"]}>
-                      <div className={styles["directed"]}>
-                        <p className={styles["label"]}>Directed by</p>
-                        <p className={styles["content"]}>{movies.director}</p>
-                      </div>
-                      <div className={styles["casts"]}>
-                        <p className={styles["label"]}>Casts</p>
-                        <p className={styles["content"]}>{movies.casts}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles["synopsis"]}>
+                {movies.length === 0 ? (
+                  <Loading />
+                ) : (
+                  <div className={styles["movie-details"]}>
                     <div className={styles["title"]}>
-                      <p>Synopsis</p>
+                      <h1>{movies.movie_name}</h1>
                     </div>
-                    <p>{movies.synopsis}</p>
+                    <div className={styles["categories"]}>
+                      <p>{movies.genres.join(", ")}</p>
+                    </div>
+                    <div className={styles["credits"]}>
+                      <div className={styles["left"]}>
+                        <div className={styles["release"]}>
+                          <p className={styles["label"]}>Release Date</p>
+                          <p className={styles["content"]}>
+                            {`${date} ${month} ${year}`}
+                          </p>
+                        </div>
+                        <div className={styles["duration"]}>
+                          <p className={styles["label"]}>Duration</p>
+                          <p
+                            className={styles["content"]}
+                          >{`${movies.duration} minutes`}</p>
+                        </div>
+                      </div>
+                      <div className={styles["right"]}>
+                        <div className={styles["directed"]}>
+                          <p className={styles["label"]}>Directed by</p>
+                          <p className={styles["content"]}>{movies.director}</p>
+                        </div>
+                        <div className={styles["casts"]}>
+                          <p className={styles["label"]}>Casts</p>
+                          <p className={styles["content"]}>{movies.casts}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles["synopsis"]}>
+                      <div className={styles["title"]}>
+                        <p>Synopsis</p>
+                      </div>
+                      <p>{movies.synopsis}</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

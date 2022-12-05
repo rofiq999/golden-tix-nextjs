@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 // import logo from "../assets/golden-logo.png";
 import defaultImg from "../assets/avatar.webp";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import profileActions from "../redux/actions/profile";
 
 function Header() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const image = useSelector((state) => state.user.profile.image);
   const token = useSelector((state) => state.auth.userData.token);
@@ -17,12 +19,21 @@ function Header() {
   const showHamburger = () => {
     setToggle(!toggle);
   };
+
+  useEffect(() => {
+    dispatch(profileActions.userThunk(token));
+  }, [dispatch]);
   return (
     <header>
       <div className="container">
         <div className={`row ${styles["container"]}`}>
           <div className="col-lg-2 col-md-2 col-10">
-            <div className={styles["logo-container"]}>
+            <div
+              className={styles["logo-container"]}
+              onClick={() => {
+                router.push("/");
+              }}
+            >
               <div className={styles["golden"]}>
                 <p>GOLDEN</p>
               </div>
@@ -65,13 +76,22 @@ function Header() {
                       />
                     </div>
                   ) : (
-                    <button
-                      onClick={() => {
-                        router.push("/auth/signup");
-                      }}
-                    >
-                      Sign Up
-                    </button>
+                    <div className={styles["right-btn"]}>
+                      <button
+                        onClick={() => {
+                          router.push("/auth/signup");
+                        }}
+                      >
+                        Sign Up
+                      </button>
+                      <button
+                        onClick={() => {
+                          router.push("/auth/signin");
+                        }}
+                      >
+                        Sign In
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
