@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-const axiosRequest = (method, url, data, params, id) => {
+const axiosRequest = (method, url, data, params) => {
   return axios({
     method,
     url: `${baseUrl}${url}`,
@@ -29,4 +29,8 @@ export const getMovieUpcoming = (params) => {
 
 export const getMovieDetails = (token, params) => {
   return axios.get(`${baseUrl}${params}`, config(token));
+};
+
+export const createMovies = (token, data) => {
+  return axiosRequest("POST", "/api/movie/new", config(token), data);
 };
