@@ -1,16 +1,17 @@
 import React, { useEffect, Fragment } from "react";
-import styles from "../styles/Order.module.css";
+import { Fragment } from "react";
+import styles from "../../styles/Order.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import PageTitle from "../Components/PageTitle";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+import PageTitle from "../../Components/PageTitle";
 
-import cineone from "../assets/cineone2.png";
-import arrowdown from "../assets/arrowdown.png";
-import arrowright from "../assets/arrowright.png";
-import chevron2 from "../assets/chevron2.png";
+import cineone from "../../assets/cineone2.png";
+import arrowdown from "../../assets/arrowdown.png";
+import arrowright from "../../assets/arrowright.png";
+import chevron2 from "../../assets/chevron2.png";
 
 function Order() {
   const router = useRouter();

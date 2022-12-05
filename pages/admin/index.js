@@ -1,22 +1,24 @@
-import styles from "../styles/Admin.module.css";
+import styles from "../../styles/Admin.module.css";
 import Image from "next/image";
 
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+import PageTitle from "../../Components/PageTitle";
 
-import poster from "../assets/poster1.png";
-import location from "../assets/location.png";
-import chevron from "../assets/chevron.png";
-import ebv from "../assets/ebv.png";
-import hiflix from "../assets/hiflix.png";
-import cineone from "../assets/cineone.png";
-import calendar from "../assets/calendar.png";
-import plus from "../assets/plus.png";
-import chart from "../assets/chart.png";
+import poster from "../../assets/poster1.png";
+import location from "../../assets/location.png";
+import chevron from "../../assets/chevron.png";
+import ebv from "../../assets/ebv.png";
+import hiflix from "../../assets/hiflix.png";
+import cineone from "../../assets/cineone.png";
+import calendar from "../../assets/calendar.png";
+import plus from "../../assets/plus.png";
+import chart from "../../assets/chart.png";
 
 export default function Admin() {
   return (
     <main>
+      <PageTitle title={"Create Movie"} />
       <Header />
       <section className={styles["section-main"]}>
         <section className={styles["section-1"]}>
@@ -61,14 +63,9 @@ export default function Admin() {
                     </div>
                     <div>
                       <p className={styles["desc-label-1"]}>
-                        Duration (hour / minute)
+                        Duration (minutes)
                       </p>
                       <div className={styles["desc-div-4"]}>
-                        <input
-                          className={styles["desc-input-3"]}
-                          type="text"
-                          placeholder="0"
-                        />
                         <input
                           className={styles["desc-input-3"]}
                           type="text"

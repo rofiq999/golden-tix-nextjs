@@ -12,4 +12,5 @@ export const ACTION_STRING = {
   getShowing: "GET_SHOWING",
   getDetails: "GET_DETAILS",
   getSchedule: "GET_SCHEDULE",
+  createMovie: "CREATE_MOVIE",
 };

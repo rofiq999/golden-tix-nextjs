@@ -108,7 +108,7 @@ function Details() {
                 </div>
               </div>
               <div className="col-lg-9 col-md-12 col-12">
-                {loading ? (
+                {movies.length === 0 ? (
                   <Loading />
                 ) : (
                   <div className={styles["movie-details"]}>
