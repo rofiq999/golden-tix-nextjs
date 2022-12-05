@@ -1,4 +1,7 @@
-import React from 'react'
+
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 //import css
 import styles from "../../styles/Tiket.module.css";
@@ -14,8 +17,49 @@ import icon_QR_Code_1 from "../../assets/icon_QR_Code_1.png";
 import icon_download from "../../assets/icon_download.png";
 import icon_printer from "../../assets/icon_printer.png";
 
-
+import { useRouter } from "next/router";
+import authActions from "../../redux/actions/auth";
 function index() {
+    // const [qrCodeText, setQRCodeText] = useState("");
+    // const [showPrint, setShowPrint] = useState("d-block");
+    const token = useSelector((state) => state.auth.userData.token);
+    const router = useRouter();
+    const [ticket, setTicket] = useState({});
+    const [seat, setSeat] = useState([]);
+    const { id } = router.query;
+    // const [data, setData] = useState([]);
+    const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
+
+    useEffect(() => {
+        const baseUrl = `${LINK}api/booking/ticket/detail/Golden-tix-424916`;
+        axios
+            .get(baseUrl,
+                {
+                    headers: {
+                        "x-access-token": token
+                    }
+                })
+            .then((res) => {
+                console.log(res);
+                // setData(res.data.data);
+                setTicket(res.data.data);
+                setSeat(res.data.data);
+
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    const costing = (price) => {
+        return (
+            "IDR " +
+            parseFloat(price)
+                .toFixed()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+        );
+    };
+    // console.log(ticket.seats);
     return (
         <>
             <Header />
@@ -32,34 +76,41 @@ function index() {
                                     </div>
                                     <div className={styles['content-movie']}>
                                         <p className={styles['text-movie']}>Movie</p>
-                                        <p className={styles['text-spider']}>Spider-Man: Homecoming</p>
+                                        <p className={styles['text-spider']}>{seat.movie_name
+                                        }</p>
                                     </div>
                                     <div className={styles['content-wrap']}>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Date</p>
-                                            <p className={styles['text-month']}>07 July</p>
+                                            <p className={styles['text-month']}>{new Date(seat.show_date
+                                            ).toLocaleDateString(undefined, { month: 'long', day: 'numeric' })
+                                            }</p>
                                         </div>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Time</p>
-                                            <p className={styles['text-month']}>02:00pm</p>
+                                            <p className={styles['text-month']}> {seat.time}</p>
                                         </div>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Category</p>
-                                            <p className={styles['text-month']}>PG-13</p>
+                                            <p className={styles['text-month']}>{seat.category
+                                            }</p>
                                         </div>
                                     </div>
                                     <div className={styles['content-wrap-sec']}>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Count</p>
-                                            <p className={styles['text-month']}>3 pieces</p>
+                                            <p className={styles['text-month']}>{seat.ticket_total
+                                            }</p>
                                         </div>
+
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Seats</p>
-                                            <p className={styles['text-month']}>C4, C5, C6</p>
+                                            <p className={styles['text-month']}> {ticket.seats}  </p>
                                         </div>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Price</p>
-                                            <p className={styles['text-month']}>$30.00</p>
+                                            <p className={styles['text-month']}>{costing(ticket.price)
+                                            }</p>
                                         </div>
                                     </div>
                                     <div className={styles['bor-total']}>

@@ -16,6 +16,7 @@ import Sidebar from "../../Components/SideBar";
 //import components
 import Footer from "../../Components/Footer";
 import Header from "../../Components/Header";
+// import Loading from "../../Components/Loading";
 
 import profileActions from "../../redux/actions/profile";
 import authActions from "../../redux/actions/auth";
