@@ -16,7 +16,7 @@ function Header() {
   const [toggle, setToggle] = useState(false);
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   // console.log(image);
-
+  console.log(role);
   const showHamburger = () => {
     setToggle(!toggle);
   };
@@ -45,7 +45,7 @@ function Header() {
           </div>
           <div className="col-lg-10 col-md-10 col-2">
             <div className={styles["navbar"]}>
-              {!token === "admin" ? (
+              {role === "user" ? (
                 <div className={styles["left-content"]}>
                   <ol>
                     <li>Movies</li>
