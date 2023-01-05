@@ -16,7 +16,7 @@ function Header() {
   const [toggle, setToggle] = useState(false);
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   // console.log(image);
-  console.log(role);
+  // console.log(role);
   const showHamburger = () => {
     setToggle(!toggle);
   };

@@ -225,11 +225,11 @@ function Details() {
                   );
                 })}
               </div>
-              <div className={styles["show-more"]}>
+              {/* <div className={styles["show-more"]}>
                 <span></span>
                 <p>Show More</p>
                 <span></span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

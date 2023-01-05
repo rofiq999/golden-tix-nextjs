@@ -56,6 +56,7 @@ const cinemaReducer = (prevState = initialState, { payload, type }) => {
         isLoading: false,
         isError: false,
         isFulfilled: true,
+        error: null,
         showingData: payload.data.data,
       };
 

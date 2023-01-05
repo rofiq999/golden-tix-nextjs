@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Link from "next/link";
+import { toast } from "react-toastify";
 
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
@@ -24,12 +26,12 @@ function Order() {
   const [code, setCode] = useState([]);
   const seats = useSelector((state) => state.booking.seatData.data);
   const token = useSelector((state) => state.auth.userData.token);
-  const showData = useSelector((state) => state.cinema.showingData);
+  const showData = useSelector((state) => state.cinema.showingData?.data);
   const bookedDataRaw = useSelector((state) => state.booking.bookedData.data);
-  const bookedData = bookedDataRaw.map((item) => {
+  const bookedData = bookedDataRaw?.map((item) => {
     return item.seat_id;
   });
-  // console.log(bookedData);
+  console.log(showData);
 
   useEffect(() => {
     console.log(router.query);
@@ -38,11 +40,12 @@ function Order() {
         "x-access-token": token,
       },
     };
-    const showTimeId = router.query.showtime_id;
+    // const showTimeId = router.query.showtime_id;
+    const showTimeId = localStorage.getItem("id");
     dispatch(bookingAction.getSeatThunk());
     dispatch(bookingAction.getBookedThunk(showTimeId));
     dispatch(cinemaActions.getCinemaShowingThunk(showTimeId, config));
-  }, [router.query]);
+  }, [router.query, dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,12 +55,15 @@ function Order() {
       movieScheduleId: router.query.showtime_id,
       totalPayment: showData.price * id.length,
     };
+    console.log(body);
     const config = {
       headers: {
         "x-access-token": token,
       },
     };
-    // dispatch(bookingAction.postBookThunk(body, config));
+    // dispatch(
+    //   bookingAction.postBookThunk(body, config, bookSuccess, bookFailed)
+    // );
     axios
       .post(
         "https://golden-tix-backend.vercel.app/api/booking/new",
@@ -66,11 +72,25 @@ function Order() {
       )
       .then((res) => {
         console.log(res);
+        bookSuccess(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        bookFailed(err);
+      });
   };
 
-  console.log(code);
+  const bookSuccess = (res) => {
+    toast.success(`Book Success!`);
+    router.push(`/ticket/${res.data.data.booking_details.payment_id}`);
+    window.open(res.data.data.redirectUrl, "_blank").focus();
+  };
+
+  const bookFailed = (error) => {
+    toast.error(`${error.message}`);
+  };
+
+  // console.log(code);
 
   return (
     <Fragment>
@@ -82,8 +102,12 @@ function Order() {
             <div className={styles["movie-div"]}>
               <h1 className={styles["movie-header-1"]}>Movie Selected</h1>
               <div className={styles["movie-div-1"]}>
-                <p className={styles["movie-text-1"]}>{showData.movie}</p>
-                <button className={styles["movie-btn-1"]}>Change movie</button>
+                <p className={styles["movie-text-1"]}>{showData?.movie}</p>
+                <Link href="/">
+                  <button className={styles["movie-btn-1"]}>
+                    Change movie
+                  </button>
+                </Link>
               </div>
             </div>
             <h1 className={styles["movie-header-1"]}>Choose Your Seat</h1>
@@ -106,7 +130,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index < 7 &&
                             (bookedData.includes(e.seat_id) ? (
@@ -139,7 +163,7 @@ function Order() {
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      {seats.map(
+                      {seats?.map(
                         (e, index) =>
                           index >= 7 &&
                           index < 14 &&
@@ -176,7 +200,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 14 &&
                             index < 21 &&
@@ -210,7 +234,7 @@ function Order() {
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      {seats.map(
+                      {seats?.map(
                         (e, index) =>
                           index >= 21 &&
                           index < 28 &&
@@ -247,7 +271,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 28 &&
                             index < 35 &&
@@ -281,7 +305,7 @@ function Order() {
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      {seats.map(
+                      {seats?.map(
                         (e, index) =>
                           index >= 35 &&
                           index < 42 &&
@@ -318,7 +342,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 42 &&
                             index < 49 &&
@@ -352,7 +376,7 @@ function Order() {
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      {seats.map(
+                      {seats?.map(
                         (e, index) =>
                           index >= 49 &&
                           index < 56 &&
@@ -389,7 +413,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 56 &&
                             index < 63 &&
@@ -423,7 +447,7 @@ function Order() {
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      {seats.map(
+                      {seats?.map(
                         (e, index) =>
                           index >= 63 &&
                           index < 70 &&
@@ -460,7 +484,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 70 &&
                             index < 77 &&
@@ -495,7 +519,7 @@ function Order() {
                     </div>
                     <div className={styles["seat-div-4"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 77 &&
                             index < 79 &&
@@ -527,7 +551,7 @@ function Order() {
                             ))
                         )}
                         <div className={styles["seat-div-31"]}></div>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 81 &&
                             index < 84 &&
@@ -565,7 +589,7 @@ function Order() {
                   <div className={styles["seat-div-3"]}>
                     <div className={styles["seat-div-6"]}>
                       <div className={styles["seat-div-4"]}>
-                        {seats.map(
+                        {seats?.map(
                           (e, index) =>
                             index >= 84 &&
                             index < 91 &&
@@ -599,7 +623,7 @@ function Order() {
                       </div>
                     </div>
                     <div className={styles["seat-div-4"]}>
-                      {seats.map(
+                      {seats?.map(
                         (e, index) =>
                           index >= 91 &&
                           index < 98 &&
@@ -747,7 +771,9 @@ function Order() {
               <button className={styles["seat-btn-1"]}>Add new seat</button>
             </div>
             <div className={styles["btn-div-1"]}>
-              <button className={styles["btn-1"]}>Change your movie</button>
+              <Link href="/">
+                <button className={styles["btn-1"]}>Change your movie</button>
+              </Link>
               <form onSubmit={handleSubmit}>
                 <button type="submit" className={styles["btn-2"]}>
                   Checkout now
@@ -763,38 +789,44 @@ function Order() {
                   <Image
                     width={174}
                     height={70}
-                    src={`https://res.cloudinary.com/dedmbkp9a/image/upload/v1669990442/${showData.image}`}
+                    src={`https://res.cloudinary.com/dedmbkp9a/image/upload/v1669990442/${showData?.image}`}
                     alt="img"
                   />
                 </div>
-                <h1 className={styles["order-header-1"]}>{showData.cinema}</h1>
+                <h1 className={styles["order-header-1"]}>{showData?.cinema}</h1>
                 <div className={styles["order-div-5"]}>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>Movie selected</p>
-                    <p className={styles["order-text-2"]}>{showData.movie}</p>
+                    <p className={styles["order-text-2"]}>{showData?.movie}</p>
                   </div>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>
-                      Tuesday, 07 July 2020
+                      {showData?.show_date.slice(0, 10)}
                     </p>
-                    <p className={styles["order-text-2"]}>02:00pm</p>
+                    <p className={styles["order-text-2"]}>
+                      {showData?.time.slice(0, 8)}
+                    </p>
                   </div>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>One ticket price</p>
                     <p
                       className={styles["order-text-2"]}
-                    >{`Rp ${showData.price}`}</p>
+                    >{`Rp ${showData?.price}`}</p>
                   </div>
                   <div className={styles["order-div-2"]}>
                     <p className={styles["order-text-1"]}>Seat choosed</p>
-                    <p className={styles["order-text-2"]}>C4, C5, C6</p>
+                    <p className={styles["order-text-2"]}>
+                      {code.map((x) => {
+                        return ` ${x},`;
+                      })}
+                    </p>
                   </div>
                 </div>
               </div>
               <section className={styles["order-section-2"]}>
                 <p className={styles["order-text-3"]}>Total Payment</p>
                 <p className={styles["order-text-4"]}>
-                  Rp {showData.price * id.length}
+                  Rp {showData?.price * id.length}
                 </p>
               </section>
             </div>
