@@ -167,7 +167,7 @@ function Order() {
                         (e, index) =>
                           index >= 7 &&
                           index < 14 &&
-                          (bookedData.includes(e.seat_id) ? (
+                          (bookedData?.includes(e.seat_id) ? (
                             <div
                               style={{ backgroundColor: "" }}
                               className={styles["seat-div-5"]}
@@ -204,7 +204,7 @@ function Order() {
                           (e, index) =>
                             index >= 14 &&
                             index < 21 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -238,7 +238,7 @@ function Order() {
                         (e, index) =>
                           index >= 21 &&
                           index < 28 &&
-                          (bookedData.includes(e.seat_id) ? (
+                          (bookedData?.includes(e.seat_id) ? (
                             <div
                               style={{ backgroundColor: "" }}
                               className={styles["seat-div-5"]}
@@ -275,7 +275,7 @@ function Order() {
                           (e, index) =>
                             index >= 28 &&
                             index < 35 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -309,7 +309,7 @@ function Order() {
                         (e, index) =>
                           index >= 35 &&
                           index < 42 &&
-                          (bookedData.includes(e.seat_id) ? (
+                          (bookedData?.includes(e.seat_id) ? (
                             <div
                               style={{ backgroundColor: "" }}
                               className={styles["seat-div-5"]}
@@ -346,7 +346,7 @@ function Order() {
                           (e, index) =>
                             index >= 42 &&
                             index < 49 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -380,7 +380,7 @@ function Order() {
                         (e, index) =>
                           index >= 49 &&
                           index < 56 &&
-                          (bookedData.includes(e.seat_id) ? (
+                          (bookedData?.includes(e.seat_id) ? (
                             <div
                               style={{ backgroundColor: "" }}
                               className={styles["seat-div-5"]}
@@ -417,7 +417,7 @@ function Order() {
                           (e, index) =>
                             index >= 56 &&
                             index < 63 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -451,7 +451,7 @@ function Order() {
                         (e, index) =>
                           index >= 63 &&
                           index < 70 &&
-                          (bookedData.includes(e.seat_id) ? (
+                          (bookedData?.includes(e.seat_id) ? (
                             <div
                               style={{ backgroundColor: "" }}
                               className={styles["seat-div-5"]}
@@ -488,7 +488,7 @@ function Order() {
                           (e, index) =>
                             index >= 70 &&
                             index < 77 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -523,7 +523,7 @@ function Order() {
                           (e, index) =>
                             index >= 77 &&
                             index < 79 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -555,7 +555,7 @@ function Order() {
                           (e, index) =>
                             index >= 81 &&
                             index < 84 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -593,7 +593,7 @@ function Order() {
                           (e, index) =>
                             index >= 84 &&
                             index < 91 &&
-                            (bookedData.includes(e.seat_id) ? (
+                            (bookedData?.includes(e.seat_id) ? (
                               <div
                                 style={{ backgroundColor: "" }}
                                 className={styles["seat-div-5"]}
@@ -627,7 +627,7 @@ function Order() {
                         (e, index) =>
                           index >= 91 &&
                           index < 98 &&
-                          (bookedData.includes(e.seat_id) ? (
+                          (bookedData?.includes(e.seat_id) ? (
                             <div
                               style={{ backgroundColor: "" }}
                               className={styles["seat-div-5"]}
