@@ -51,9 +51,11 @@ function index() {
     });
     // // const [data, setData] = useState([]);
 
-
+    const [loading, setLoading] = useState(false)
+    const [times, setTimes] = useState('')
     const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
     useEffect(() => {
+        setLoading(true)
         if (!router.isReady) return;
         const baseUrl = `${LINK}/api/booking/ticket/detail/${router.query.id}`;
         axios
@@ -64,12 +66,13 @@ function index() {
                     }
                 })
             .then((res) => {
-                console.log(localStorage.getItem("token"));
                 setQRCodeText(`${LINK}/api/booking/ticket/detail/${router.query.id}`);
                 // setData(res.data.data);
                 setTicket(res.data.data);
                 setSeat(res.data.data);
-
+                setTimes(res.data.data.time)
+                // console.log(res.data.data);
+                setLoading(false)
             })
             .catch((err) => {
                 console.log(err);
@@ -113,7 +116,7 @@ function index() {
                                         </div>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Time</p>
-                                            <p className={styles['text-month']}> {seat.time}</p>
+                                            <p className={styles['text-month']}> {loading ? null : times.substring(0, 5)}</p>
                                         </div>
                                         <div className={styles['content-describe']}>
                                             <p className={styles['text-date']}>Category</p>
