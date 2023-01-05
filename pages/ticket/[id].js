@@ -55,7 +55,7 @@ function index() {
     const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
     useEffect(() => {
         if (!router.isReady) return;
-        const baseUrl = `${LINK}api/booking/ticket/detail/${router.query.id}`;
+        const baseUrl = `${LINK}/api/booking/ticket/detail/${router.query.id}`;
         axios
             .get(baseUrl,
                 {
@@ -65,7 +65,7 @@ function index() {
                 })
             .then((res) => {
                 console.log(localStorage.getItem("token"));
-                setQRCodeText(`${LINK}api/booking/ticket/detail/${router.query.id}`);
+                setQRCodeText(`${LINK}/api/booking/ticket/detail/${router.query.id}`);
                 // setData(res.data.data);
                 setTicket(res.data.data);
                 setSeat(res.data.data);

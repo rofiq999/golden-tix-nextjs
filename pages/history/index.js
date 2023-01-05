@@ -25,7 +25,7 @@ function index() {
   const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
 
   useEffect(() => {
-    const baseUrl = `${LINK}api/booking/history`;
+    const baseUrl = `${LINK}/api/booking/history`;
     axios
       .get(baseUrl,
         {
