@@ -12,7 +12,7 @@ import icon_cineone from "../assets/history/icon_cineone.png";
 export default function CardHistory(props) {
   const router = useRouter();
   const showHandler = () => {
-    router.push("/ticket");
+    router.push("/ticket/id");
   };
   return (
     <>
@@ -30,13 +30,13 @@ export default function CardHistory(props) {
           {/* kondisi color */}
           {props.type === ["pending", "active"] || props.type === "In active" ? (
             <button className={`${styles["btn-ticket"]} bg-secondary text-white`}>
-              {` sdsd ${props.ticket_status}`}
+              {` ${props.ticket_status}`}
             </button>
           ) : (
             <button className={`${styles["btn-ticket"]} bg-success text-white`}>{` ${props.ticket_status}`}</button>
           )}
 
-          <p className={styles["show"]} onClick={showHandler}>
+          <p className={styles["show"]} onClick={props.showHandler}>
             Show Details <span className={styles["text-v"]}>∨</span>
           </p>
         </div>

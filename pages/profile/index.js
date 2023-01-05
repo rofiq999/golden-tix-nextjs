@@ -288,7 +288,9 @@ function Index() {
                   handleEditPass();
                 }}>Save Password</button>
               </div>
-              <button className={styles['logout']} onClick={handleShow}>Logout</button>
+              <div className={styles['content-logout']}>
+                <button className={styles['logout']} onClick={handleShow}>Logout</button>
+              </div>
             </div>
           </div>
         </section>
