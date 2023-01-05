@@ -49,12 +49,13 @@ function Order() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const body = JSON.stringify({
+    const body = {
       seatIds: id,
       paymentMethodId: "370a39e9-b3fb-434b-ac85-5c2f3c068f9f",
       movieScheduleId: router.query.showtime_id,
       totalPayment: showData.price * id.length,
-    });
+    };
+    console.log(body);
     const config = {
       headers: {
         "x-access-token": token,
@@ -71,7 +72,7 @@ function Order() {
       )
       .then((res) => {
         console.log(res);
-        bookSuccess();
+        bookSuccess(res);
       })
       .catch((err) => {
         console.log(err);
@@ -79,8 +80,10 @@ function Order() {
       });
   };
 
-  const bookSuccess = () => {
+  const bookSuccess = (res) => {
     toast.success(`Book Success!`);
+    router.push(`/ticket/${res.data.data.booking_details.payment_id}`);
+    window.open(res.data.data.redirectUrl, "_blank").focus();
   };
 
   const bookFailed = (error) => {
