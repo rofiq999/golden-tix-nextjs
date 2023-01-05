@@ -32,7 +32,7 @@ const getSeatThunk = (cbSuccess, cbError) => {
     } catch (error) {
       console.log(error.response);
       dispatch(getSeatRejected(error));
-      typeof cbSuccess === "function" && cbError(error);
+      typeof cbError === "function" && cbError(error);
     }
   };
 };
@@ -60,7 +60,7 @@ const postBookThunk = (body, config, cbSuccess, cbError) => {
     } catch (error) {
       console.log(error);
       dispatch(postBookRejected(error));
-      typeof cbSuccess === "function" && cbError(error);
+      typeof cbError === "function" && cbError(error);
     }
   };
 };
@@ -82,7 +82,7 @@ const getBookedThunk = (id, cbSuccess, cbError) => {
     try {
       dispatch(getBookedPending());
       const result = await getBookedList(id);
-      console.log(result.data.data);
+      // console.log(result.data.data);
       dispatch(getBookedFulfilled(result));
       typeof cbSuccess === "function" && cbSuccess();
     } catch (error) {

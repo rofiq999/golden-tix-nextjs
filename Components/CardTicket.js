@@ -14,6 +14,7 @@ function CardTicket(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    localStorage.setItem("id", id);
     router.push(
       {
         pathname: "/order",
@@ -47,7 +48,13 @@ function CardTicket(props) {
           {props.cinemaone21?.map((schedule) => {
             const time = `${schedule.schedule}`.slice(0, 5);
             return (
-              <div className={styles["time"]}>
+              <div
+                className={
+                  id === schedule.showtime_id
+                    ? styles["time-red"]
+                    : styles["time"]
+                }
+              >
                 <p
                   onClick={() => {
                     setTime(schedule.schedule);

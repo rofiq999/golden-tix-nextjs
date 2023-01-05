@@ -1,65 +1,64 @@
-import { ActionType } from "redux-promise-middleware";
+// import { ActionType } from "redux-promise-middleware";
 import { ACTION_STRING } from "./actionStrings";
 import {
   getCinemaShowingList,
   getScheduleList,
 } from "../../modules/api/cinema";
 
-const { getSchedule, getCinemaShowing, Pending, Rejected, Fulfilled } =
-  ActionType;
+const { pending, rejected, fulfilled, getCinemaShowing } = ACTION_STRING;
 
 const getSchedulePending = () => ({
-  type: ACTION_STRING.getSchedule.concat("_", Pending),
+  type: ACTION_STRING.getSchedule.concat(pending),
 });
 
 const getScheduleRejected = (error) => ({
-  type: ACTION_STRING.getSchedule.concat("_", Rejected),
+  type: ACTION_STRING.getSchedule.concat(rejected),
   payload: { error },
 });
 
 const getScheduleFulfilled = (data) => ({
-  type: ACTION_STRING.getSchedule.concat("_", Fulfilled),
+  type: ACTION_STRING.getSchedule.concat(fulfilled),
   payload: { data },
 });
 
 const getScheduleThunk = (config) => {
-  return async (dispacth) => {
+  return async (dispatch) => {
     try {
-      dispacth(getSchedulePending());
+      dispatch(getSchedulePending());
       const result = await getScheduleList(config);
-      // console.log(result.data.data);
-      dispacth(getScheduleFulfilled(result.data));
+      console.log(result.data.data);
+      dispatch(getScheduleFulfilled(result.data));
     } catch (error) {
       // console.log(error.response.data);
-      dispacth(getScheduleRejected(error));
+      dispatch(getScheduleRejected(error));
     }
   };
 };
 
 const getCinemaShowingPending = () => ({
-  type: ACTION_STRING.getCinemaShowing.concat("_", Pending),
+  type: getCinemaShowing.concat(pending),
 });
 
 const getCinemaShowingRejected = (error) => ({
-  type: ACTION_STRING.getCinemaShowing.concat("_", Rejected),
+  type: getCinemaShowing.concat(rejected),
   payload: { error },
 });
 
 const getCinemaShowingFulfilled = (data) => ({
-  type: ACTION_STRING.getCinemaShowing.concat("_", Fulfilled),
+  type: getCinemaShowing.concat(fulfilled),
   payload: { data },
 });
 
 const getCinemaShowingThunk = (id, config) => {
-  return async (dispacth) => {
+  return async (dispatch) => {
     try {
-      dispacth(getCinemaShowingPending());
+      dispatch(getCinemaShowingPending());
       const result = await getCinemaShowingList(id, config);
       // console.log(result.data.data);
-      dispacth(getCinemaShowingFulfilled(result.data));
+      dispatch(getCinemaShowingFulfilled(result));
     } catch (error) {
       // console.log(error.response.data);
-      dispacth(getCinemaShowingRejected(error));
+      dispatch(getCinemaShowingRejected(error));
     }
   };
 };
