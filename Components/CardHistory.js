@@ -12,7 +12,7 @@ import icon_cineone from "../assets/history/icon_cineone.png";
 export default function CardHistory(props) {
   const router = useRouter();
   const showHandler = () => {
-    router.push("/ticket");
+    router.push("/ticket/id");
   };
   return (
     <>
