@@ -34,8 +34,8 @@ function index() {
           }
         })
       .then((res) => {
-        console.log(res);
         setData(res.data.data);
+        console.log(res.data);
 
       })
       .catch((err) => {
@@ -46,7 +46,6 @@ function index() {
   const profileHandler = () => {
     router.push("/profile");
   };
-
 
   return (
     <>
@@ -70,12 +69,13 @@ function index() {
                 {data.length > 0 && data ? (
                   data.map((e) => (
                     <Card_History
+                      showHandler={() => { router.push(`/ticket/${e.payment_id}`) }}
                       key={e.id}
                       movie={e.movie}
                       image={`${CLOUD}/${e.image}`}
                       cinema={e.cinema}
                       ticket_status={e.ticket_status}
-                      id={e.id}
+                      payment_id={e.payment_id}
                       show_date={new Date(e.show_date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                     />
                   ))

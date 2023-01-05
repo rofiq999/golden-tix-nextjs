@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 //import css
@@ -19,19 +19,43 @@ import icon_printer from "../../assets/icon_printer.png";
 
 import { useRouter } from "next/router";
 import authActions from "../../redux/actions/auth";
+import { useReactToPrint } from "react-to-print";
+import QRCode from "qrcode.react";
 function index() {
-    // const [qrCodeText, setQRCodeText] = useState("");
-    // const [showPrint, setShowPrint] = useState("d-block");
+
+    const [showPrint, setShowPrint] = useState("d-block");
     const token = useSelector((state) => state.auth.userData.token);
     const router = useRouter();
     const [ticket, setTicket] = useState({});
     const [seat, setSeat] = useState([]);
     const { id } = router.query;
-    // const [data, setData] = useState([]);
-    const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
+    // download QR code
+    const downloadQRCode = () => {
+        let data = document.getElementById("qrCodeEl");
+        console.log(data);
+        const qrCodeURL = data
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        console.log(qrCodeURL);
+        let aEl = document.createElement("a");
+        aEl.href = qrCodeURL;
+        aEl.download = "QR_Code.png";
+        document.body.appendChild(aEl);
+        aEl.click();
+        document.body.removeChild(aEl);
+    };
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
+    // // const [data, setData] = useState([]);
+
+
+    const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
     useEffect(() => {
-        const baseUrl = `${LINK}api/booking/ticket/detail/Golden-tix-424916`;
+        if (!router.isReady) return;
+        const baseUrl = `${LINK}api/booking/ticket/detail/${router.query.id}`;
         axios
             .get(baseUrl,
                 {
@@ -40,7 +64,8 @@ function index() {
                     }
                 })
             .then((res) => {
-                console.log(res);
+                console.log(localStorage.getItem("token"));
+                setQRCodeText(`${LINK}api/booking/ticket/detail/${router.query.id}`);
                 // setData(res.data.data);
                 setTicket(res.data.data);
                 setSeat(res.data.data);
@@ -49,8 +74,8 @@ function index() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
-
+    }, [router.isReady]);
+    const [qrCodeText, setQRCodeText] = useState('');
     const costing = (price) => {
         return (
             "IDR " +
@@ -68,7 +93,7 @@ function index() {
                     <div className={`${styles['content-container']} container`}>
                         <div className={styles['content']}>
                             <p className={styles['text-payment']}>Proof of Payment</p>
-                            <div className={`${styles['content-main']} row`}>
+                            <div className={`${styles['content-main']} row`} ref={componentRef}>
                                 <div className={`${styles['content-left']} col-xl-8 col-sm-12 col-md-12`}>
                                     <div className={`${styles['content-tix']} container`} >
                                         <Image src={logo3} alt='logo3' width={100} height={40} />
@@ -122,17 +147,27 @@ function index() {
                                     <div className={styles['content-tix']}>
                                         <Image src={logo3} alt='logo3' width={100} height={40} />
                                     </div>
-                                    <div className={styles['content-Qr']}>
-                                        <Image src={icon_QR_Code_1} alt='icon_QR_Code_1' width={230} height={210} />
+                                    <div className={`${styles['content-Qr']} px-5`}>
+                                        <QRCode
+                                            size={210}
+                                            height="auto"
+                                            id="qrCodeEl"
+                                            style={{
+                                                maxWidth: "100%",
+                                                width: "100%",
+                                            }}
+                                            value={qrCodeText}
+                                            viewBox={`0 0 256 256`}
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div className={styles['content-end']}>
-                                <div className={styles['bor-download']}>
+                                <div className={styles['bor-download']} onClick={downloadQRCode}>
                                     <Image src={icon_download} alt='icon_download' />
                                     <p className={styles['text-download']}>Download</p>
                                 </div>
-                                <div className={styles['bor-download']}>
+                                <div className={styles['bor-download']} onClick={handlePrint}>
                                     <Image src={icon_printer} alt='icon_printer' />
                                     <p className={styles['text-download']}>Print</p>
                                 </div>
