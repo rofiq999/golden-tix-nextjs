@@ -48,11 +48,17 @@
 }
 
 .time-red {
+  display: flex;
   margin: 0;
-  color: var(--primary);
+  justify-content: center;
+  color: white;
+  background-color: var(--primary);
   font-size: 0.9rem;
   font-weight: 600;
   user-select: none;
+  height: 2.8ch;
+  width: 5ch;
+  border-radius: 5px;
 }
 .card-ticket .schedule .time p:hover {
   cursor: pointer;

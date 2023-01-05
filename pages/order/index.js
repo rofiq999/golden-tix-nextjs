@@ -49,30 +49,34 @@ function Order() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const body = {
+    const body = JSON.stringify({
       seatIds: id,
       paymentMethodId: "370a39e9-b3fb-434b-ac85-5c2f3c068f9f",
       movieScheduleId: router.query.showtime_id,
       totalPayment: showData.price * id.length,
-    };
+    });
     const config = {
       headers: {
         "x-access-token": token,
       },
     };
-    dispatch(
-      bookingAction.postBookThunk(body, config, bookSuccess, bookFailed)
-    );
-    // axios
-    //   .post(
-    //     "https://golden-tix-backend.vercel.app/api/booking/new",
-    //     body,
-    //     config
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+    // dispatch(
+    //   bookingAction.postBookThunk(body, config, bookSuccess, bookFailed)
+    // );
+    axios
+      .post(
+        "https://golden-tix-backend.vercel.app/api/booking/new",
+        body,
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        bookSuccess();
+      })
+      .catch((err) => {
+        console.log(err);
+        bookFailed(err);
+      });
   };
 
   const bookSuccess = () => {
