@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import authActions from "../../redux/actions/auth";
 import { useReactToPrint } from "react-to-print";
 import QRCode from "qrcode.react";
-function index() {
+function Index() {
 
     const [showPrint, setShowPrint] = useState("d-block");
     const token = useSelector((state) => state.auth.userData.token);
@@ -53,7 +53,7 @@ function index() {
 
     const [loading, setLoading] = useState(false)
     const [times, setTimes] = useState('')
-    const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
+    const LINK = process.env.NEXT_PUBLIC_BACKEND_URL;
     useEffect(() => {
         setLoading(true)
         if (!router.isReady) return;
@@ -184,4 +184,4 @@ function index() {
     )
 }
 
-export default index;
+export default Index;

@@ -21,7 +21,7 @@ function index() {
   const profiles = useSelector((state) => state.user.profile);
   const token = useSelector((state) => state.auth.userData.token);
   const [data, setData] = useState([]);
-  const LINK = process.env.NEXT_PUBLIC_BACKEND_LINK;
+  const LINK = process.env.NEXT_PUBLIC_BACKEND_URL;
   const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
 
   useEffect(() => {
@@ -68,7 +68,7 @@ function index() {
                 </div>
                 {data.length > 0 && data ? (
                   data.map((e) => (
-                    <Card_History
+                    <Card_History className={`${styles['card-history']}`}
                       showHandler={() => { router.push(`/ticket/${e.payment_id}`) }}
                       key={e.id}
                       movie={e.movie}

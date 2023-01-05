@@ -1,6 +1,6 @@
 import { ActionType } from "redux-promise-middleware";
 import { ACTION_STRING } from "./actionStrings";
-import { editProfile, editImage } from "../../modules/profile";
+import { getProfile, editProfile } from "../../modules/profile";
 
 
 const { Pending, Rejected, Fulfilled, } = ActionType;
@@ -35,7 +35,7 @@ const userThunk = (token) => {
     return async (dispacth) => {
         try {
             dispacth(profilePending());
-            const result = await editProfile(token);
+            const result = await getProfile(token);
             dispacth(profileFulfilled(result.data));
             // if (typeof router === "function") router();
         } catch (error) {
@@ -49,7 +49,7 @@ const imageThunk = (token, body, cbSuccess, cbError) => {
     return async (dispacth) => {
         try {
             dispacth(imagePending());
-            const result = await editImage(token, body);
+            const result = await editProfile(token, body);
             dispacth(imageFulfilled(result.data));
             typeof cbSuccess === "function" && cbSuccess();
         } catch (error) {
