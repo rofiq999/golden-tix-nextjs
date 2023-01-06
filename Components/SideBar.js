@@ -44,7 +44,7 @@ export default function SideBar({ firstname, lastname, username, image }) {
   };
 
   useEffect(() => {
-    dispatch(profileActions.imageThunk(token));
+    dispatch(profileActions.userThunk(token));
   }, [dispatch]);
 
   const handleSaveShow = () => {

@@ -75,6 +75,7 @@ function Index() {
 
   //edit profile
   const handleSave = () => {
+    console.log('click');
     const formData = new FormData();
     if (first_name) formData.append("first_name", first_name);
     if (last_name) formData.append("last_name", last_name);
@@ -281,9 +282,9 @@ function Index() {
                 </div>
               </div>
               <div className={styles["content-save"]}>
-                <button className={styles['update']} onClick={() => {
-                  handleSave();
-                }}>Update changes</button>
+                <button className={styles['update']} onClick={
+                  handleSave}
+                >Update changes</button>
                 <button className={styles['save']} onClick={() => {
                   handleEditPass();
                 }}>Save Password</button>

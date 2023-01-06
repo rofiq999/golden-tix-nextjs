@@ -3,7 +3,7 @@
 .content-all {
   /* border: 1px solid black; */
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   border-radius: 1rem;
   background: white;
   display: flex;
@@ -192,7 +192,6 @@ padding-left: 40px; */
 }
 
 .content-logout {
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -202,14 +201,13 @@ padding-left: 40px; */
 }
 
 .logout {
-  position: absolute;
-  top: 110px;
   width: 100%;
   height: 56px;
   font-family: 'Mulish';
   font-weight: 700;
   font-size: 16px;
   line-height: 28px;
+  margin-top: 60px;
   color: #f7f7fc;
   background: rgb(207, 26, 26);
   border: none;
