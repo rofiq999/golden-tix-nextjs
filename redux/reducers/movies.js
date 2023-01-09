@@ -17,6 +17,7 @@ const initialState = {
     director: null,
     image: null,
   },
+  meta: {},
   isError: false,
   isLoading: false,
   isFulfilled: false,
@@ -81,6 +82,7 @@ const moviesReducer = (prevState = initialState, { type, payload }) => {
         isError: false,
         isFulfilled: true,
         showing: payload.data.data,
+        meta: payload.data.meta,
       };
 
     case getDetails.concat("_", Pending):
