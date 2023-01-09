@@ -13,11 +13,9 @@ import poster3 from "../assets/keramat.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import moviesActions from "../redux/actions/movies";
-import { useRouter } from "next/router";
 
-export default function Home() {
+export default function showingAll() {
   const dispatch = useDispatch();
-  const router = useRouter();
   const upcomingMovies = useSelector((state) => state.movie.upcoming);
   const showingMovies = useSelector((state) => state.movie.showing);
   const loading = useSelector((state) => state.movie.isLoading);
@@ -79,7 +77,9 @@ export default function Home() {
               <div className={styles["now-showing"]}>
                 <p>Now Showing</p>
               </div>
-              <div className={styles["view-all"]}>{/* <p>view all</p> */}</div>
+              <div className={styles["view-all"]}>
+                <p>view all</p>
+              </div>
             </div>
             <div className={styles["card-movies"]}>
               {loading ? (
@@ -105,10 +105,7 @@ export default function Home() {
               <div className={styles["upcoming"]}>
                 <p>Upcoming Movies</p>
               </div>
-              <div
-                className={styles["view-all"]}
-                onClick={() => router.push("/showingAllMovies")}
-              >
+              <div className={styles["view-all"]}>
                 <p>view all</p>
               </div>
             </div>

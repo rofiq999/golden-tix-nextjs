@@ -14,11 +14,38 @@ function Header() {
   const token = useSelector((state) => state.auth.userData.token);
   const role = useSelector((state) => state.auth.userData.role);
   const [toggle, setToggle] = useState(false);
+  // const [search, setSearch] = useState({
+  //   search: "",
+  // });
   const link = process.env.NEXT_PUBLIC_CLOUDINARY_LINK;
   // console.log(image);
   // console.log(role);
   const showHamburger = () => {
     setToggle(!toggle);
+  };
+  // console.log(search);
+
+  // const changeHandler = (e) => {
+  //   setSearch({
+  //     ...search,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  const searchMovies = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    console.log(router.pathname);
+    // if(router.pathname )
+    // setQuery({ ...queryProps });
+    router.push({
+      pathname: "/showingAllMovies",
+      query: {
+        page: 1,
+        limit: 10,
+        search: search,
+      },
+    });
   };
 
   useEffect(() => {
@@ -74,10 +101,22 @@ function Header() {
                   <p>Location</p>
                   <i className="fa-sharp fa-solid fa-chevron-down"></i>
                 </div>
-                <div className={styles["search"]}>
-                  <input type="text" placeholder="Search here..." />
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </div>
+                <form className={styles["search"]} onSubmit={searchMovies}>
+                  <input
+                    type="text"
+                    name="search"
+                    // value={search.search}
+                    // onChange={changeHandler}
+                    placeholder="Search here..."
+                  />
+                  <i
+                    className="fa-solid fa-magnifying-glass"
+                    onClick={() => {
+                      // setQuery();
+                      router.push("/showingAllMovies");
+                    }}
+                  ></i>
+                </form>
                 <div className={styles["btn-container"]}>
                   {token ? (
                     <div
@@ -130,8 +169,20 @@ function Header() {
         <div className={styles["toggle-list"]}>
           <div className="container">
             <div className={styles["search"]}>
-              <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="Search..." />
+              <i
+                className="fa-solid fa-magnifying-glass"
+                onClick={() => {
+                  setQuery(search);
+                  router.push("/showingAllMovies");
+                }}
+              ></i>
+              <input
+                // type="text"
+                // name="search"
+                // value={search.search}
+                // onChange={changeHandler}
+                placeholder="Search.."
+              />
             </div>
           </div>
           <div className={styles["location"]}>
