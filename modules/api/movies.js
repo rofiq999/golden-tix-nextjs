@@ -20,11 +20,11 @@ const config = (token) => {
 };
 
 export const getMovieShowing = (params) => {
-  return axiosRequest("GET", "/api/movie/showing", params);
+  return axios.get(`${baseUrl}/api/movie/showing`, { params });
 };
 
 export const getMovieUpcoming = (params) => {
-  return axiosRequest("GET", "/api/movie/upcoming", params);
+  return axios.get(`${baseUrl}/api/movie/upcoming`, { params });
 };
 
 export const getMovieDetails = (token, params) => {

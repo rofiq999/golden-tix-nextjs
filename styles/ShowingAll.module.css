@@ -1,0 +1,336 @@
+.top-content {
+    display: flex;
+    align-items: center;
+    padding: 5rem 0;
+}
+
+.tagline-container h2 {
+    color: #A0A3BD;
+    font-size: 1.5rem;
+}
+
+.tagline-container h1 {
+    color: var(--primary);
+    font-size: 3.5rem;
+}
+
+.poster-container {
+    display: flex;
+    padding-left: 5rem;
+    gap: 1.5rem;
+}
+
+.poster-container .image-content1 {
+    position: relative;
+    top: 30px;
+    width: 107px;
+    height: 352px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.poster-container .image-content2{
+    position: relative;
+    width: 107px;
+    height: 352px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.poster-container .image-content3 {
+    position: relative;
+    top: -30px;
+    width: 107px;
+    height: 352px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.showing-container {
+    background-color: #F5F6F8;
+    padding: 2rem 0;
+    z-index: 1;
+}
+
+.showing-container .tab {
+    display: flex;
+    justify-content: space-between;
+}
+
+.showing-container .tab .now-showing {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.showing-container .tab .view-all {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    user-select: none;
+}
+
+.showing-container .tab .view-all:hover {
+    cursor: pointer;
+}
+
+.showing-container .card-movies {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 2rem;
+    padding: 2rem 0 10rem;
+    min-width: 100%;
+}
+
+.coming-container {
+    background-color: white;
+    padding: 2rem 0;
+}
+
+.coming-container .tab {
+    display: flex;
+    justify-content: space-between;
+}
+
+.coming-container .tab .upcoming {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: black;
+}
+
+.coming-container .tab .view-all {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    user-select: none;
+}
+
+.coming-container .tab .view-all:hover {
+    cursor: pointer;
+}
+
+.coming-container .months-slider {
+    display: flex;
+    gap: 1rem;
+    overflow-x: scroll;
+}
+
+.coming-container .months-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.coming-container .months-slider .months-btn {
+    width: 100%;
+}
+
+.coming-container .months-slider .months-btn button {
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background-color: white;
+    color: var(--primary);
+    font-weight: 600;
+    padding: .5rem 1rem;
+    width: 8rem;
+}
+
+.coming-container .months-slider .selected {
+    width: 100%;
+}
+
+.coming-container .months-slider .selected button {
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    padding: .5rem 1rem;
+    width: 8rem;
+}
+
+.coming-container .months-slider .months-btn button:hover {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0px 8px 30px rgba(95, 46, 234, 0.3);
+    transition: all .3s ease-out;
+}
+
+.coming-container .card-movies {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 2rem;
+    padding: 3rem 0;
+    overflow-x: scroll;
+    height: 35rem;
+}
+
+.coming-container .card-movies::-webkit-scrollbar {
+    display: none;
+}
+
+.bottom-content {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 10rem;
+}
+
+.bottom-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 0px 16px 32px rgba(186, 186, 186, 0.3);
+}
+
+.bottom-container .tagline h2 {
+    color: #4E4B66;
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+}
+
+.bottom-container .tagline h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.bottom-container .join-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+}
+
+.bottom-container .join-container .input {
+    border: 2px solid #DEDEDE;
+    padding: .5rem 1rem;
+}
+
+.bottom-container .join-container .input input {
+    outline: none;
+    border: none;
+    font-weight: 600;
+}
+
+.bottom-container .join-container .input input::-webkit-input-placeholder {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #A0A3BD;
+}
+
+.bottom-container .join-container .join-btn button {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary);
+    color: white;
+    font-size: .8rem;
+    padding: .8rem 1.5rem;
+}
+
+.bottom-container .join-container .join-btn button:active {
+    opacity: .8;
+}
+
+.bottom-container .info {
+    max-width: 40%;
+    text-align: center;
+    padding: 2rem;
+}
+
+.bottom-container .info p{
+    color: #6E7191;
+    font-size: .8rem;
+}
+
+.paginate-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.paginate-container .title-paginate p {
+    margin: 0;
+}
+
+.paginate-container .btn-paginate {
+    display: flex;
+    gap: 1rem;
+}
+
+.paginate-container .btn-paginate .btn-prev, .paginate-container .btn-paginate .btn-next {
+    background-color: black;
+    border: none;
+    padding: .5rem 1rem;
+    /* border-radius: 5px; */
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.paginate-container .btn-paginate .disable-btn {
+    background-color: #9F9F9F;
+    border: none;
+    padding: .5rem 1rem;
+    /* border-radius: 5px; */
+    cursor: default;
+    color: #4F5665;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+@media screen and (max-width: 768px) {
+    .showing-container {
+        overflow-x: scroll;
+        z-index: 1;
+    }
+
+    .card-movies {
+        overflow-x: scroll;
+        /* overflow: hidden; */
+    }
+
+    .bottom-container .join-container {
+        flex-direction: column;
+    }
+
+    .bottom-container .join-container .join-btn {
+        width: 100%;
+    }
+
+    .bottom-container .join-container .join-btn button {
+        width: 100%;
+    }
+
+    .bottom-container .info {
+        max-width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 428px) {
+    .tagline-container h2 {
+        color: #A0A3BD;
+        font-size: 1rem;
+    }
+    
+    .tagline-container h1 {
+        color: var(--primary);
+        font-size: 3rem;
+    }
+
+    .poster-container {
+        padding: 6rem 0 10rem;
+        justify-content: space-around;
+    }
+
+    .card-movies {
+        overflow-x: scroll;
+        /* overflow: hidden; */
+    }
+}
