@@ -81,7 +81,7 @@ export default function Home() {
               </div>
               <div className={styles["view-all"]}>{/* <p>view all</p> */}</div>
             </div>
-            <div className={styles["card-movies"]}>
+            {showingMovies.length == 0 ? <p className="text-center fs-1">No Showing Movies</p> : <div className={styles["card-movies"]}>
               {loading ? (
                 <Loading />
               ) : (
@@ -96,7 +96,8 @@ export default function Home() {
                   );
                 })
               )}
-            </div>
+            </div>}
+
           </div>
         </div>
         <div className={styles["coming-container"]}>
