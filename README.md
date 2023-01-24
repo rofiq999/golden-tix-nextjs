@@ -99,3 +99,40 @@ You may also see any lint errors in the console.
 <img width="500" src="https://raw.githubusercontent.com/zainulrofa/golden-tix-nextjs/main/assets/details.PNG" alt="Movie details">
 
 </div>
+
+## Related Project
+
+- [Golden-Tix Backend](https://github.com/zainulrofa/golden-tix-backend)
+        
+        
+## Contributors
+
+<center>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/rzkiyprtm">
+          <img width="100" ; src="/home/pratama/monlight-wallet/src/assets/gue.jpg" alt=""><br/>
+          <sub><b>Muhammad Arsyad Budiman</b></sub>
+        </a>
+        </td>
+        <td align="center">
+        <a href="https://github.com/rzkiyprtm">
+          <img width="100" ; src="/home/pratama/monlight-wallet/src/assets/gue.jpg" alt=""><br/>
+          <sub><b>Nur cholis Majid</b></sub>
+        </a>
+        </td>
+        <td align="center">
+        <a href="https://github.com/rzkiyprtm">
+          <img width="100" ; src="/home/pratama/monlight-wallet/src/assets/gue.jpg" alt=""><br/>
+          <sub><b>Rofiq Hidayat</b></sub>
+        </a>
+        </td>
+        <td align="center">
+        <a href="https://github.com/rzkiyprtm">
+          <img width="100" ; src="/home/pratama/monlight-wallet/src/assets/gue.jpg" alt=""><br/>
+          <sub><b>Zainul Muhammad Rofa</b></sub>
+        </a>
+        </td>
+  </table>
+</center>
